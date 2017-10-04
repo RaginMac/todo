@@ -8,7 +8,7 @@ public class Manager : MonoBehaviour {
 	
 	public static Manager Instance;
 	public Intantiation_G_1_3 fishSpawner;
-	public Image[] stars, popupStars, wrongAnsStars;
+	public Image[] stars, popupStars, starsWrong;
 
 	public GameObject[] questionArray;
 	//public GameObject[] answerArray;
@@ -20,23 +20,20 @@ public class Manager : MonoBehaviour {
 	//public bool directCompareAnswer = false;
 
 	public bool autoPlayAudio = false, countWrongAnswer = false;
-	public AudioSource audioSource;
+	public AudioSource audioSource, UIAudioSource, UIAudioSource2;
 
 	public int noOfQuestionsAnswered, totalNoOfQuestions;
 
 	public GameObject gameCompletePopup;
 	public int isCorrect;
 
-	public AudioSource correctAns;
-	public AudioSource wrongAns;
-	public AudioSource popUp;
-	public AudioSource starAward;
-	public AudioSource click;
+	public AudioClip UIClick, correctAudio, wrongAudio, popupAudio, starAudio, balloonPop;
+	public AudioSource questionSource;
 
 	// Use this for initialization
 	void Start () {
 		gameCompletePopup.SetActive (false);
-		//audioSource = this.gameObject.GetComponent<AudioSource> ();
+	//	audioSource = this.gameObject.GetComponent<AudioSource> ();
 		Instance = this;
 		if (questionArray.Length > 0) {
 			ShuffleQuestionArray ();
@@ -49,6 +46,17 @@ public class Manager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
+	}
+
+	public void PlayClickAudio (){
+		UIAudioSource.clip = UIClick;
+		UIAudioSource.Play ();
+	}
+
+	public void PlayQuestionAudio(){
+		if (!questionArray [questionNumber].GetComponent<AudioSource> ().isPlaying) {
+			questionArray [questionNumber].GetComponent<AudioSource> ().Play ();
+		}
 	}
 
 	public void ShuffleQuestionArray() {
@@ -99,6 +107,8 @@ public class Manager : MonoBehaviour {
 			print ("wrong answer");
 			return "wrong";
 		}
+
+	
 	}
 
 	public void PlayAudio(AudioClip clip)
@@ -115,7 +125,7 @@ public class Manager : MonoBehaviour {
 
 	public void RepeatAudio()
 	{
-		audioSource.clip = questionArray [questionNumber].GetComponent<Question> ().question.questionAudio;
+		//audioSource.clip = questionArray [questionNumber].GetComponent<Question> ().question.questionAudio;
 		audioSource.Play ();
 	}
 
@@ -136,16 +146,13 @@ public class Manager : MonoBehaviour {
 	{
 		noOfQuestionsAnswered++;
 		if ((noOfQuestionsAnswered <= totalNoOfQuestions) && isCorrect) {
-			RewardStars (noOfQuestionsAnswered);	
-			//correctAns.Play ();
-
+			RewardStars (true, noOfQuestionsAnswered);			
 		} else if ((noOfQuestionsAnswered <= totalNoOfQuestions) && !isCorrect) {
-			RewardWrongStars (noOfQuestionsAnswered);
-			wrongAns.Play ();
+			RewardStars(false, noOfQuestionsAnswered);
 		}
 
 		if (noOfQuestionsAnswered >= totalNoOfQuestions) {
-			Invoke("CompletedSection", 1.5f);
+			Invoke("CompletedSection", 1.6f);
 		}
 //		else if ((noOfQuestionsAnswered < totalNoOfQuestions) && isCorrect){
 //			RewardStars (noOfQuestionsAnswered);			
@@ -155,53 +162,71 @@ public class Manager : MonoBehaviour {
 	public void CompletedSection()
 	{
 		print ("One section finished");
+		AudioSource source = questionArray [questionNumber].GetComponent<AudioSource> ();
+		if (source != null) {
+			source.Stop ();
+		}
+		UIAudioSource.Stop ();
+		PlayPopupAudio ();
 		for (int i = 0; i < isCorrect; i++) {
 			popupStars [i].gameObject.SetActive (true);			
 		}
 		gameCompletePopup.SetActive (true);
-		//popUp.Play ();
 	}
 
-	public void RewardStars(int starIndex)
+	public void PlayPopupAudio(){
+		UIAudioSource.clip = popupAudio;
+		UIAudioSource.Play ();
+	}
+
+	public void PlayCorrectSound(){
+		UIAudioSource2.clip = correctAudio;
+		UIAudioSource2.Play ();
+	}
+	public void PlayWrongSound(){
+		UIAudioSource2.clip = wrongAudio;
+		UIAudioSource2.Play ();
+	}
+
+	public void RewardStars(bool correct, int starIndex)
 	{
 	//	print ("Star rewarded");
-		//starAward.Play();
-		stars[starIndex - 1].gameObject.SetActive(true);
-		isCorrect++;
+
+		if (correct) {
+			PlayStarAudio();
+			PlayCorrectSound ();
+			stars [starIndex - 1].gameObject.SetActive (true);
+			isCorrect++;
+		} else if (!correct) {
+			PlayWrongSound ();
+			starsWrong [starIndex - 1].gameObject.SetActive (true);
+		}
 	}
 
-	public void RewardWrongStars(int starIndex)
-	{
-		//	print ("Star rewarded");
-		wrongAnsStars[starIndex - 1].gameObject.SetActive(true);
-		//isCorrect++;
+	public void PlayStarAudio(){
+		UIAudioSource.clip = starAudio;
+		UIAudioSource.Play ();
 	}
 
 	public void PlayNextGame()
 	{
 		print ("Load next game");
 		SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex + 1);
-		//click.Play ();
 	}
 
 	public void RepeatGame()
 	{
 		print ("Play Again");
 		SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex);
-		//click.Play ();
 	}
 
 	public void GoToStartScreen()
 	{
-		click.Play ();
 		SceneManager.LoadScene ("StartScene");
-
 	}
 
-	public void GoToLevelSelectionScreen()
-	{
-		//click.Play ();
-		SceneManager.LoadScene ("LevelSelectionScreen");
+	public void GoToHomeScreen(string home){
+		SceneManager.LoadScene (home);
 	}
 
 	public void CheckAnswerArray()
@@ -383,57 +408,60 @@ public class Manager : MonoBehaviour {
 		NextQuestion ();
 	}
 
-	public void CheckTextMultiply() {
-		
-		//click.Play ();
-
-		if (questionArray [questionNumber].GetComponent<multiply> ().answer == questionArray [questionNumber].GetComponent<multiply> ().finalAnswer) {
+	public void CheckTextSub(){
+		if (questionArray [questionNumber].GetComponent<SetNumberTextSub> ().answerNumber.ToString () == questionArray [questionNumber].GetComponent<SetNumberTextSub> ().answerPressed) {
 			CountQuestionsAnswered (true);
 		} else {
 			CountQuestionsAnswered (false);
 		}
-		questionArray [questionNumber].GetComponent<multiply> ().eggTrayObj.SetActive (false);
+
 		NextQuestion ();
 	}
 
-	public void CheckMultiplication(){
+	public void CheckCarrotCount(){
+		if (questionArray [questionNumber].GetComponent<SetCarrotCount> ().answer == questionArray [questionNumber].GetComponent<SetCarrotCount> ().clickedAnswer) {
+			CountQuestionsAnswered (true);
+		} else {
+			CountQuestionsAnswered (false);
+		}
+		NextQuestion ();
+	}
 
-		//click.Play ();
-		int tempnum = 0;
+	public void CheckSubtractionFromAddition(string grade){
+		print (grade);
 
-		for (int i = 0; i < questionArray [questionNumber].GetComponent<MultiplicationTable> ().answerArray.Length; i++) {
-			if (questionArray [questionNumber].GetComponent<MultiplicationTable> ().answerArray[i] == questionArray [questionNumber].GetComponent<MultiplicationTable> ().playerAnswerArray[i]) {
-				//CountQuestionsAnswered (true);
-				tempnum++;
-				//print (questionArray [questionNumber].GetComponent<MultiplicationTable> ().playerAnswerArray[i]);
-				//continue;
+		if (grade == "Grade1") {
+			if (questionArray [questionNumber].GetComponent<GetSubFromAdd> ().noOneNumber.ToString () == questionArray [questionNumber].GetComponent<GetSubFromAdd> ().answerPressed) {
+				print ("correct");
+				CountQuestionsAnswered (true);
 			} else {
-				//CountQuestionsAnswered (false);
-				//print(questionArray [questionNumber].GetComponent<MultiplicationTable> ().answerArray[i]);
-				break;
+				CountQuestionsAnswered (false);
 			}
-
+		}
+		if (grade == "Grade2") {
+			if (((questionArray [questionNumber].GetComponent<GetSubFromAdd> ().noOneNumber.ToString() == questionArray [questionNumber].GetComponent<GetSubFromAdd> ().answerPressed)||
+				(questionArray [questionNumber].GetComponent<GetSubFromAdd> ().noTwoNumber.ToString() == questionArray [questionNumber].GetComponent<GetSubFromAdd> ().answerPressed)) &&
+				((questionArray [questionNumber].GetComponent<GetSubFromAdd> ().noOneNumber.ToString() == questionArray [questionNumber].GetComponent<GetSubFromAdd> ().answerPressed2)||
+					(questionArray [questionNumber].GetComponent<GetSubFromAdd> ().noTwoNumber.ToString() == questionArray [questionNumber].GetComponent<GetSubFromAdd> ().answerPressed2))) {
+				//print("correct");
+				CountQuestionsAnswered (true);
+			} else {
+				CountQuestionsAnswered (false);
+			}
 		}
 
-		if (tempnum >= questionArray [questionNumber].GetComponent<MultiplicationTable> ().answerArray.Length) {
-			CountQuestionsAnswered (true);
-			//NextQuestion ();
-		} else {
-			CountQuestionsAnswered (false);
-			//NextQuestion ();
+		if (grade == "Grade3") {
+			if ((questionArray [questionNumber].GetComponent<GetSubFromAdd> ().answerNumber.ToString () == questionArray [questionNumber].GetComponent<GetSubFromAdd> ().answerPressed) &&
+			    ((questionArray [questionNumber].GetComponent<GetSubFromAdd> ().answerPressed2 == questionArray [questionNumber].GetComponent<GetSubFromAdd> ().noOneNumber.ToString ()) ||
+			    (questionArray [questionNumber].GetComponent<GetSubFromAdd> ().answerPressed2 == questionArray [questionNumber].GetComponent<GetSubFromAdd> ().noTwoNumber.ToString ())) &&
+			    ((questionArray [questionNumber].GetComponent<GetSubFromAdd> ().answerPressed3 == questionArray [questionNumber].GetComponent<GetSubFromAdd> ().noOneNumber.ToString ()) ||
+			    (questionArray [questionNumber].GetComponent<GetSubFromAdd> ().answerPressed3 == questionArray [questionNumber].GetComponent<GetSubFromAdd> ().noTwoNumber.ToString ()))) {
+				CountQuestionsAnswered (true);
+			} else {
+				CountQuestionsAnswered (false);
+			}
 		}
+
 		NextQuestion ();
-	}
-
-	public void HintButton()
-	{
-		//click.Play ();
-		if (!questionArray [questionNumber].GetComponent<multiply> ().Arrange && !questionArray [questionNumber].GetComponent<multiply> ().hintPressed) 
-		{
-			questionArray [questionNumber].GetComponent<multiply> ().CreateEggTrayGrid ();
-			questionArray [questionNumber].GetComponent<multiply> ().anime.SetTrigger ("Move");
-			questionArray [questionNumber].GetComponent<multiply> ().eggTrayObj.SetActive (true);
-			questionArray [questionNumber].GetComponent<multiply> ().hintPressed = true;
-		}
 	}
 }
