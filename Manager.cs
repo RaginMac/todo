@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Manager : MonoBehaviour {
-	
+	//THIS IS TEST FILE FOR GIT
 	public static Manager Instance;
 	public Intantiation_G_1_3 fishSpawner;
 	public Image[] stars, popupStars, starsWrong;
