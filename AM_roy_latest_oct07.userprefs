@@ -1,0 +1,24 @@
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Options.cs">
+    <Files>
+      <File FileName="Assets\Scripts\BubblePopper.cs" Line="77" Column="6" />
+      <File FileName="Assets\Scripts\BubbleManager.cs" Line="77" Column="96" />
+      <File FileName="Assets\Scripts\Question.cs" Line="44" Column="3" />
+      <File FileName="Assets\Scripts\Manager.cs" Line="102" Column="4" />
+      <File FileName="Assets\Scripts\DragNDrop\DragObjects.cs" Line="104" Column="27" />
+      <File FileName="Assets\Scripts\DragNDrop\Spawn.cs" Line="59" Column="57" />
+      <File FileName="Assets\Test.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\FishAnim.cs" Line="30" Column="60" />
+      <File FileName="Assets\Scripts\Intantiation_G_1_3.cs" Line="30" Column="4" />
+      <File FileName="Assets\Scripts\Options.cs" Line="38" Column="76" />
+      <File FileName="Assets\Scripts\Trace\Trace.cs" Line="81" Column="47" />
+      <File FileName="Assets\Scripts\Trace\TraceCollision.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Trace\TraceDrag.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

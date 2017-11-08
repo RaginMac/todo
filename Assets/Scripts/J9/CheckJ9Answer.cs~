@@ -1,0 +1,34 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CheckJ9Answer : MonoBehaviour {
+
+	public Sprite origSprite, pressedSprite;
+	public SpriteRenderer checkAnswerButton;
+	public SetBubbles balloonSpawn;
+
+	// Use this for initialization
+	void Start () {
+		balloonSpawn  = GameObject.Find("Balloon_shooter").GetComponent<SetBubbles>();
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
+
+	public void OnMouseDown(){
+	//	print ("Answer");
+		if(balloonSpawn.balloonCount>=balloonSpawn.subAddScript.answerNumber-1 && balloonSpawn.balloons[balloonSpawn.balloonCount].GetComponent<BubbleAnimationScript>().isReady)
+		{
+			print ("Answer");
+			Manager.Instance.CheckSubtractionFromAddition (Manager.Instance.questionArray[Manager.Instance.questionNumber].GetComponent<GetSubFromAdd>().diff.ToString());
+			checkAnswerButton.sprite = pressedSprite;
+		}
+	}
+
+	public void OnMouseUp(){
+		checkAnswerButton.sprite = origSprite;
+	}
+}

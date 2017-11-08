@@ -1,0 +1,22 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class SetAnswerArea : MonoBehaviour {
+
+	public Keypad keypad;
+	public Animator keypadAnimator;
+	public TextMesh answerArea;
+
+	void Start()
+	{
+		keypad = GameObject.Find("Keypad").GetComponent<Keypad>();
+		keypadAnimator = GameObject.Find("Keypad").GetComponent<Animator>();
+	}
+
+	public void OnMouseDown()
+	{
+		keypadAnimator.SetTrigger("ShowKeypad");
+		keypad.answerArea = answerArea;
+	}
+}
