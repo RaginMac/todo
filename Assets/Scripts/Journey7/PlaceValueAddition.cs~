@@ -284,7 +284,6 @@ public class PlaceValueAddition : MonoBehaviour {
 
 
 	public void SetCoinsOnStart(int no1, int no2 = 0, int no3 = 0){
-		print(no1.ToString() + no2.ToString() + no3.ToString());
 
 		dropIndexOne = no3;
 		dropIndexTen = no2;
@@ -373,7 +372,6 @@ public class PlaceValueAddition : MonoBehaviour {
 
 	void CheckForShift(List<GameObject> droppedCoinsList){
 		if(droppedCoinsList.Count==10){
-			print("Time to shift");
 			ShiftCoinSet(droppedCoinsList);
 		}
 	}
@@ -448,32 +446,36 @@ public class PlaceValueAddition : MonoBehaviour {
 	public void DragObject2D()
 	{
 		Ray ray = cam.ScreenPointToRay (Input.mousePosition);
+		RaycastHit2D hit = Physics2D.Raycast (ray.origin, ray.direction, 100f);
 
 		if (Input.GetMouseButtonDown (0))
 		{
 			if (!draggedObject)
 			{
-				RaycastHit2D hit = Physics2D.Raycast (ray.origin, ray.direction, 100f);
-
 				if (hit != null && hit.collider!=null && (hit.collider.tag == "Coin1" || hit.collider.tag == "Coin10"))
 				{
-					print(hit.collider.tag);
 					draggedObject = hit.transform.gameObject;
 					draggedObject.GetComponent<BoxCollider2D> ().enabled = false;
 					offset = draggedObject.transform.position - ray.origin;
 					SetColliders(draggedObject.tag);
 				}
 			}
+
+		}
+		if(draggedObject) {
+			if(hit != null && hit.collider!=null && (hit.transform.tag=="SlotMachine" || hit.collider.tag=="Snap1" || hit.collider.tag=="Snap2") ){
+				draggedObject.transform.position = new Vector3(ray.origin.x + offset.x, ray.origin.y + offset.y, draggedObject.transform.position.z);
+			}
+			else {
+				//draggedObject.transform.position = draggedObject.GetComponent<OriginalPos>().originalPos;
+			}
 		}
 
-		if(draggedObject) {
-			draggedObject.transform.position = new Vector3(ray.origin.x + offset.x, ray.origin.y + offset.y, draggedObject.transform.position.z);
-		}
 
 		if (Input.GetMouseButtonUp (0))
 		{
 			if (draggedObject != null) {
-				RaycastHit2D hit = Physics2D.Raycast (ray.origin, ray.direction, 100f);
+				//RaycastHit2D hit = Physics2D.Raycast (ray.origin, ray.direction, 100f);
 
 				if(hit.collider!=null && (hit.collider.tag=="Snap1" || hit.collider.tag=="Snap2"))
 				{
