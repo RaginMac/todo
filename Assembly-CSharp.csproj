@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{A70C27A8-C216-9069-E843-F2DE4176F8DA}</ProjectGuid>
+    <ProjectGuid>{58BE4886-E782-D2FA-A4F5-0D8C1C8358D7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -39,10 +39,10 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="UnityEngine">
-      <HintPath>D:/Unity5.6/Editor/Data/Managed/UnityEngine.dll</HintPath>
+      <HintPath>E:/Applications/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
-      <HintPath>D:/Unity5.6/Editor/Data/Managed/UnityEditor.dll</HintPath>
+      <HintPath>E:/Applications/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -55,35 +55,53 @@
      <Compile Include="Assets\Scripts\FishAnim.cs" />
      <Compile Include="Assets\Scripts\FishManager.cs" />
      <Compile Include="Assets\Scripts\Intantiation_G_1_3.cs" />
-     <Compile Include="Assets\Scripts\J14\DrawGrid.cs" />
-     <Compile Include="Assets\Scripts\J14\GetCalcValue.cs" />
-     <Compile Include="Assets\Scripts\J14\SetSnapStatus.cs" />
-     <Compile Include="Assets\Scripts\J5\SetNumberText.cs" />
-     <Compile Include="Assets\Scripts\J5\SetStartPositions.cs" />
-     <Compile Include="Assets\Scripts\J8\SetCalcAnswer.cs" />
-     <Compile Include="Assets\Scripts\J8\SetCarrotCount.cs" />
-     <Compile Include="Assets\Scripts\J8\SetNumberTextSub.cs" />
-     <Compile Include="Assets\Scripts\J9\BubbleAnimationScript.cs" />
-     <Compile Include="Assets\Scripts\J9\CheckJ9Answer.cs" />
-     <Compile Include="Assets\Scripts\J9\GetSubFromAdd.cs" />
-     <Compile Include="Assets\Scripts\J9\SetBubbles.cs" />
-     <Compile Include="Assets\Scripts\Journey 10\Subtraction.cs" />
+     <Compile Include="Assets\Scripts\Journey10\CoinFallScript.cs" />
+     <Compile Include="Assets\Scripts\Journey10\EnableScript.cs" />
+     <Compile Include="Assets\Scripts\Journey10\Subtraction.cs" />
+     <Compile Include="Assets\Scripts\Journey11\MulByRepeatedAdd.cs" />
+     <Compile Include="Assets\Scripts\Journey11\ScrollRectSnap_CS.cs" />
+     <Compile Include="Assets\Scripts\Journey11\ScrollValues.cs" />
+     <Compile Include="Assets\Scripts\Journey11\UI_InfiniteScroll.cs" />
+     <Compile Include="Assets\Scripts\Journey12\ButtonScript.cs" />
+     <Compile Include="Assets\Scripts\Journey12\Multiplication.cs" />
+     <Compile Include="Assets\Scripts\Journey12\MultiplicationTable.cs" />
+     <Compile Include="Assets\Scripts\Journey12\SetNumberMultiply.cs" />
+     <Compile Include="Assets\Scripts\Journey12\multiply.cs" />
+     <Compile Include="Assets\Scripts\Journey14\DrawGrid.cs" />
+     <Compile Include="Assets\Scripts\Journey14\GetCalcValue.cs" />
+     <Compile Include="Assets\Scripts\Journey14\SetSnapStatus.cs" />
      <Compile Include="Assets\Scripts\Journey15\DropLimit.cs" />
      <Compile Include="Assets\Scripts\Journey15\EnterText.cs" />
      <Compile Include="Assets\Scripts\Journey15\FishDrop.cs" />
      <Compile Include="Assets\Scripts\Journey15\KeyPadShow.cs" />
+     <Compile Include="Assets\Scripts\Journey2\ArrangeInOrder.cs" />
+     <Compile Include="Assets\Scripts\Journey2\SwapNumbers.cs" />
+     <Compile Include="Assets\Scripts\Journey2\TestScripts\BlockGame.cs" />
+     <Compile Include="Assets\Scripts\Journey2\TestScripts\IndexValue.cs" />
+     <Compile Include="Assets\Scripts\Journey2\TestScripts\SnapIndexValue.cs" />
      <Compile Include="Assets\Scripts\Journey3\Lever.cs" />
      <Compile Include="Assets\Scripts\Journey3\PlaceValue.cs" />
      <Compile Include="Assets\Scripts\Journey3\TestJ3.cs" />
      <Compile Include="Assets\Scripts\Journey4\ArrangementScript.cs" />
      <Compile Include="Assets\Scripts\Journey4\GreaterOrLesser.cs" />
+     <Compile Include="Assets\Scripts\Journey4\GreaterOrLesser_2.cs" />
      <Compile Include="Assets\Scripts\Journey4\SetSprites.cs" />
+     <Compile Include="Assets\Scripts\Journey5\SetNumberText.cs" />
+     <Compile Include="Assets\Scripts\Journey5\SetStartPositions.cs" />
      <Compile Include="Assets\Scripts\Journey7\Deactivate.cs" />
      <Compile Include="Assets\Scripts\Journey7\Keypad.cs" />
      <Compile Include="Assets\Scripts\Journey7\Move.cs" />
      <Compile Include="Assets\Scripts\Journey7\PlaceValueAddition.cs" />
      <Compile Include="Assets\Scripts\Journey7\PullLever.cs" />
      <Compile Include="Assets\Scripts\Journey7\SetAnswerArea.cs" />
+     <Compile Include="Assets\Scripts\Journey8\SetCalcAnswer.cs" />
+     <Compile Include="Assets\Scripts\Journey8\SetCarrotCount.cs" />
+     <Compile Include="Assets\Scripts\Journey8\SetNumberTextSub.cs" />
+     <Compile Include="Assets\Scripts\Journey9\BubbleAnimationScript.cs" />
+     <Compile Include="Assets\Scripts\Journey9\CheckJ9Answer.cs" />
+     <Compile Include="Assets\Scripts\Journey9\GetSubFromAdd.cs" />
+     <Compile Include="Assets\Scripts\Journey9\SetBubbles.cs" />
+     <Compile Include="Assets\Scripts\LevelSelection.cs" />
      <Compile Include="Assets\Scripts\Manager.cs" />
      <Compile Include="Assets\Scripts\ObjectPosition.cs" />
      <Compile Include="Assets\Scripts\OptionAnim.cs" />
@@ -98,32 +116,31 @@
      <Compile Include="Assets\Scripts\Stars\StarManager.cs" />
      <Compile Include="Assets\Scripts\Stars\TestAnimation.cs" />
      <Compile Include="Assets\Scripts\StartGame.cs" />
-     <Compile Include="Assets\Scripts\SwapNumbers.cs" />
      <Compile Include="Assets\Scripts\Trace\Trace.cs" />
      <Compile Include="Assets\Scripts\Trace\TraceCollision.cs" />
      <Compile Include="Assets\Scripts\Trace\TraceDrag.cs" />
      <Compile Include="Assets\Scripts\Trace\TraceHelper.cs" />
      <Compile Include="Assets\SetCarrotForAdd.cs" />
  <Reference Include="UnityEngine.UI">
- <HintPath>D:/Unity5.6/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ <HintPath>E:/Applications/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
- <HintPath>D:/Unity5.6/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ <HintPath>E:/Applications/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.TestRunner">
- <HintPath>D:/Unity5.6/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll</HintPath>
+ <HintPath>E:/Applications/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll</HintPath>
  </Reference>
  <Reference Include="nunit.framework">
- <HintPath>D:/Unity5.6/Editor/Data/UnityExtensions/Unity/TestRunner/nunit.framework.dll</HintPath>
+ <HintPath>E:/Applications/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/nunit.framework.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Analytics">
- <HintPath>D:/Unity5.6/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
+ <HintPath>E:/Applications/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.HoloLens">
- <HintPath>D:/Unity5.6/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
+ <HintPath>E:/Applications/Unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.VR">
- <HintPath>D:/Unity5.6/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
+ <HintPath>E:/Applications/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -13,9 +13,6 @@ public class OriginalPos : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		originalPos = this.transform.position;
-		if (this.transform.childCount > 0) {
-			//text = this.transform.GetChild (0).GetComponent<TextMesh> ().text;
-		}
 		isSnapped = false;
 	}
 	

@@ -1,0 +1,735 @@
+fileFormatVersion: 2
+guid: 119d0a57f53545b4b8cbb8e01d92ab95
+timeCreated: 1507290594
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Caterpillar_Missing body part_0
+    21300002: Caterpillar_Missing body part_1
+    21300004: Caterpillar_Missing body part_2
+    21300006: Caterpillar_Missing body part_3
+    21300008: Caterpillar_Missing body part_4
+    21300010: Caterpillar_Missing body part_5
+    21300012: Caterpillar_Missing body part_6
+    21300014: Caterpillar_Missing body part_7
+    21300016: Caterpillar_Missing body part_8
+    21300018: Caterpillar_Missing body part_9
+    21300020: Caterpillar_Missing body part_10
+    21300022: Caterpillar_Missing body part_11
+    21300024: Caterpillar_Missing body part_12
+    21300026: Caterpillar_Missing body part_13
+    21300028: Caterpillar_Missing body part_14
+    21300030: Caterpillar_Missing body part_15
+    21300032: Caterpillar_Missing body part_16
+    21300034: Caterpillar_Missing body part_17
+    21300036: Caterpillar_Missing body part_18
+    21300038: Caterpillar_Missing body part_19
+    21300040: Caterpillar_Missing body part_20
+    21300042: Caterpillar_Missing body part_21
+    21300044: Caterpillar_Missing body part_22
+    21300046: Caterpillar_Missing body part_23
+    21300048: Caterpillar_Missing body part_24
+    21300050: Caterpillar_Missing body part_25
+    21300052: Caterpillar_Missing body part_26
+    21300054: Caterpillar_Missing body part_27
+    21300056: Caterpillar_Missing body part_28
+    21300058: Caterpillar_Missing body part_29
+    21300060: Caterpillar_Missing body part_30
+    21300062: Caterpillar_Missing body part_31
+    21300064: Caterpillar_Missing body part_32
+    21300066: Caterpillar_Missing body part_33
+    21300068: Caterpillar_Missing body part_34
+    21300070: Caterpillar_Missing body part_35
+    21300072: Caterpillar_Missing body part_36
+    21300074: Caterpillar_Missing body part_37
+    21300076: Caterpillar_Missing body part_38
+    21300078: Caterpillar_Missing body part_39
+    21300080: Caterpillar_Missing body part_40
+    21300082: Caterpillar_Missing body part_41
+    21300084: Caterpillar_Missing body part_42
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapU: -1
+    wrapV: -1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 0
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 512
+    textureFormat: 47
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1824
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_1
+      rect:
+        serializedVersion: 2
+        x: 297
+        y: 1824
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_2
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 1824
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_3
+      rect:
+        serializedVersion: 2
+        x: 891
+        y: 1824
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_4
+      rect:
+        serializedVersion: 2
+        x: 1188
+        y: 1824
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_5
+      rect:
+        serializedVersion: 2
+        x: 1485
+        y: 1824
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_6
+      rect:
+        serializedVersion: 2
+        x: 1782
+        y: 1824
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1520
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_8
+      rect:
+        serializedVersion: 2
+        x: 297
+        y: 1520
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_9
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 1520
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_10
+      rect:
+        serializedVersion: 2
+        x: 891
+        y: 1520
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_11
+      rect:
+        serializedVersion: 2
+        x: 1188
+        y: 1520
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_12
+      rect:
+        serializedVersion: 2
+        x: 1485
+        y: 1520
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_13
+      rect:
+        serializedVersion: 2
+        x: 1782
+        y: 1520
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1216
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_15
+      rect:
+        serializedVersion: 2
+        x: 297
+        y: 1216
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_16
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 1216
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_17
+      rect:
+        serializedVersion: 2
+        x: 891
+        y: 1216
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_18
+      rect:
+        serializedVersion: 2
+        x: 1188
+        y: 1216
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_19
+      rect:
+        serializedVersion: 2
+        x: 1485
+        y: 1216
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_20
+      rect:
+        serializedVersion: 2
+        x: 1782
+        y: 1216
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_21
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 912
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_22
+      rect:
+        serializedVersion: 2
+        x: 297
+        y: 912
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_23
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 912
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_24
+      rect:
+        serializedVersion: 2
+        x: 891
+        y: 912
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_25
+      rect:
+        serializedVersion: 2
+        x: 1188
+        y: 912
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_26
+      rect:
+        serializedVersion: 2
+        x: 1485
+        y: 912
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_27
+      rect:
+        serializedVersion: 2
+        x: 1782
+        y: 912
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_28
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 608
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_29
+      rect:
+        serializedVersion: 2
+        x: 297
+        y: 608
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_30
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 608
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_31
+      rect:
+        serializedVersion: 2
+        x: 891
+        y: 608
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_32
+      rect:
+        serializedVersion: 2
+        x: 1188
+        y: 608
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_33
+      rect:
+        serializedVersion: 2
+        x: 1485
+        y: 608
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_34
+      rect:
+        serializedVersion: 2
+        x: 1782
+        y: 608
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_35
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 304
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_36
+      rect:
+        serializedVersion: 2
+        x: 297
+        y: 304
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_37
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 304
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_38
+      rect:
+        serializedVersion: 2
+        x: 891
+        y: 304
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_39
+      rect:
+        serializedVersion: 2
+        x: 1188
+        y: 304
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_40
+      rect:
+        serializedVersion: 2
+        x: 1485
+        y: 304
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_41
+      rect:
+        serializedVersion: 2
+        x: 1782
+        y: 304
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Missing body part_42
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    outline: []
+    physicsShape: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

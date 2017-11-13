@@ -50,6 +50,8 @@ public class GreaterOrLesser : MonoBehaviour {
             options3.GetComponent<BoxCollider>().enabled = false;
             options4.GetComponent<BoxCollider>().enabled = false;
         }
+
+		FindFinalAnswer ();
     }
 
     public void DragObject()
@@ -169,4 +171,10 @@ public class GreaterOrLesser : MonoBehaviour {
         number3.text = n1.ToString();
         number4.text = n2.ToString();
     }
+
+	public void FindFinalAnswer()
+	{
+		finalRatNumber = finalAnswerNumbers[0] + finalAnswerNumbers[1];
+		finalElephantNumber = finalAnswerNumbers[2] + finalAnswerNumbers[3];
+	}
 }
