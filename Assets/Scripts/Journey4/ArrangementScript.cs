@@ -4,35 +4,58 @@ using UnityEngine;
 
 public class ArrangementScript : MonoBehaviour {
 	public bool ascending, descending;
+
 	public Transform[] snapPoints;
 	public string[] playerAnswer;
 	public string[] answerArray;
+    public Transform[] boyJumpPoints;
+	public Transform[] highlighter;
+
 	public int answerCounter;
 	public bool dropFlag;
-	public int dropCount;
+    public bool jumpFlag;
+    public int dropCount;
+    public int jumpPoint;
 
-	public Transform draggedObj;
+    public Transform draggedObj;
 	public Camera cam;
 	Vector3 offset;
 	RaycastHit hit;
 
 	public Manager manager;
+    public GameObject boy;
+    public Animator boyAnime;
+
+	public bool ansClicked;
 
 	void Start () {
 		manager = GameObject.Find ("Manager").GetComponent<Manager>();
 		cam = Camera.main;
 		ArrangeInOrder();
-		if(ascending)
-			dropCount = snapPoints.Length - 1;
+        if (ascending)
+        {
+            dropCount = snapPoints.Length - 1;
+            boyAnime.SetTrigger("PointTop");
+			jumpPoint = 5;
+        }
 
-		if(descending)
+		if (descending) {
 			dropCount = 0;
+			boyAnime.SetTrigger("PointDown");
+			jumpPoint = -1;
+		}
+
+		StartCoroutine (HighligterBlink());
 	}
 
 	void Update () {
-		DragObject ();
+		
 
-	}
+		DragObject ();
+		ArrangeInOrder();
+
+		BoyJump();
+    }
 
 	public void DragObject()
 	{
@@ -40,15 +63,16 @@ public class ArrangementScript : MonoBehaviour {
 
 		if(Input.GetMouseButtonDown(0))
 		{
-			ArrangeInOrder();
-			if(!draggedObj)
+            if (draggedObj == null)
 			{
-				if(Physics.Raycast(ray, out hit, Mathf.Infinity)  && hit.collider.tag == "DraggableObject")
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity)  && hit.collider.tag == "DraggableObject")
 				{
-					draggedObj = hit.transform;
+                    draggedObj = hit.transform;
 					hit.transform.GetComponent<BoxCollider>().enabled = false;
 					offset = draggedObj.position - ray.origin;
-					ResetAnswer();
+
+					if(!draggedObj.GetComponent<OriginalPos> ().isSnapped)
+						draggedObj.GetComponent<OriginalPos> ().originalPos = hit.transform.position;
 				}
 			}
 		}
@@ -61,13 +85,26 @@ public class ArrangementScript : MonoBehaviour {
 		{
 			if(draggedObj)
 			{
-				if (Physics.Raycast (ray, out hit, Mathf.Infinity))
+                if (Physics.Raycast (ray, out hit, Mathf.Infinity))
 				{
-					if(hit.collider.tag == "Snap" && dropFlag)
-					{
-						DropAnswer ();
-					} else {
+					if ((hit.collider.tag == "Snap" && dropFlag && !draggedObj.GetComponent<OriginalPos> ().isSnapped)) {
 						
+						if (jumpPoint >= 1 && ascending  && jumpPoint > dropCount) {
+							jumpPoint = dropCount;
+							boyAnime.SetTrigger ("Jump1");
+						} else if (jumpPoint <= 3 && descending  && jumpPoint < dropCount) {
+							jumpPoint = dropCount;
+							boyAnime.SetTrigger ("Jump1");
+						}
+
+						DropAnswer ();
+					} 
+					else if ((hit.collider.tag != "Snap" || hit.collider.tag == "Snap") && draggedObj.GetComponent<OriginalPos> ().isSnapped) 
+					{
+						ResetAnswer ();
+						draggedObj.transform.position = draggedObj.gameObject.GetComponent<OriginalPos> ().originalPos;
+					} else 
+					{
 						draggedObj.transform.position = draggedObj.gameObject.GetComponent<OriginalPos> ().originalPos;
 					}
 				}
@@ -75,53 +112,51 @@ public class ArrangementScript : MonoBehaviour {
 
 			if (draggedObj != null) {
 				draggedObj.gameObject.GetComponent<BoxCollider> ().enabled = true;
-			}
+            }
 
 			draggedObj = null;
-		}
+        }
 	}
 
 	public void DropAnswer ()
 	{
-		Vector3 temp = snapPoints[dropCount].transform.position;
+        Vector3 temp = snapPoints[dropCount].transform.position;
 		temp.z -= 1f;
 		draggedObj.transform.position = temp;
 		playerAnswer[dropCount] = draggedObj.gameObject.GetComponentInChildren<TextMesh>().text;
 		draggedObj.gameObject.GetComponent<OriginalPos>().indexValue = dropCount;
-		draggedObj.gameObject.GetComponent<OriginalPos>().isSnapped = true;
-		//draggedObj.gameObject.SetActive (false);
-	}
+        draggedObj.gameObject.GetComponent<OriginalPos>().isSnapped = true;
+
+		jumpFlag = true;
+    }
 
 	public void ResetAnswer()
 	{
-		if(draggedObj.gameObject.GetComponent<OriginalPos>().isSnapped == true)
-		{
 			draggedObj.gameObject.GetComponent<OriginalPos>().isSnapped = false;
 			dropCount = draggedObj.gameObject.GetComponent<OriginalPos>().indexValue;
 			playerAnswer[draggedObj.gameObject.GetComponent<OriginalPos>().indexValue] = "";
 			draggedObj.gameObject.GetComponent<OriginalPos>().indexValue = 0;
-		}
-		//draggedObj.gameObject.GetComponent<OriginalPos>().indexValue = 0;
 	}
 
 	public void ArrangeInOrder()
 	{
-		if(ascending)
+        if (ascending)
 		{
-			for (int i = dropCount; i >= 0; i--)
+			for (int i = snapPoints.Length - 1; i >= 0; i--)
 			{
 				if(playerAnswer[i] == "")
 				{
 					dropFlag = true;
-					dropCount = i;
-					break;
+                    dropCount = i;
+                    break;
 				} 
 				else {
 					dropFlag = false;
-				}
+                }
 			}
-
-		}
+            
+           
+        }
 
 		if(descending)
 		{
@@ -131,7 +166,7 @@ public class ArrangementScript : MonoBehaviour {
 				{
 					dropFlag = true;
 					dropCount = i;
-					break;
+                    break;
 				} 
 				else {
 					dropFlag = false;
@@ -139,5 +174,39 @@ public class ArrangementScript : MonoBehaviour {
 			}
 
 		}
+	}
+
+    public void BoyJump()
+    {
+		if(descending && jumpFlag)
+		{
+			Vector2 tempPos = boyJumpPoints [jumpPoint].transform.position;
+			tempPos.y += 1.05f;
+			boy.transform.position = Vector2.MoveTowards (boy.transform.position, tempPos, 0.06f);
+		} 
+		else if(ascending && jumpFlag) {
+
+			Vector2 tempPos = boyJumpPoints [jumpPoint].transform.position;
+			tempPos.y += 1.05f;
+			boy.transform.position = Vector2.MoveTowards (boy.transform.position, tempPos, 0.06f);
+			//jumpFlag = false;
 		}
+	}
+
+	IEnumerator HighligterBlink()
+	{
+		if (descending) {
+			for (int i = 0; i < highlighter.Length; i++) {
+				highlighter [i].gameObject.SetActive (true);
+				yield return new WaitForSeconds (0.8f);
+				highlighter [i].gameObject.SetActive (false);
+			}
+		}else if (ascending) {
+			for (int i = highlighter.Length - 1; i >= 0; i--) {
+				highlighter [i].gameObject.SetActive (true);
+				yield return new WaitForSeconds (0.8f);
+				highlighter [i].gameObject.SetActive (false);
+			}
+		}
+	}
 }

@@ -15,6 +15,9 @@ public class Options : MonoBehaviour {
 	public int clipNumber;
 	public int answerValue;
 	public string answerString;
+
+
+	public bool ansClicked;
 	//public Transform spawnedFish;
 
 	// Use this for initialization
@@ -86,18 +89,28 @@ public class Options : MonoBehaviour {
 		}
 	}
 
+
 	public void CheckAnswerString(){
 		//print ("oo");
-		string valid = manager.ValidateAnswer (answerString);
-		if (anim != null) {
-			if (valid == "correct") {
-				anim.SetTrigger ("HappyCaterpillar");
-			} else if (valid == "wrong") {
-				anim.SetTrigger ("SadCaterpillar");
+		if (!ansClicked)
+		{
+			string valid = manager.ValidateAnswer(answerString);
+			if (anim != null) {
+				if (valid == "correct") {
+					anim.SetTrigger("HappyCat");
+					ansClicked = true;
+					Invoke("Next", 2.5f);
+				} else if (valid == "wrong") {
+					anim.SetTrigger("SadCat");
+					if (manager.countWrongAnswer) {
+						ansClicked = true;
+						Invoke("Next", 2.5f);
+					}
+				}
 			}
+			//		manager.NextQuestion ();
+
 		}
-//		manager.NextQuestion ();
-		Invoke("Next", 2.5f);
 	}
 
 	public void Next(){

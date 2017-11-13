@@ -1,0 +1,356 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class DrawGrid : MonoBehaviour {
+
+	public Transform startCell, startPlaceVal, startPlaceValVert, gridParent, placeValParent;
+	public Image cell, y_cell, b_cell;
+	public Text number1, number2, answer;
+	public int columns, rows, no1, no2, ansNumber, x, y, x1, y1;
+	public int clickedAnswer;
+	public List<Image> gridCells,activatedHunCells, activatedTensCells, activatedOnesCells;
+	//public List<int> activatedHunCells;
+	public GameObject draggedObject, hunGrid, tenGridVert, tenGridHor, oneGrid;
+	public Camera cam;
+	public Vector3 offset;
+
+	public int indexHundred, indexTen, indexOne, tempIndex, indexCounter;
+
+
+	//public string latestDrop;
+
+	void Awake(){
+		CreateQuestion();
+
+	}
+
+	// Use this for initialization
+	void Start () {
+		//indexHundred = columns-1;
+		tenGridHor.GetComponent<BoxCollider2D>().enabled = false;
+		tenGridVert.GetComponent<BoxCollider2D>().enabled = false;
+		oneGrid.GetComponent<BoxCollider2D>().enabled = false;
+		cam = Camera.main;
+		//gridCells = new Image[columns*rows];
+		gridCells = new List<Image>();
+
+		InstantiateGrid(rows, columns);
+		InstantiateOneColumnNRow();
+
+
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		DragObject2D();
+	
+	}
+
+	public void CreateQuestion(){
+		rows = Random.Range(12, 16);
+		columns = Random.Range(10, 16);
+		no1 = rows;
+		no2 = columns;
+		ansNumber = no1 * no2;
+
+		number1.text = no1.ToString();
+		number2.text = no2.ToString();
+		//startPlaceValVert.position = new Vector3(startCell.position.x - ((columns)*0.45f), startCell.position.y, 1);
+	}
+
+	public void InstantiateGrid(int rows, int columns){
+		for (int j = 0; j < rows; j++) {
+			for (int i = 0; i < columns; i++) {
+				Image temp  = Instantiate(cell,new Vector3(startCell.position.x + (i*0.45f),startCell.position.y- (j*0.45f), 1f), Quaternion.identity, gridParent);
+				temp.GetComponent<SetSnapStatus>().row = j;
+				temp.GetComponent<SetSnapStatus>().column = i;
+				gridCells.Add(temp);
+			}
+		}
+
+
+	}
+
+	public void InstantiateOneColumnNRow(){
+		
+		if(no2%10!=0){
+			x = ((no2%10));
+			y = (no2-x);
+		}
+
+		if(no1%10!=0){
+			x1 = no1%10;
+			y1 = no1 - x1;
+		}
+
+		for (int i = 0; i < no2; i++) {
+			if(i<y){
+				Instantiate(b_cell, new Vector3(startPlaceVal.position.x + (i*0.45f), startPlaceVal.position.y, 1), Quaternion.identity, placeValParent);
+			}else{
+				Instantiate(y_cell, new Vector3((startPlaceVal.position.x + (i*0.45f)), startPlaceVal.position.y, 1), Quaternion.identity, placeValParent);
+			}
+		}
+		for (int j = 0; j < no1; j++) {
+			if(j<y1){
+				Instantiate(b_cell, new Vector3(startPlaceValVert.position.x , startPlaceValVert.position.y - (j*0.45f), 1), Quaternion.identity, placeValParent);
+			}else{
+				Instantiate(y_cell, new Vector3((startPlaceValVert.position.x ), startPlaceValVert.position.y - (j*0.45f), 1), Quaternion.identity, placeValParent);
+			}
+		}
+
+	}
+
+	public void DragObject2D()
+	{
+		Ray ray = cam.ScreenPointToRay (Input.mousePosition);
+
+		if (Input.GetMouseButtonDown (0))
+		{
+			if (!draggedObject)
+			{
+				RaycastHit2D hit = Physics2D.Raycast (ray.origin, ray.direction, 100f);
+			//	print(hit.collider.tag);
+				if (hit != null && hit.collider!=null && hit.collider.tag == "DraggableObject")
+				{
+					draggedObject = hit.transform.gameObject;
+					draggedObject.GetComponent<BoxCollider2D> ().enabled = false;
+					offset = draggedObject.transform.position - ray.origin;
+
+
+					CheckDropIndex(draggedObject.gameObject.name, draggedObject.gameObject);
+				}
+			}
+		}
+
+		if(draggedObject) {
+			draggedObject.transform.position = new Vector3(ray.origin.x + offset.x, ray.origin.y + offset.y, draggedObject.transform.position.z);
+		}
+
+		if (Input.GetMouseButtonUp (0))
+		{
+			if (draggedObject != null) {
+				RaycastHit2D hit = Physics2D.Raycast (ray.origin, ray.direction, 100f);
+
+				if(hit.collider!=null && hit.collider.tag=="Snap" && !hit.collider.GetComponent<SetSnapStatus>().isSnapped)
+				{
+					//draggedObject.transform.position = hit.collider.transform.position;
+
+
+					DropObjects(hit.collider.transform, draggedObject.transform);
+					Horizontal();
+				}
+				else if(hit.collider==null || hit.collider.tag!="Snap" || hit.collider.GetComponent<SetSnapStatus>().isSnapped)
+				{
+					draggedObject.transform.position = draggedObject.gameObject.GetComponent<OriginalPos> ().originalPos;
+				}
+
+
+				draggedObject.gameObject.GetComponent<BoxCollider2D> ().enabled = true;
+				draggedObject = null;
+
+			}
+		}
+	}
+//
+	public void DropObjects(Transform hit, Transform drag){
+		drag.transform.position = drag.gameObject.GetComponent<OriginalPos> ().originalPos;
+
+//		if(drag.gameObject.name == "100grid"){
+//			for (int j = 0; j < 10; j++) {
+//				for (int i = 0; i < 10; i++) {
+//					gridCells[indexHundred + i].transform.GetChild(0).gameObject.SetActive(true);
+//					activatedHunCells.Add(gridCells[indexHundred+i].transform.GetChild(0).GetComponent<Image>());
+//				//	gridCells[indexHundred+i].GetComponent<BoxCollider2D>().enabled = false;
+//					gridCells[indexHundred+i].GetComponent<SetSnapStatus>().isSnapped = true;
+//				}
+//				indexHundred+=columns;
+//			}
+//			//latestDrop = "100grid";
+//			tenGridHor.GetComponent<BoxCollider2D>().enabled = true;
+//			tenGridVert.GetComponent<BoxCollider2D>().enabled = true;
+//			oneGrid.GetComponent<BoxCollider2D>().enabled = true;
+//			//indexTen = columns*10;
+//
+//		}
+//
+		//print("dropIndex  " + indexHundred);
+//		if(drag.gameObject.GetComponent<OriginalPos>().isDroppabble && drag.gameObject.name=="10gridVert"){
+//			for (int i = 0; i < 10; i++) {
+//				gridCells[indexHundred+(i*columns)].transform.GetChild(1).gameObject.SetActive(true);
+//				gridCells[indexHundred+(i*columns)].GetComponent<SetSnapStatus>().isSnapped = true;
+//				activatedHunCells.Add(gridCells[indexHundred+(i*columns)].transform.GetChild(1).GetComponent<Image>());
+//				//gridCells[indexHundred+i].GetComponent<BoxCollider2D>().enabled = false;
+//				drag.gameObject.GetComponent<OriginalPos>().isDroppabble = false;
+//			}
+//		}
+		if(drag.gameObject.GetComponent<OriginalPos>().isDroppabble && drag.gameObject.name=="10gridHor"){
+			print(indexTen);
+			for (int i = 0; i < 10; i++) {
+				gridCells[indexTen+i].transform.GetChild(1).gameObject.SetActive(true);
+				activatedHunCells.Add(gridCells[indexTen+i].transform.GetChild(1).GetComponent<Image>());
+				//gridCells[indexTen+i].GetComponent<BoxCollider2D>().enabled = false;
+				gridCells[indexTen+i].GetComponent<SetSnapStatus>().isSnapped = true;
+			}
+
+		}
+//		if(drag.gameObject.GetComponent<OriginalPos>().isDroppabble && drag.gameObject.name=="1grid"){
+//			gridCells[indexOne].transform.GetChild(2).gameObject.SetActive(true);
+//			gridCells[indexOne].GetComponent<SetSnapStatus>().isSnapped = true;
+//			activatedHunCells.Add(gridCells[indexOne].transform.GetChild(2).GetComponent<Image>());
+//			//activatedTensCells.Add(gridCells[indexTen+i]);
+//		}
+
+
+	}
+//
+
+	void CheckDropIndex(string obj, GameObject dragObj){
+		if(obj=="10gridHor"){
+//			for (int i = 0; i < gridCells.Count; i++) {
+//				if(!gridCells[i].GetComponent<SetSnapStatus>().isSnapped)
+//				{
+//					CalculateHorSnapIndex(i, dragObj);
+//					break;
+//				}
+//			}
+//		}else if(obj=="10gridHor" && latestDrop=="100grid")
+//			for (int i = indexTen; i < indexTen+10; i++) 
+//			{
+//				if(!gridCells[indexTen].GetComponent<SetSnapStatus>().isSnapped){
+//					dragObj.GetComponent<OriginalPos>().isDroppabble = true;
+//				}
+//				else if(gridCells[indexTen].GetComponent<SetSnapStatus>().isSnapped){
+//					if(columns<20){
+//						indexTen+=columns;
+//					}else{
+//						if((indexTen-tempIndex)%columns==0){
+//							indexTen=(indexTen+columns)-10;
+//						}else{
+//							indexTen+=10;
+//							tempIndex = indexTen;
+//						}
+//					}
+//				}
+//			}
+			print(obj);
+			for (int i = 0; i < gridCells.Count; i++)
+			{
+				if(gridCells[i].GetComponent<SetSnapStatus>().horizontalDrop)
+				{
+					indexTen = i;
+					dragObj.GetComponent<OriginalPos>().isDroppabble = true;
+					//print(i);
+					break;
+				} else{
+					//go back
+				}
+			}
+
+		}
+
+//		if(obj=="10gridVert"){
+//			for (int i = 0; i < gridCells.Count; i++) {
+//				if(!gridCells[i].GetComponent<SetSnapStatus>().isSnapped)
+//				{
+//					CalculateVertSnapIndex(i, dragObj);
+//					break;
+//				}
+//			}
+//		}
+
+//		if(obj=="1grid"){
+//			for (int i = 0; i < gridCells.Count; i++) {
+//				if(!gridCells[i].GetComponent<SetSnapStatus>().isSnapped)
+//				{
+//					//CalculateOnesSnapIndex(i, dragObj);
+//					indexOne = i;
+//					print(indexOne);
+//					dragObj.GetComponent<OriginalPos>().isDroppabble = true;
+//					break;
+//				}
+//			}
+//		}
+
+		
+	}
+
+
+//	void CalculateVertSnapIndex(int index, GameObject obj){
+//		for (int i = 0; i < 10; i++) {
+//			if(gridCells[index+(i*columns)].GetComponent<SetSnapStatus>().isSnapped){
+//				
+//				return;
+//			}
+//		
+//		}
+//		indexHundred = index;
+//		obj.GetComponent<OriginalPos>().isDroppabble = true;
+//	}
+////
+////	void CalculateHorSnapIndex(int index, GameObject obj){
+////		print(index);
+////		for (int i = index; i < index+10; i++) 
+////		{
+////			if(!gridCells[index].GetComponent<SetSnapStatus>().isSnapped){
+////				obj.GetComponent<OriginalPos>().isDroppabble = true;
+////			}
+////			else if(gridCells[index].GetComponent<SetSnapStatus>().isSnapped){
+////				if(columns<20){
+////					index+=columns;
+////					indexTen = index;
+////				}else{
+////					if((index-tempIndex)%columns==0){
+////						
+////						index=(index+columns)-10;
+////						print("new   " + index);
+////						indexTen = index;
+////					}else{
+////						index+=10;
+////						indexTen = index;
+////						tempIndex = index;
+////					}
+////				}
+////			}
+////		}
+////	}
+	public void Horizontal()
+	{
+		for (int i = 0; i < gridCells.Count - 10; i++)
+		{
+			int tempi = i;
+		//	print("i" + i);
+			for (int j = 0; j < 10 ; j++)
+			{
+				if(gridCells[i].GetComponent<SetSnapStatus>().row == gridCells[tempi].GetComponent<SetSnapStatus>().row && !gridCells[tempi].GetComponent<SetSnapStatus>().isSnapped)
+				{
+					gridCells[i].GetComponent<SetSnapStatus>().horizontalDrop = true;
+					tempi+=1;
+					//print("temp" + tempi);
+				} else{
+					gridCells[i].GetComponent<SetSnapStatus>().horizontalDrop = false;
+				}
+			//	print(temp);
+			}
+		}
+	}
+
+	public void ClearGrid(){
+		for (int i = 0; i < activatedHunCells.Count; i++) {
+			activatedHunCells[i].gameObject.SetActive(false);
+
+		}
+		for (int i = 0; i < gridCells.Count; i++) {
+			gridCells[i].GetComponent<SetSnapStatus>().isSnapped = false;
+		}
+		activatedHunCells.Clear();
+		indexHundred = 0;
+		indexTen = 0;
+		indexOne = 0;
+		tenGridHor.GetComponent<BoxCollider2D>().enabled = false;
+		tenGridVert.GetComponent<BoxCollider2D>().enabled = false;
+		oneGrid.GetComponent<BoxCollider2D>().enabled = false;
+	}
+
+}
