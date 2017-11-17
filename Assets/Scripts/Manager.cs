@@ -180,7 +180,7 @@ public class Manager : MonoBehaviour {
 
 	public void CompletedSection()
 	{
-		print ("One section finished");
+		//print ("One section finished");
 
 		if(questionArray.Length>0){
 			source = questionArray [questionNumber].GetComponent<AudioSource> ();
@@ -368,6 +368,27 @@ public class Manager : MonoBehaviour {
 			}
 
 
+		}
+	}
+
+	//Game 2.6
+	public void CheckBlockSet()
+	{
+		int tempNum = 0;
+
+		for (int i = 1; i <= questionArray [questionNumber].GetComponent<BlockGame> ().numberBoxes.Length - 1; i++) {
+			if (questionArray [questionNumber].GetComponent<BlockGame> ().numberBoxes [i] != null) {
+				tempNum++;
+			} else {
+				break;
+			}
+		}
+
+		if (tempNum >= questionArray [questionNumber].GetComponent<BlockGame> ().numberBoxes.Length - 1) {
+			CountQuestionsAnswered (true);
+			Invoke ("NextQuestion", 1f);
+		} else {
+			CountQuestionsAnswered (false);
 		}
 	}
 

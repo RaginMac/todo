@@ -10,8 +10,6 @@ public class FishAnim : MonoBehaviour {
 	void Start () {
 		animator = this.GetComponent<Animator> ();
 
-//		if()
-
 		animator.SetTrigger ("FishIdle");
 	}
 	
