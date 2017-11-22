@@ -61,7 +61,7 @@ public class TraceCollision : MonoBehaviour {
 		if (col.GetComponent<Collider>().tag != "TraceCollider") {
 			traceScript.ResetPosition ();
 
-			for (int i = 0; i <= traceScript.helper.Length - 1;		 i++) { 
+			for (int i = 0; i <= traceScript.helper.Length - 1;i++) { 
 				traceScript.helper [i].hasEntered = false;
 			}
 		}

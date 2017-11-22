@@ -33,6 +33,7 @@ public class Keypad : MonoBehaviour {
 
 	public void  Erase()
 	{
+		print ("Erase");
 		inputArea.text = "";
 	}
 

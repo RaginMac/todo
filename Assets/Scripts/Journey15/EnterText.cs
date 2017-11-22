@@ -23,7 +23,7 @@ public class EnterText : MonoBehaviour {
 //
 	public void SetAnswerText(string ans)
 	{
-		if(keypadAnsArea.whichToFill=="remainder"){
+		if(keypadAnsArea.whichToFill == "remainder"){
 			remainderText.text = ans;
 			manager.questionArray[manager.questionNumber].GetComponent<FishDrop>().clickedRemainder = int.Parse(ans);
 		}else if(keypadAnsArea.whichToFill=="answer"){
