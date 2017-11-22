@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Game 2/Game2.6.unity
+- path: Assets/Scenes/Journey 16/16.3/Game 16.3A.unity
   isLoaded: 1
   isActive: 1

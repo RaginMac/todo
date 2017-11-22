@@ -74,6 +74,9 @@
      <Compile Include="Assets\Scripts\Journey15\EnterText.cs" />
      <Compile Include="Assets\Scripts\Journey15\FishDrop.cs" />
      <Compile Include="Assets\Scripts\Journey15\KeyPadShow.cs" />
+     <Compile Include="Assets\Scripts\Journey16\16.3\BasketScript.cs" />
+     <Compile Include="Assets\Scripts\Journey16\16.3\DivisionByMul.cs" />
+     <Compile Include="Assets\Scripts\Journey16\16.3\RowValue.cs" />
      <Compile Include="Assets\Scripts\Journey2\ArrangeInOrder.cs" />
      <Compile Include="Assets\Scripts\Journey2\SwapNumbers.cs" />
      <Compile Include="Assets\Scripts\Journey2\TestScripts\BlockGame.cs" />
