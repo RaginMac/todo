@@ -8,6 +8,7 @@ public class DivisionByMul : MonoBehaviour {
 	public int firstNum;
 	public int secondNum;
 	public int answer;
+	public int playerAnswer;
 	public int basketIndex;
 
 	public int noOfEggTrays;
@@ -27,6 +28,7 @@ public class DivisionByMul : MonoBehaviour {
 	public Transform parent;
 	public Transform mainParent;
 	public Transform draggedObj;
+	public GameObject keypad;
 
 	public Camera cam;
 	Vector3 offset;
@@ -196,5 +198,10 @@ public class DivisionByMul : MonoBehaviour {
 			eggs[tempIndex].transform.SetParent (parent);
 			tempIndex++;
 		}
+	}
+
+	public void ResetKeypad()
+	{
+		keypad.GetComponent<Animator>().SetBool("KeypadShow", false);
 	}
 }

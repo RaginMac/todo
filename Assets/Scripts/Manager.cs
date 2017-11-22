@@ -1035,7 +1035,6 @@ public class Manager : MonoBehaviour {
 	}
 
 	//j16
-
 	public void CheckCarrotDivision()
 	{
 		DivideCarrots carrotDivQuestion =  questionArray[questionNumber].GetComponent<DivideCarrots>();
@@ -1065,4 +1064,19 @@ public class Manager : MonoBehaviour {
 		}
 
 	}
+
+	//j16.3
+	public void J16_3CheckAnswer(){
+		questionArray [questionNumber].GetComponent<DivisionByMul> ().playerAnswer = int.Parse (questionArray [questionNumber].GetComponent<DivisionByMul> ().answerText.text);
+
+		if (questionArray [questionNumber].GetComponent<DivisionByMul> ().answer == questionArray [questionNumber].GetComponent<DivisionByMul> ().playerAnswer) {
+			CountQuestionsAnswered(true);
+			questionArray[questionNumber].GetComponent<DivisionByMul>().ResetKeypad();
+			NextQuestion();
+		}
+		else{
+			CountQuestionsAnswered(false);
+		}
+	}
+
 }
