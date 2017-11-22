@@ -1,4 +1,0 @@
-sceneSetups:
-- path: Assets/Scenes/Journey 15/Game 15.2.unity
-  isLoaded: 1
-  isActive: 1
