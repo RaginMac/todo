@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SetAnswerArea : MonoBehaviour {
 
 	public Keypad keypad;
 	public Animator keypadAnimator;
 	public TextMesh answerArea;
+	public Text inputArea;
 
 	public GameObject[] toHighlight, toHide;
 
@@ -22,10 +24,16 @@ public class SetAnswerArea : MonoBehaviour {
 		//keypadAnimator.SetTrigger("ShowKeypad");
 		keypadAnimator.SetBool("KeypadShow", true);
 		ShowSelection ();
-		keypad.answerArea = answerArea;
+		if(answerArea!=null){
+			keypad.answerArea = answerArea;
+		}
+		else if(inputArea!=null)
+		{
+			keypad.inputArea = inputArea;
+		}
 	}
 
-	void ShowSelection(){
+	public void ShowSelection(){
 		for (int i = 0; i < toHighlight.Length; i++) {
 			toHighlight [i].SetActive (true);
 		}

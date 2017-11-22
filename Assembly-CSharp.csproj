@@ -77,6 +77,8 @@
      <Compile Include="Assets\Scripts\Journey16\16.3\BasketScript.cs" />
      <Compile Include="Assets\Scripts\Journey16\16.3\DivisionByMul.cs" />
      <Compile Include="Assets\Scripts\Journey16\16.3\RowValue.cs" />
+     <Compile Include="Assets\Scripts\Journey16\DivideCarrots.cs" />
+     <Compile Include="Assets\Scripts\Journey16\PlayAnimFromRabbit.cs" />
      <Compile Include="Assets\Scripts\Journey2\ArrangeInOrder.cs" />
      <Compile Include="Assets\Scripts\Journey2\SwapNumbers.cs" />
      <Compile Include="Assets\Scripts\Journey2\TestScripts\BlockGame.cs" />
@@ -119,6 +121,7 @@
      <Compile Include="Assets\Scripts\Stars\StarManager.cs" />
      <Compile Include="Assets\Scripts\Stars\TestAnimation.cs" />
      <Compile Include="Assets\Scripts\StartGame.cs" />
+     <Compile Include="Assets\Scripts\TESTPOS.cs" />
      <Compile Include="Assets\Scripts\Trace\Trace.cs" />
      <Compile Include="Assets\Scripts\Trace\TraceCollision.cs" />
      <Compile Include="Assets\Scripts\Trace\TraceDrag.cs" />
