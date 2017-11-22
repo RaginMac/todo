@@ -118,6 +118,7 @@
      <Compile Include="Assets\Scripts\Stars\StarManager.cs" />
      <Compile Include="Assets\Scripts\Stars\TestAnimation.cs" />
      <Compile Include="Assets\Scripts\StartGame.cs" />
+     <Compile Include="Assets\Scripts\TESTPOS.cs" />
      <Compile Include="Assets\Scripts\Trace\Trace.cs" />
      <Compile Include="Assets\Scripts\Trace\TraceCollision.cs" />
      <Compile Include="Assets\Scripts\Trace\TraceDrag.cs" />
