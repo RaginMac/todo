@@ -70,6 +70,7 @@ public class Manager : MonoBehaviour {
 				questionArray [r] = temp;
 			}
 			questionArray [questionNumber].SetActive (true);
+
 			if ((audioSource != null)&&(questionArray [questionNumber].GetComponent<Question> ()!=null)) {
 				audioSource.clip = questionArray [questionNumber].GetComponent<Question> ().question.questionAudio;
 			}
@@ -179,7 +180,7 @@ public class Manager : MonoBehaviour {
 
 	public void CompletedSection()
 	{
-		print ("One section finished");
+		//print ("One section finished");
 
 		if(questionArray.Length>0){
 			source = questionArray [questionNumber].GetComponent<AudioSource> ();
@@ -251,37 +252,285 @@ public class Manager : MonoBehaviour {
 
 	public void CheckAnswerArray()
 	{
-		questionArray [questionNumber].GetComponent<SwapNumbers> ().answerCounter = 0;
-		for (int i = 0; i < questionArray [questionNumber].GetComponent<SwapNumbers> ().answerArray.Length; i++) {
-			if (questionArray [questionNumber].GetComponent<SwapNumbers> ().answerArray [i] == questionArray [questionNumber].GetComponent<SwapNumbers> ().numberArray [i]) {
-				questionArray [questionNumber].GetComponent<SwapNumbers> ().answerCounter++;
+		if (!questionArray[questionNumber].GetComponent<SwapNumbers>().ansClicked)
+		{
+			questionArray[questionNumber].GetComponent<SwapNumbers>().answerCounter = 0;
+
+			for (int i = 0; i < questionArray[questionNumber].GetComponent<SwapNumbers>().answerArray.Length; i++) {
+				//print (questionArray [questionNumber].GetComponent<SwapNumbers> ().answerArray [i].GetComponentInChildren<TextMesh>().text);
+				if (questionArray[questionNumber].GetComponent<SwapNumbers>().answerArray[i].GetComponentInChildren<TextMesh>().text == questionArray[questionNumber].GetComponent<SwapNumbers>().newAnswerArray[i]) {
+					questionArray[questionNumber].GetComponent<SwapNumbers>().answerCounter++;
+
+				}
+				else {
+					continue;
+				}
+			}
+
+			if (questionArray[questionNumber].GetComponent<SwapNumbers>().answerCounter == questionArray[questionNumber].GetComponent<SwapNumbers>().answerArray.Length) {
+				//print ("Correct");
+				questionArray[questionNumber].GetComponent<SwapNumbers>().animator.SetTrigger("HappyCat");
+				CountQuestionsAnswered(true);
+				questionArray[questionNumber].GetComponent<SwapNumbers>().ansClicked = true;
+				Invoke("NextQuestion", 2.5f);
+
+			} else {
+				//print ("Wrong");
+				questionArray[questionNumber].GetComponent<SwapNumbers>().animator.SetTrigger("SadCat");
+				CountQuestionsAnswered(false);
+				if (countWrongAnswer) {
+					// CountQuestionsAnswered(false);
+					questionArray[questionNumber].GetComponent<SwapNumbers>().ansClicked = true;
+					Invoke("NextQuestion", 2.5f);
+				}
+			}
+
+		}
+	}
+
+	public void MakeAnswerArray()
+	{
+		if (!questionArray [questionNumber].GetComponent<ArrangeInOrder> ().ansClicked) {
+			int tempNum = 0;
+			string tempString = "";
+
+			for (int i = 0; i <= questionArray [questionNumber].GetComponent<ArrangeInOrder> ().answer.Length - 1; i++) { 
+				if (questionArray [questionNumber].GetComponent<ArrangeInOrder> ().caterpillarBodies [i] != null)
+					tempString = questionArray [questionNumber].GetComponent<ArrangeInOrder> ().caterpillarBodies [i].GetComponentInChildren<TextMesh> ().text;
+				else
+					tempString = "";
+
+				string tempAnsString = questionArray [questionNumber].GetComponent<ArrangeInOrder> ().answer [i];
+
+				if (tempString == tempAnsString && tempString != "") {
+					tempNum++;
+				} else {
+					break;
+				}
+			}
+
+			if (tempNum == questionArray [questionNumber].GetComponent<ArrangeInOrder> ().answer.Length) {
+				questionArray [questionNumber].GetComponent<ArrangeInOrder> ().anime.SetTrigger ("HappyCat");
+				CountQuestionsAnswered (true);
+				questionArray [questionNumber].GetComponent<ArrangeInOrder> ().ansClicked = true;
+				Invoke ("NextQuestion", 2.5f);
+
+			} else {
+				questionArray [questionNumber].GetComponent<ArrangeInOrder> ().anime.SetTrigger ("SadCat");
+				CountQuestionsAnswered (false);
+				if (countWrongAnswer) {
+					//CountQuestionsAnswered(false);
+					questionArray[questionNumber].GetComponent<ArrangeInOrder>().ansClicked = true;
+					Invoke("NextQuestion", 2.5f);
+				}
+			}
+
+
+		}
+	}
+
+	//game 2.4 and 2.5
+	public void MakeAnswerArray2()
+	{
+		if (!questionArray [questionNumber].GetComponent<SwapNumbers> ().ansClicked) {
+			int tempNum = 0;
+			string tempString = "";
+
+			for (int i = 0; i <= questionArray [questionNumber].GetComponent<SwapNumbers> ().newAnswerArray.Length - 1; i++) { 
+				if (questionArray [questionNumber].GetComponent<SwapNumbers> ().caterpillarBodies [i] != null)
+					tempString = questionArray [questionNumber].GetComponent<SwapNumbers> ().caterpillarBodies [i].GetComponentInChildren<TextMesh> ().text;
+				else
+					tempString = "";
+
+				string tempAnsString = questionArray [questionNumber].GetComponent<SwapNumbers> ().newAnswerArray [i];
+
+				if (tempString == tempAnsString && tempString != "") {
+					tempNum++;
+				} else {
+					break;
+				}
+			}
+
+			if (tempNum == questionArray [questionNumber].GetComponent<SwapNumbers> ().newAnswerArray.Length) {
+				questionArray [questionNumber].GetComponent<SwapNumbers> ().animator.SetTrigger ("HappyCat");
+				CountQuestionsAnswered (true);
+				questionArray [questionNumber].GetComponent<SwapNumbers> ().ansClicked = true;
+				Invoke ("NextQuestion", 2.5f);
+
+			} else {
+				questionArray [questionNumber].GetComponent<SwapNumbers> ().animator.SetTrigger ("SadCat");
+				CountQuestionsAnswered(false);
+				if (countWrongAnswer) {
+					CountQuestionsAnswered (false);
+					questionArray [questionNumber].GetComponent<SwapNumbers> ().ansClicked = true;
+					Invoke ("NextQuestion", 2.5f);
+				}
+			}
+
+
+		}
+	}
+
+	//Game 2.6
+	public void CheckBlockSet()
+	{
+		int tempNum = 0;
+
+		for (int i = 1; i <= questionArray [questionNumber].GetComponent<BlockGame> ().numberBoxes.Length - 1; i++) {
+			if (questionArray [questionNumber].GetComponent<BlockGame> ().numberBoxes [i] != null) {
+				tempNum++;
+			} else {
+				break;
+			}
+		}
+
+		if (tempNum >= questionArray [questionNumber].GetComponent<BlockGame> ().numberBoxes.Length - 1) {
+			CountQuestionsAnswered (true);
+			Invoke ("NextQuestion", 1f);
+		} else {
+			CountQuestionsAnswered (false);
+		}
+	}
+
+	//J4 check answers
+	public void GreaterThan() {
+		if(questionArray [questionNumber].GetComponent<SetQuestionNumber> ().answered==0){
+			if (questionArray [questionNumber].GetComponent<SetQuestionNumber> ().n1 > questionArray [questionNumber].GetComponent<SetQuestionNumber> ().n2) {
+				questionArray [questionNumber].GetComponent<SetQuestionNumber> ().crocAnime.SetTrigger ("Greater");
+				Invoke("NextQuestion", 5.2f);
+				CountQuestionsAnswered (true);
+				questionArray [questionNumber].GetComponent<SetQuestionNumber> ().answered = 1;
+			} else {
+				questionArray [questionNumber].GetComponent<SetQuestionNumber> ().crocAnime.SetTrigger ("WrongAns");
+				//questionArray [questionNumber].GetComponent<SetQuestionNumber> ().answered = 0;
+				CountQuestionsAnswered (false);
+				if (countWrongAnswer) {
+					Invoke("NextQuestion", 3.9f);
+					questionArray [questionNumber].GetComponent<SetQuestionNumber> ().answered = 1;
+				}
+			}
+			//			questionArray [questionNumber].GetComponent<SetQuestionNumber> ().crocAnime.SetTrigger ("Greater");
+			//			questionArray [questionNumber].GetComponent<SetQuestionNumber> ().answered = 1;
+			//			Invoke("NextQuestion", 3.9f);
+		}
+		//Invoke("NextQuestion", 3.9f);
+	}
+
+	public void LessThan() {
+		if(questionArray [questionNumber].GetComponent<SetQuestionNumber> ().answered==0){
+			if (questionArray [questionNumber].GetComponent<SetQuestionNumber> ().n1 < questionArray [questionNumber].GetComponent<SetQuestionNumber> ().n2) {
+				questionArray [questionNumber].GetComponent<SetQuestionNumber> ().crocAnime.SetTrigger ("Lesser");
+				CountQuestionsAnswered (true);
+				Invoke("NextQuestion", 5.2f);
+				questionArray [questionNumber].GetComponent<SetQuestionNumber> ().answered = 1;
+			} else {
+				questionArray [questionNumber].GetComponent<SetQuestionNumber> ().crocAnime.SetTrigger ("WrongAns");
+				CountQuestionsAnswered (false);
+				if(countWrongAnswer){
+					Invoke("NextQuestion", 3.9f);
+					questionArray [questionNumber].GetComponent<SetQuestionNumber> ().answered = 1;
+				}
+			}
+			//questionArray [questionNumber].GetComponent<SetQuestionNumber> ().crocAnime.SetTrigger ("Lesser");
+			//			questionArray [questionNumber].GetComponent<SetQuestionNumber> ().answered = 1;
+
+			//			Invoke("NextQuestion", 3.9f);
+		}
+	}
+
+	public void EqualTo() {
+		if(questionArray [questionNumber].GetComponent<SetQuestionNumber> ().answered==0){
+			if (questionArray [questionNumber].GetComponent<SetQuestionNumber> ().n1 == questionArray [questionNumber].GetComponent<SetQuestionNumber> ().n2) {
+				questionArray [questionNumber].GetComponent<SetQuestionNumber> ().crocAnime.SetTrigger ("EqualTo");
+				CountQuestionsAnswered (true);
+				questionArray [questionNumber].GetComponent<SetQuestionNumber> ().answered = 1;
+				Invoke("NextQuestion", 2.7f);
+			}
+			else {
+				questionArray [questionNumber].GetComponent<SetQuestionNumber> ().crocAnime.SetTrigger ("WrongAns");
+				CountQuestionsAnswered (false);
+				if (countWrongAnswer) {
+					questionArray [questionNumber].GetComponent<SetQuestionNumber> ().answered = 1;
+					Invoke("NextQuestion", 2.7f);
+				}
+			}
+
+			//	questionArray [questionNumber].GetComponent<SetQuestionNumber> ().crocAnime.SetTrigger ("EqualTo");
+			//			questionArray [questionNumber].GetComponent<SetQuestionNumber> ().answered = 1;
+			//			Invoke("NextQuestion", 2.7f);
+		}
+	}
+
+	public void NotEqualTo(){
+		if(questionArray [questionNumber].GetComponent<SetQuestionNumber> ().answered==0){
+			if (questionArray [questionNumber].GetComponent<SetQuestionNumber> ().n1 == questionArray [questionNumber].GetComponent<SetQuestionNumber> ().n2) {
+				//	print ("Wrong");
+				questionArray [questionNumber].GetComponent<SetQuestionNumber> ().crocAnime.SetTrigger ("WrongAns");
+				CountQuestionsAnswered (false);
+				if(countWrongAnswer){
+					questionArray [questionNumber].GetComponent<SetQuestionNumber> ().answered = 1;
+					Invoke("NextQuestion", 2.7f);
+				}
 			} 
 			else {
-				continue;
+				//	print ("Correct");
+				//questionArray [questionNumber].GetComponent<SetQuestionNumber> ().crocAnime.SetTrigger ("EqualTo");
+				CountQuestionsAnswered (true);
+				Invoke("NextQuestion", 2.7f);
+				questionArray [questionNumber].GetComponent<SetQuestionNumber> ().answered = 1;
 			}
+			//questionArray [questionNumber].GetComponent<SetQuestionNumber> ().answered = 1;
+
+		}
+	}
+
+	public void CompareDraggedImage(){
+		//if(questionArray [questionNumber].GetComponent<SetQuestionNumber> ().answered==0)
+		{
+			if(questionArray [questionNumber].GetComponent<SetQuestionNumber> ().parent.transform.childCount<=0){
+				//CountQuestionsAnswered(false);
+				questionArray [questionNumber].GetComponent<SetQuestionNumber> ().Reset();
+
+			}
+			else{
+				string temp = questionArray [questionNumber].GetComponent<SetQuestionNumber> ().parent.GetChild(0).gameObject.name;
+
+				if ((questionArray [questionNumber].GetComponent<SetQuestionNumber> ().n1 > questionArray [questionNumber].GetComponent<SetQuestionNumber> ().n2)&&(temp=="GreaterThan")) {
+					CountQuestionsAnswered (true);
+					//					NextQuestion();
+					Invoke("NextQuestion", 2f);
+				}
+				else if((questionArray [questionNumber].GetComponent<SetQuestionNumber> ().n1 < questionArray [questionNumber].GetComponent<SetQuestionNumber> ().n2)&&(temp=="LessThan")){
+					CountQuestionsAnswered (true);
+					//					NextQuestion();
+					Invoke("NextQuestion", 2f);
+				}
+				else if((questionArray [questionNumber].GetComponent<SetQuestionNumber> ().n1 == questionArray [questionNumber].GetComponent<SetQuestionNumber> ().n2)&&(temp=="EqualTo")){
+					CountQuestionsAnswered (true);
+					//					NextQuestion();
+					Invoke("NextQuestion", 2f);
+				}
+				else {
+					//CountQuestionsAnswered(false);
+					questionArray [questionNumber].GetComponent<SetQuestionNumber> ().Reset();
+				}
+			}
+			//questionArray [questionNumber].GetComponent<SetQuestionNumber> ().answered = 1;
+			//NextQuestion();
 		}
 
-		if (questionArray [questionNumber].GetComponent<SwapNumbers> ().answerCounter == questionArray [questionNumber].GetComponent<SwapNumbers> ().answerArray.Length) {
-			//print ("Correct");
-			questionArray [questionNumber].GetComponent<SwapNumbers> ().animator.SetTrigger ("H_cat");
-			CountQuestionsAnswered (true);
-
-		} else {
-			//print ("Wrong");
-			questionArray [questionNumber].GetComponent<SwapNumbers> ().animator.SetTrigger ("S_cat");
-			if(countWrongAnswer){
-				CountQuestionsAnswered (false);
-			}
-		}
-
-		Invoke ("NextQuestion", 2.5f);
 	}
 
 	public void CheckAnswer()
 	{
 		questionArray [questionNumber].GetComponent<ArrangementScript> ().answerCounter = 0;
-		for (int i = 0; i < questionArray [questionNumber].GetComponent<ArrangementScript> ().answerArray.Length; i++) {
+
+		for (int i = 0; i < questionArray [questionNumber].GetComponent<ArrangementScript> ().answerArray.Length; i++)
+		{
+			//print ("R" + questionArray [questionNumber].GetComponent<ArrangementScript> ().playerAnswer [i] + "R");
+			//print ("R" + questionArray [questionNumber].GetComponent<ArrangementScript> ().answerArray [i] + "R");
 			if (questionArray [questionNumber].GetComponent<ArrangementScript> ().answerArray [i] == questionArray [questionNumber].GetComponent<ArrangementScript> ().playerAnswer [i]) {
+
 				questionArray [questionNumber].GetComponent<ArrangementScript> ().answerCounter++;
 			} 
 			else {
@@ -289,137 +538,29 @@ public class Manager : MonoBehaviour {
 			}
 		}
 
-		if (questionArray [questionNumber].GetComponent<ArrangementScript> ().answerCounter == questionArray [questionNumber].GetComponent<ArrangementScript> ().answerArray.Length - 1) {
+		if ((questionArray [questionNumber].GetComponent<ArrangementScript> ().answerCounter == questionArray [questionNumber].GetComponent<ArrangementScript> ().answerArray.Length - 1) 
+			&& !questionArray [questionNumber].GetComponent<ArrangementScript> ().ansClicked)
+		{
 			CountQuestionsAnswered (true);
-
+			questionArray [questionNumber].GetComponent<ArrangementScript> ().ansClicked = true;
+			Invoke ("NextQuestion", 2f); //NextQuestion ();
 		} else {
-			if(countWrongAnswer){
-				CountQuestionsAnswered (false);
+			if (countWrongAnswer) {
+				Invoke ("NextQuestion", 2f);
 			}
+			CountQuestionsAnswered (false);
+
+			questionArray [questionNumber].GetComponent<ArrangementScript> ().boyAnime.SetTrigger ("Wrong");
 		}
-
-		NextQuestion ();
-	}
-
-	public void MakeAnswerArray()
-	{
-		questionArray [questionNumber].GetComponent<SwapNumbers> ().answerCounter = 0;
-		for (int i = 0; i < questionArray [questionNumber].GetComponent<SwapNumbers> ().newAnswerArrayIndex; i++) {
-			if (questionArray [questionNumber].transform.GetChild (i + 1).GetComponentInChildren<TextMesh> ().text == questionArray [questionNumber].GetComponent<SwapNumbers> ().newAnswerArray [i]) {
-				questionArray [questionNumber].GetComponent<SwapNumbers> ().answerCounter++; 
-			} else {
-				continue;
-			}
-
-		}
-
-		if (questionArray [questionNumber].GetComponent<SwapNumbers> ().answerCounter == questionArray [questionNumber].GetComponent<SwapNumbers> ().newAnswerArray.Length) {
-			questionArray [questionNumber].GetComponent<SwapNumbers> ().animator.SetTrigger ("HappyCat");
-			CountQuestionsAnswered (true);
-
-		} else {
-			questionArray [questionNumber].GetComponent<SwapNumbers> ().animator.SetTrigger ("SadCat");
-			if(countWrongAnswer){
-				CountQuestionsAnswered (false);
-			}
-		}
-
-		Invoke("NextQuestion", 2.5f);
-	}
-
-	public void GreaterThan(){
-		if(questionArray [questionNumber].GetComponent<SetQuestionNumber> ().answered==0){
-			if (questionArray [questionNumber].GetComponent<SetQuestionNumber> ().n1 > questionArray [questionNumber].GetComponent<SetQuestionNumber> ().n2) {
-				CountQuestionsAnswered (true);
-			} else {
-				CountQuestionsAnswered (false);
-			}
-			questionArray [questionNumber].GetComponent<SetQuestionNumber> ().crocAnime.SetTrigger ("Greater");
-			questionArray [questionNumber].GetComponent<SetQuestionNumber> ().answered = 1;
-			Invoke("NextQuestion", 3.9f);
-		}
-		//Invoke("NextQuestion", 3.9f);
-	}
-
-	public void LessThan(){
-		if(questionArray [questionNumber].GetComponent<SetQuestionNumber> ().answered==0){
-			if (questionArray [questionNumber].GetComponent<SetQuestionNumber> ().n1 < questionArray [questionNumber].GetComponent<SetQuestionNumber> ().n2) {
-				CountQuestionsAnswered (true);
-			} else {
-				CountQuestionsAnswered (false);
-			}
-			questionArray [questionNumber].GetComponent<SetQuestionNumber> ().crocAnime.SetTrigger ("Lesser");
-			questionArray [questionNumber].GetComponent<SetQuestionNumber> ().answered = 1;
-
-			Invoke("NextQuestion", 3.9f);
-		}
-	}
-
-	public void EqualTo(){
-		if(questionArray [questionNumber].GetComponent<SetQuestionNumber> ().answered==0){
-			if (questionArray [questionNumber].GetComponent<SetQuestionNumber> ().n1 == questionArray [questionNumber].GetComponent<SetQuestionNumber> ().n2) {
-				CountQuestionsAnswered (true);
-			}
-			else {
-				CountQuestionsAnswered (false);
-			}
-
-			questionArray [questionNumber].GetComponent<SetQuestionNumber> ().crocAnime.SetTrigger ("EqualTo");
-			questionArray [questionNumber].GetComponent<SetQuestionNumber> ().answered = 1;
-			Invoke("NextQuestion", 2.7f);
-		}
-	}
-
-	public void NotEqualTo(){
-		if(questionArray [questionNumber].GetComponent<SetQuestionNumber> ().answered==0){
-			if (questionArray [questionNumber].GetComponent<SetQuestionNumber> ().n1 == questionArray [questionNumber].GetComponent<SetQuestionNumber> ().n2) {
-			//	print ("Wrong");
-				CountQuestionsAnswered (false);
-			} 
-			else {
-			//	print ("Correct");
-				CountQuestionsAnswered (true);
-			}
-			questionArray [questionNumber].GetComponent<SetQuestionNumber> ().answered = 1;
-			Invoke("NextQuestion", 2.7f);
-		}
-	}
-
-	public void CompareDraggedImage(){
-		if(questionArray [questionNumber].GetComponent<SetQuestionNumber> ().answered==0){
-			if(questionArray [questionNumber].GetComponent<SetQuestionNumber> ().parent.transform.childCount<=0){
-				CountQuestionsAnswered(false);
-			}
-			else{
-				string temp = questionArray [questionNumber].GetComponent<SetQuestionNumber> ().parent.GetChild(0).gameObject.name;
-
-				if ((questionArray [questionNumber].GetComponent<SetQuestionNumber> ().n1 > questionArray [questionNumber].GetComponent<SetQuestionNumber> ().n2)&&(temp=="GreaterThan")) {
-					CountQuestionsAnswered (true);
-				}
-				else if((questionArray [questionNumber].GetComponent<SetQuestionNumber> ().n1 < questionArray [questionNumber].GetComponent<SetQuestionNumber> ().n2)&&(temp=="LessThan")){
-					CountQuestionsAnswered (true);
-				}
-				else if((questionArray [questionNumber].GetComponent<SetQuestionNumber> ().n1 == questionArray [questionNumber].GetComponent<SetQuestionNumber> ().n2)&&(temp=="EqualTo")){
-					CountQuestionsAnswered (true);
-				}
-				else {
-					CountQuestionsAnswered(false);
-				}
-			}
-			questionArray [questionNumber].GetComponent<SetQuestionNumber> ().answered = 1;
-			NextQuestion();
-		}
-
 	}
 
 	public void RatNElephant()
 	{
-		
-		questionArray[questionNumber].GetComponent<GreaterOrLesser>().finalRatNumber = questionArray[questionNumber].GetComponent<GreaterOrLesser>().finalAnswerNumbers[0] + questionArray[questionNumber].GetComponent<GreaterOrLesser>().finalAnswerNumbers[1];
-		questionArray[questionNumber].GetComponent<GreaterOrLesser>().finalElephantNumber = questionArray[questionNumber].GetComponent<GreaterOrLesser>().finalAnswerNumbers[2] + questionArray[questionNumber].GetComponent<GreaterOrLesser>().finalAnswerNumbers[3];
-
 		if((questionArray[questionNumber].GetComponent<GreaterOrLesser>().finalRatNumber=="")||(questionArray[questionNumber].GetComponent<GreaterOrLesser>().finalElephantNumber=="")){
 			CountQuestionsAnswered(false);
+			if (countWrongAnswer) {
+				NextQuestion();
+			}
 		}else{
 			int n1 = int.Parse(questionArray[questionNumber].GetComponent<GreaterOrLesser>().finalRatNumber);
 			int n2 = int.Parse(questionArray[questionNumber].GetComponent<GreaterOrLesser>().finalElephantNumber);
@@ -427,19 +568,52 @@ public class Manager : MonoBehaviour {
 			if (n1 < n2) 
 			{
 				CountQuestionsAnswered(true);
+				NextQuestion ();
 			}
 			else
 			{
 				CountQuestionsAnswered(false);
+				if (countWrongAnswer) {
+					NextQuestion();
+				}
 			}
 		}
-		NextQuestion();
+		//NextQuestion();
 	}
 
-	public void SetAnswer(int ans){
-		//int temp = ans;
-		questionArray [questionNumber].GetComponent<SetStartPositions> ().answerPressed = ans;
-		//CheckAddition (temp);
+	public void RatNElephant2()
+	{
+		if((questionArray[questionNumber].GetComponent<GreaterOrLesser_2>().finalRatNumber == questionArray[questionNumber].GetComponent<GreaterOrLesser_2>().smallestNum)
+			|| (questionArray[questionNumber].GetComponent<GreaterOrLesser_2>().finalElephantNumber == questionArray[questionNumber].GetComponent<GreaterOrLesser_2>().biggestNum))
+		{
+			if((questionArray[questionNumber].GetComponent<GreaterOrLesser_2>().finalRatNumber=="")||(questionArray[questionNumber].GetComponent<GreaterOrLesser_2>().finalElephantNumber=="")){
+				CountQuestionsAnswered(false);
+				if (countWrongAnswer) {
+					NextQuestion();
+				}
+			} else{
+				int n1 = int.Parse(questionArray[questionNumber].GetComponent<GreaterOrLesser_2>().finalRatNumber);
+				int n2 = int.Parse(questionArray[questionNumber].GetComponent<GreaterOrLesser_2>().finalElephantNumber);
+
+				if (n1 < n2) 
+				{
+					CountQuestionsAnswered(true);
+					NextQuestion ();
+				}
+				else
+				{
+					CountQuestionsAnswered(false);
+					if (countWrongAnswer) {
+						NextQuestion();
+					}
+				}
+			}
+		} else {
+			CountQuestionsAnswered(false);
+			if (countWrongAnswer) {
+				NextQuestion();
+			}
+		}
 	}
 
 	public void CheckAddition(){
@@ -725,5 +899,170 @@ public class Manager : MonoBehaviour {
 		} else {
 			CountQuestionsAnswered(false);
 		}
+	}
+
+
+	//J10 check answer
+	public void CheckSubtractionAnswer()
+	{
+
+		string a1 = "";
+		string a10 = "";
+		string a100 = "";
+		bool allBlocksFilled = false;
+
+		if (questionArray [questionNumber].GetComponent<Subtraction> ().ans100.text == "") {
+			a100 = "0";
+		} else if(questionArray [questionNumber].GetComponent<Subtraction> ().ans100.text != ""){
+			a100 = questionArray [questionNumber].GetComponent<Subtraction> ().ans100.text; 
+		}
+
+		if (questionArray [questionNumber].GetComponent<Subtraction> ().ans10.text == "") {
+			a10 = "0";
+		} else if(questionArray [questionNumber].GetComponent<Subtraction> ().ans10.text != ""){
+			a10 = questionArray [questionNumber].GetComponent<Subtraction> ().ans10.text; 
+		}
+
+		if (questionArray [questionNumber].GetComponent<Subtraction> ().ans1.text == "") {
+			a1 = "0";
+		} else if(questionArray [questionNumber].GetComponent<Subtraction> ().ans1.text != "") {
+			a1 = questionArray [questionNumber].GetComponent<Subtraction> ().ans1.text; 
+		}
+
+
+		questionArray [questionNumber].GetComponent<Subtraction> ().playerAnswer =  a100 + a10 + a1;
+
+		if (questionArray [questionNumber].GetComponent<Subtraction> ().ans100.text != ""
+			&& questionArray [questionNumber].GetComponent<Subtraction> ().ans10.text != ""
+			&& questionArray [questionNumber].GetComponent<Subtraction> ().ans1.text != "") {
+			allBlocksFilled = true;
+
+		} else {
+			allBlocksFilled = false;
+		}
+
+		int n1 = int.Parse (questionArray [questionNumber].GetComponent<Subtraction> ().answer);
+		int n2 = int.Parse (questionArray [questionNumber].GetComponent<Subtraction> ().playerAnswer);
+
+		if (n1 == n2 && !questionArray [questionNumber].GetComponent<Subtraction> ().answered && allBlocksFilled) {
+			CountQuestionsAnswered(true);
+			questionArray [questionNumber].GetComponent<Subtraction> ().answered = true;
+			Invoke("NextQuestion", 2f);
+			questionArray [questionNumber].GetComponent<Subtraction> ().camAnimation.SetBool ("moveCamera", false); 
+		} else {
+			CountQuestionsAnswered(false);
+		}
+	}
+
+	//J11 check answer
+	public void CheckMulByRepeatedAdd()
+	{
+		int playerAns = int.Parse (questionArray [questionNumber].GetComponent<MulByRepeatedAdd> ().playerAns);
+		if (playerAns == questionArray [questionNumber].GetComponent<MulByRepeatedAdd> ().answer) {
+			CountQuestionsAnswered (true);
+			Invoke("NextQuestion",2f);
+			//Invoke("ScrollAnimation",2f);
+			//print ("correct");
+		}else {
+			
+			CountQuestionsAnswered (false);
+			questionArray [questionNumber].GetComponent<MulByRepeatedAdd> ().ScrollAnimation ();
+			//print ("wrong");
+
+		}
+		questionArray [questionNumber].GetComponent<MulByRepeatedAdd> ().count = 0;
+	}
+
+	//J12 check answer
+	public void CheckTextMultiply() {
+
+		//click.Play ();
+
+		if (questionArray [questionNumber].GetComponent<multiply> ().answer == questionArray [questionNumber].GetComponent<multiply> ().finalAnswer) {
+			CountQuestionsAnswered (true);
+			questionArray [questionNumber].GetComponent<multiply> ().eggTrayObj.SetActive (false);
+			NextQuestion ();
+		} else {
+			CountQuestionsAnswered (false);
+			//wrongAns.Play();
+			questionArray [questionNumber].GetComponent<multiply> ().anime.SetTrigger ("CalculatorShake");
+			questionArray [questionNumber].GetComponent<multiply> ().Reset ();
+		}
+
+	}
+
+	public void CheckMultiplication(){
+
+		//click.Play ();
+		int tempnum = 0;
+
+		for (int i = 0; i < questionArray [questionNumber].GetComponent<MultiplicationTable> ().answerArray.Length; i++) {
+			if (questionArray [questionNumber].GetComponent<MultiplicationTable> ().answerArray[i] == questionArray [questionNumber].GetComponent<MultiplicationTable> ().playerAnswerArray[i]) {
+				//CountQuestionsAnswered (true);
+				tempnum++;
+				//print (questionArray [questionNumber].GetComponent<MultiplicationTable> ().playerAnswerArray[i]);
+				//continue;
+			} else {
+				//CountQuestionsAnswered (false);
+				//print(questionArray [questionNumber].GetComponent<MultiplicationTable> ().answerArray[i]);
+				break;
+			}
+
+		}
+
+		if (tempnum >= questionArray [questionNumber].GetComponent<MultiplicationTable> ().answerArray.Length) {
+			CountQuestionsAnswered (true);
+			NextQuestion ();
+		} else {
+			//wrongAns.Play ();
+			questionArray [questionNumber].GetComponent<MultiplicationTable> ().Reset ();
+			CountQuestionsAnswered (false);
+			//NextQuestion ();
+		}
+		//NextQuestion ();
+	}
+
+	public void HintButton()
+	{
+		//click.Play ();
+		if (!questionArray [questionNumber].GetComponent<multiply> ().hintPressed && questionArray [questionNumber].GetComponent<multiply> ().moveCalci != null) 
+		{
+			questionArray [questionNumber].GetComponent<multiply> ().CreateEggTrayGrid ();
+			questionArray [questionNumber].GetComponent<multiply> ().moveCalci.SetTrigger ("Move");
+			questionArray [questionNumber].GetComponent<multiply> ().eggTrayObj.SetActive (true);
+			questionArray [questionNumber].GetComponent<multiply> ().hintPressed = true;
+		}
+	}
+
+	//j16
+
+	public void CheckCarrotDivision()
+	{
+		DivideCarrots carrotDivQuestion =  questionArray[questionNumber].GetComponent<DivideCarrots>();
+
+		if(carrotDivQuestion.qType==DivideCarrots.QuestionType.withoutRemainder){
+			if(carrotDivQuestion.answer.ToString()==carrotDivQuestion.clickedAnswer)
+			{
+				CountQuestionsAnswered(true);
+				questionArray[questionNumber].GetComponent<DivideCarrots>().ResetKeypad();
+				NextQuestion();
+			}
+			else{
+				CountQuestionsAnswered(false);
+			}
+		}
+		else if(carrotDivQuestion.qType==DivideCarrots.QuestionType.withRemainder)
+		{
+			if(carrotDivQuestion.answer.ToString()==carrotDivQuestion.clickedAnswer && carrotDivQuestion.remainder.ToString()==carrotDivQuestion.clickedRemainder)
+			{
+				CountQuestionsAnswered(true);
+				questionArray[questionNumber].GetComponent<DivideCarrots>().ResetKeypad();
+				NextQuestion();
+			}
+			else{
+				CountQuestionsAnswered(false);
+			}
+		}
+
 	}
 }

@@ -1033,4 +1033,36 @@ public class Manager : MonoBehaviour {
 			questionArray [questionNumber].GetComponent<multiply> ().hintPressed = true;
 		}
 	}
+
+	//j16
+
+	public void CheckCarrotDivision()
+	{
+		DivideCarrots carrotDivQuestion =  questionArray[questionNumber].GetComponent<DivideCarrots>();
+
+		if(carrotDivQuestion.qType==DivideCarrots.QuestionType.withoutRemainder){
+			if(carrotDivQuestion.answer.ToString()==carrotDivQuestion.clickedAnswer)
+			{
+				CountQuestionsAnswered(true);
+				questionArray[questionNumber].GetComponent<DivideCarrots>().ResetKeypad();
+				NextQuestion();
+			}
+			else{
+				CountQuestionsAnswered(false);
+			}
+		}
+		else if(carrotDivQuestion.qType==DivideCarrots.QuestionType.withRemainder)
+		{
+			if(carrotDivQuestion.answer.ToString()==carrotDivQuestion.clickedAnswer && carrotDivQuestion.remainder.ToString()==carrotDivQuestion.clickedRemainder)
+			{
+				CountQuestionsAnswered(true);
+				questionArray[questionNumber].GetComponent<DivideCarrots>().ResetKeypad();
+				NextQuestion();
+			}
+			else{
+				CountQuestionsAnswered(false);
+			}
+		}
+
+	}
 }
