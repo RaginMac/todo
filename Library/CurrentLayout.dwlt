@@ -108,10 +108,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 958
-  m_MinSize: {x: 915, y: 442}
-  m_MaxSize: {x: 22010, y: 10021}
+  m_MinSize: {x: 911, y: 442}
+  m_MaxSize: {x: 22006, y: 10021}
   vertical: 0
-  controlID: 8089
+  controlID: 125
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_MinSize: {x: 202, y: 442}
   m_MaxSize: {x: 4002, y: 8042}
   vertical: 1
-  controlID: 8090
+  controlID: 12
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -182,8 +182,8 @@ MonoBehaviour:
     y: 594
     width: 888
     height: 364
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 12}
   m_Panes:
   - {fileID: 12}
@@ -207,8 +207,8 @@ MonoBehaviour:
     y: 0
     width: 204
     height: 958
-  m_MinSize: {x: 204, y: 221}
-  m_MaxSize: {x: 4004, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
@@ -408,7 +408,7 @@ MonoBehaviour:
     m_Target: 1
     speed: 2
     m_Value: 1
-  m_LastSceneViewRotation: {x: -0.10333538, y: 0.53827757, z: -0.06671173, w: -0.8337543}
+  m_LastSceneViewRotation: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
@@ -484,10 +484,10 @@ MonoBehaviour:
     - {x: 533.60004, y: 167}
     - {x: 598.60004, y: 255.59998}
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: d3b6a75748321644da42c84194229119,
+  m_AnimatorController: {fileID: 9100000, guid: 4aa43d29f4eacf0438408b4ed127d611,
     type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: 1107282219203079310, guid: d3b6a75748321644da42c84194229119,
+  - m_Target: {fileID: 1107745929431190462, guid: 4aa43d29f4eacf0438408b4ed127d611,
       type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
@@ -557,28 +557,28 @@ MonoBehaviour:
     height: 937
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 50df0700
-    m_LastClickedID: 515920
-    m_ExpandedIDs: 386cfaffc670faff8a54fbff8255fbff48b6fbff40b7fbfff2cefbff20d3fbffe0f4fbff2411fcffa218fcff440efdff665ffdff1881fdff888cfdff82b5fdff586cfeffbe71feffee76feff1c7cfeffc282feffac9afeff3ea7feff30bffeff0cc8feff98d0feffb2dffeff881fffff3a43fffff67dffff7e87ffffe48effff7ca2ffff24aaffffbeb0ffff74baffff48c0ffff32c6ffff46cbffff0cd1ffffced6ffff28dcffff6ae4ffff84eaffffbaefffff04f7ffffe2fbffff00000000f233010090350100ea360100223801002a390100da940100189501006a970100ac9801004299010046990100989a0100a29b0100f89b0100be9c0100069d0100469d01001e9e0100b09e010074b3010088b40100f8b4010040b601008cb7010086b801005acc0100bacc010098cd0100e2ce0100c6cf01003cd201007cd20100d6d20100ced3010038d40100cad50100e2fb010070fd01003aff0100a4000200c00102004c030200484d0200204e02008a7b0200cacc04008e0805003e120500ca18050094190500d0190500321b0500a62b0500ae2f05004065050024660500466605006215060086150600e22a0600342d060086450600da450600b84706001448060044480600fc8e060018910600469106003cdf070044df070082df07008cdf0700
+    m_SelectedIDs: b82f0000
+    m_LastClickedID: 0
+    m_ExpandedIDs: eeeeffffe8f9ffffe2fbffff000000007c3b0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Manager
-      m_OriginalName: Manager
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 430180
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 0
       m_ClientGUIView: {fileID: 9}
     m_SearchString: 
   m_ExpandedScenes:
-  - GameSelectJ16
+  - Game 16.2
   m_CurrenRootInstanceID: 0
   m_Locked: 0
   m_CurrentSortingName: TransformSorting
@@ -619,19 +619,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Sprites/Journey16/SS
+    - Assets/Scenes/Journey 16/16.2
   m_ViewMode: 1
   m_StartGridSize: 96
   m_LastFolders:
-  - Assets/Sprites/Journey16/SS
+  - Assets/Scenes/Journey 16/16.2
   m_LastFoldersGridSize: 96
   m_LastProjectPath: F:\UnityProjects\TODO\GIT\todo
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 200}
-    m_SelectedIDs: 54cd0700
-    m_LastClickedID: 511316
-    m_ExpandedIDs: 00000000442500007e250000122900008e2a0000a82c0000222d0000542d0000ce2e000028340000403400009e49000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 95}
+    m_SelectedIDs: 702d0000
+    m_LastClickedID: 11632
+    m_ExpandedIDs: 00000000462500008025000016290000962a0000b02c00002a2d00005c2d0000d82e000038340000503400006436000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -659,7 +659,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000442500007e250000122900008e2a0000a82c0000222d0000542d000028340000403400009e49000000ca9a3bffffff7f
+    m_ExpandedIDs: 00000000462500008025000016290000962a0000b02c00002a2d00005c2d0000d82e0000383400005034000064360000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
