@@ -42,6 +42,7 @@ public class DivisionByMul : MonoBehaviour {
 		answer = firstNum / secondNum;
 
 		CreateEggTrayGrid ();
+		keypad.GetComponent<Keypad> ().EraseAllText ();
 	}
 
 	void Update()
