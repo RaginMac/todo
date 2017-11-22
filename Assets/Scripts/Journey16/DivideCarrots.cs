@@ -39,6 +39,7 @@ public class DivideCarrots : MonoBehaviour {
 	{
 		cam = Camera.main;
 		SetQuestionCarrots(false, q_carrots.Length, q_carrots);
+		GameObject.Find("Keypad").GetComponent<Keypad>().EraseAllText();
 	}
 
 	// Use this for initialization
@@ -109,7 +110,7 @@ public class DivideCarrots : MonoBehaviour {
 	{
 		if(activeRabbit!=null){
 			activeRabbit.position = Vector3.MoveTowards(activeRabbit.position, target.position, 10*Time.deltaTime);
-			activeRabbit.localScale = Vector3.MoveTowards(activeRabbit.localScale, target.localScale, 0.7f*Time.deltaTime);
+			activeRabbit.localScale = Vector3.MoveTowards(activeRabbit.localScale, target.localScale, 2*Time.deltaTime);
 		}
 		if(Vector3.Distance(activeRabbit.position, target.position) < 0.3f)
 		{

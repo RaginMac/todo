@@ -8,6 +8,8 @@ public class Keypad : MonoBehaviour {
 	public Text inputArea;
 	public Manager manager;
 
+	public Text[] allInputAreas;
+
 	public void SetText(string input){
 		if(answerArea!=null){
 			answerArea.text = input;
@@ -34,7 +36,12 @@ public class Keypad : MonoBehaviour {
 		inputArea.text = "";
 	}
 
-
+	public void EraseAllText()
+	{
+		for (int i = 0; i < allInputAreas.Length; i++) {
+			allInputAreas[i].text = "";
+		}
+	}
 
 
 
