@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 0f57950b36217ff45bacfa1e9053259c
+timeCreated: 1503121237
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: KBPlanetEarth
+  fontNames:
+  - KBPlanetEarth
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
