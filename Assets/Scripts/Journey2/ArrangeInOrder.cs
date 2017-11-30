@@ -6,6 +6,7 @@ public class ArrangeInOrder : MonoBehaviour {
 	
 	public enum Difficulty {Grade1, Grade2, Grade3};
 	public Difficulty diff;
+	public bool arrangeInOrder;
 
 	public Transform[] questionSpawnPoints;
 	public Transform[] optionSpawnPoints;
@@ -42,7 +43,9 @@ public class ArrangeInOrder : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		
 		Arrange ();
+
 		DragObject ();
 	}
 
@@ -252,14 +255,24 @@ public class ArrangeInOrder : MonoBehaviour {
 
 	public void Arrange()
 	{
-		for (int i = 0; i <= caterpillarBodies.Length - 1; i++) {
-			if (caterpillarBodies [i] != null) {
-				questionSpawnPoints [i].GetComponent<BoxCollider> ().enabled = false;
-				continue;
-			} else {
-				questionSpawnPoints [i].GetComponent<BoxCollider> ().enabled = true;
-				previousSnapIndex = i;
-				break;
+		if (arrangeInOrder) {
+			for (int i = 0; i <= caterpillarBodies.Length - 1; i++) {
+				if (caterpillarBodies [i] != null) {
+					questionSpawnPoints [i].GetComponent<BoxCollider> ().enabled = false;
+					continue;
+				} else {
+					questionSpawnPoints [i].GetComponent<BoxCollider> ().enabled = true;
+					previousSnapIndex = i;
+					break;
+				}
+			}
+		} else if(!arrangeInOrder){
+			for (int i = 0; i <= caterpillarBodies.Length - 1; i++) {
+				if (caterpillarBodies [i] != null) {
+					questionSpawnPoints [i].GetComponent<BoxCollider> ().enabled = false;
+				} else if(caterpillarBodies [i] == null) {
+					questionSpawnPoints [i].GetComponent<BoxCollider> ().enabled = true;
+				}
 			}
 		}
 	}
