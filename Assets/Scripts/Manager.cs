@@ -249,7 +249,7 @@ public class Manager : MonoBehaviour {
 	public void GoToHomeScreen(string home){
 		SceneManager.LoadScene (home);
 	}
-
+	//G2.2
 	public void CheckAnswerArray()
 	{
 		if (!questionArray[questionNumber].GetComponent<SwapNumbers>().ansClicked)
@@ -332,17 +332,17 @@ public class Manager : MonoBehaviour {
 	//game 2.4 and 2.5
 	public void MakeAnswerArray2()
 	{
-		if (!questionArray [questionNumber].GetComponent<SwapNumbers> ().ansClicked) {
+		if (!questionArray [questionNumber].GetComponent<BeforeNAfter> ().ansClicked) {
 			int tempNum = 0;
 			string tempString = "";
 
-			for (int i = 0; i <= questionArray [questionNumber].GetComponent<SwapNumbers> ().newAnswerArray.Length - 1; i++) { 
-				if (questionArray [questionNumber].GetComponent<SwapNumbers> ().caterpillarBodies [i] != null)
-					tempString = questionArray [questionNumber].GetComponent<SwapNumbers> ().caterpillarBodies [i].GetComponentInChildren<TextMesh> ().text;
+			for (int i = 0; i <= questionArray [questionNumber].GetComponent<BeforeNAfter> ().answer.Length - 1; i++) { 
+				if (questionArray [questionNumber].GetComponent<BeforeNAfter> ().caterpillarBodies [i] != null)
+					tempString = questionArray [questionNumber].GetComponent<BeforeNAfter> ().caterpillarBodies [i].GetComponentInChildren<TextMesh> ().text;
 				else
 					tempString = "";
 
-				string tempAnsString = questionArray [questionNumber].GetComponent<SwapNumbers> ().newAnswerArray [i];
+				string tempAnsString = questionArray [questionNumber].GetComponent<BeforeNAfter> ().answer [i];
 
 				if (tempString == tempAnsString && tempString != "") {
 					tempNum++;
@@ -351,18 +351,19 @@ public class Manager : MonoBehaviour {
 				}
 			}
 
-			if (tempNum == questionArray [questionNumber].GetComponent<SwapNumbers> ().newAnswerArray.Length) {
-				questionArray [questionNumber].GetComponent<SwapNumbers> ().animator.SetTrigger ("HappyCat");
+			if (tempNum == questionArray [questionNumber].GetComponent<BeforeNAfter> ().answer.Length) {
+				questionArray [questionNumber].GetComponent<BeforeNAfter> ().anime.SetTrigger ("HappyCat");
 				CountQuestionsAnswered (true);
-				questionArray [questionNumber].GetComponent<SwapNumbers> ().ansClicked = true;
+				questionArray [questionNumber].GetComponent<BeforeNAfter> ().ansClicked = true;
 				Invoke ("NextQuestion", 2.5f);
 
 			} else {
-				questionArray [questionNumber].GetComponent<SwapNumbers> ().animator.SetTrigger ("SadCat");
+				questionArray [questionNumber].GetComponent<BeforeNAfter> ().anime.SetTrigger ("SadCat");
 				CountQuestionsAnswered(false);
+				questionArray [questionNumber].GetComponent<BeforeNAfter> ().ResetAnswer ();
 				if (countWrongAnswer) {
 					CountQuestionsAnswered (false);
-					questionArray [questionNumber].GetComponent<SwapNumbers> ().ansClicked = true;
+					questionArray [questionNumber].GetComponent<BeforeNAfter> ().ansClicked = true;
 					Invoke ("NextQuestion", 2.5f);
 				}
 			}
