@@ -109,7 +109,7 @@ public class DivideCarrots : MonoBehaviour {
 	public void MoveRabbit()
 	{
 		if(activeRabbit!=null){
-			activeRabbit.position = Vector3.MoveTowards(activeRabbit.position, target.position, 10*Time.deltaTime);
+			activeRabbit.position = Vector3.MoveTowards(activeRabbit.position, target.position, 8*Time.deltaTime);
 			activeRabbit.localScale = Vector3.MoveTowards(activeRabbit.localScale, target.localScale, 2*Time.deltaTime);
 		}
 		if(Vector3.Distance(activeRabbit.position, target.position) < 0.3f)
@@ -127,6 +127,7 @@ public class DivideCarrots : MonoBehaviour {
 	void SetMoveStatus()
 	{
 		readyToMove = true;
+		activeRabbit.GetComponent<PlayAnimFromRabbit>().PlayRunAnimation(true);
 	}
 
 	void SetNextTargetPosition()
@@ -154,6 +155,7 @@ public class DivideCarrots : MonoBehaviour {
 		for (int i = 0; i < dragCarrots.Length; i++) {
 			dragCarrots[i].SetActive(false);
 		}
+		activeRabbit.GetComponent<PlayAnimFromRabbit>().PlayRunAnimation(false);
 	}
 
 	public void DragObject2D()
