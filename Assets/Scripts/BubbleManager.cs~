@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class BubbleManager : MonoBehaviour {
 
-
 	public GameObject[] bubbleObjects;
 	public Transform[] bubbleSpawns;
 
@@ -61,7 +60,6 @@ public class BubbleManager : MonoBehaviour {
 			bubbleSpawns[r] = temp;
 		}
 
-//		for (int j=0; j
 	}
 
 	public void SpawnAndResetOptions()

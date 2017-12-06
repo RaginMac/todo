@@ -1105,4 +1105,37 @@ public class Manager : MonoBehaviour {
 		}
 	}
 
+
+	//J17
+
+	public void CountCoinsInTrays()
+	{
+		DistributedCoins trayCoin = questionArray [questionNumber].GetComponent<DistributedCoins> ();
+
+		if(trayCoin.qType==DistributedCoins.QuestionType.withoutRemainder){
+
+			if(trayCoin.playerAnswer.text==trayCoin.answer.ToString())
+			{
+				CountQuestionsAnswered(true);
+				trayCoin.ResetKeypad();
+				NextQuestion();
+			}else{
+				CountQuestionsAnswered(false);
+			}
+
+		}
+		else if(trayCoin.qType==DistributedCoins.QuestionType.withRemainder){
+
+			if(trayCoin.playerAnswer.text==trayCoin.answer.ToString() && trayCoin.remainderAnswer.text==trayCoin.remainder.ToString())
+			{
+				CountQuestionsAnswered(true);
+				trayCoin.ResetKeypad();
+				NextQuestion();
+			}else{
+				CountQuestionsAnswered(false);
+			}
+
+		}
+	}
+
 }
