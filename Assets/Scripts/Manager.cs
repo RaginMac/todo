@@ -528,18 +528,15 @@ public class Manager : MonoBehaviour {
 
 		for (int i = 0; i < questionArray [questionNumber].GetComponent<ArrangementScript> ().answerArray.Length; i++)
 		{
-			//print ("R" + questionArray [questionNumber].GetComponent<ArrangementScript> ().playerAnswer [i] + "R");
-			//print ("R" + questionArray [questionNumber].GetComponent<ArrangementScript> ().answerArray [i] + "R");
 			if (questionArray [questionNumber].GetComponent<ArrangementScript> ().answerArray [i] == questionArray [questionNumber].GetComponent<ArrangementScript> ().playerAnswer [i]) {
-
 				questionArray [questionNumber].GetComponent<ArrangementScript> ().answerCounter++;
 			} 
 			else {
-				continue;
+				break;
 			}
 		}
 
-		if ((questionArray [questionNumber].GetComponent<ArrangementScript> ().answerCounter == questionArray [questionNumber].GetComponent<ArrangementScript> ().answerArray.Length - 1) 
+		if ((questionArray [questionNumber].GetComponent<ArrangementScript> ().answerCounter == questionArray [questionNumber].GetComponent<ArrangementScript> ().answerArray.Length) 
 			&& !questionArray [questionNumber].GetComponent<ArrangementScript> ().ansClicked)
 		{
 			CountQuestionsAnswered (true);
@@ -550,7 +547,6 @@ public class Manager : MonoBehaviour {
 				Invoke ("NextQuestion", 2f);
 			}
 			CountQuestionsAnswered (false);
-
 			questionArray [questionNumber].GetComponent<ArrangementScript> ().boyAnime.SetTrigger ("Wrong");
 		}
 	}
@@ -562,18 +558,21 @@ public class Manager : MonoBehaviour {
 			if (countWrongAnswer) {
 				NextQuestion();
 			}
-		}else{
+		} else {
 			int n1 = int.Parse(questionArray[questionNumber].GetComponent<GreaterOrLesser>().finalRatNumber);
 			int n2 = int.Parse(questionArray[questionNumber].GetComponent<GreaterOrLesser>().finalElephantNumber);
 
 			if (n1 < n2) 
 			{
 				CountQuestionsAnswered(true);
-				NextQuestion ();
+				questionArray [questionNumber].GetComponent<GreaterOrLesser> ().ElephantAnime.SetTrigger ("ElephantHappy");
+				questionArray [questionNumber].GetComponent<GreaterOrLesser> ().RatAnime.SetTrigger ("Rat_Happy");
+				Invoke ("NextQuestion", 2.5f);
 			}
 			else
 			{
 				CountQuestionsAnswered(false);
+				questionArray [questionNumber].GetComponent<GreaterOrLesser> ().ResetAnswer ();
 				if (countWrongAnswer) {
 					NextQuestion();
 				}
@@ -584,35 +583,35 @@ public class Manager : MonoBehaviour {
 
 	public void RatNElephant2()
 	{
-		if((questionArray[questionNumber].GetComponent<GreaterOrLesser_2>().finalRatNumber == questionArray[questionNumber].GetComponent<GreaterOrLesser_2>().smallestNum)
-			|| (questionArray[questionNumber].GetComponent<GreaterOrLesser_2>().finalElephantNumber == questionArray[questionNumber].GetComponent<GreaterOrLesser_2>().biggestNum))
-		{
-			if((questionArray[questionNumber].GetComponent<GreaterOrLesser_2>().finalRatNumber=="")||(questionArray[questionNumber].GetComponent<GreaterOrLesser_2>().finalElephantNumber=="")){
-				CountQuestionsAnswered(false);
-				if (countWrongAnswer) {
-					NextQuestion();
-				}
-			} else{
-				int n1 = int.Parse(questionArray[questionNumber].GetComponent<GreaterOrLesser_2>().finalRatNumber);
-				int n2 = int.Parse(questionArray[questionNumber].GetComponent<GreaterOrLesser_2>().finalElephantNumber);
+		string tempFRN = questionArray [questionNumber].GetComponent<GreaterOrLesser_2> ().finalRatNumber; // FRN = finalRatNumber
+		string tempFEN = questionArray [questionNumber].GetComponent<GreaterOrLesser_2> ().finalElephantNumber; // FEN = finalElephantNumber
 
-				if (n1 < n2) 
-				{
-					CountQuestionsAnswered(true);
-					NextQuestion ();
-				}
-				else
-				{
-					CountQuestionsAnswered(false);
-					if (countWrongAnswer) {
-						NextQuestion();
-					}
-				}
-			}
-		} else {
+		string tempSmallestNum = questionArray [questionNumber].GetComponent<GreaterOrLesser_2> ().smallestNum;
+		string tempBiggestNum = questionArray [questionNumber].GetComponent<GreaterOrLesser_2> ().biggestNum;
+
+		if((questionArray[questionNumber].GetComponent<GreaterOrLesser_2>().finalRatNumber == "") || (questionArray[questionNumber].GetComponent<GreaterOrLesser_2>().finalElephantNumber == "")){
 			CountQuestionsAnswered(false);
 			if (countWrongAnswer) {
 				NextQuestion();
+			}
+		} else{
+			int n1 = int.Parse(questionArray[questionNumber].GetComponent<GreaterOrLesser_2>().finalRatNumber);
+			int n2 = int.Parse(questionArray[questionNumber].GetComponent<GreaterOrLesser_2>().finalElephantNumber);
+
+			if (n1 < n2 && tempFRN == tempSmallestNum && tempFEN == tempBiggestNum) 
+			{
+				CountQuestionsAnswered(true);
+				questionArray [questionNumber].GetComponent<GreaterOrLesser_2> ().ElephantAnime.SetTrigger ("ElephantHappy");
+				questionArray [questionNumber].GetComponent<GreaterOrLesser_2> ().RatAnime.SetTrigger ("Rat_Happy");
+				Invoke ("NextQuestion", 2.5f);
+			}
+			else
+			{
+				CountQuestionsAnswered(false);
+				questionArray [questionNumber].GetComponent<GreaterOrLesser_2> ().ResetAnswer ();
+				if (countWrongAnswer) {
+					NextQuestion();
+				}
 			}
 		}
 	}

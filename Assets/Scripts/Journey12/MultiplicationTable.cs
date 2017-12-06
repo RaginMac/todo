@@ -49,7 +49,6 @@ public class MultiplicationTable : MonoBehaviour {
 
 	public void CreateEggTrayGrid()
 	{
-
 		int indexNum = 1;
 		for (int j = 0; j < num1; j++)
 		{
@@ -178,11 +177,8 @@ public class MultiplicationTable : MonoBehaviour {
 
 	public void DropAnswer(GameObject other)
 	{
-		
 		draggedObj.transform.position = draggedObj.gameObject.GetComponent<OriginalPos> ().originalPos;
 		other.GetComponentInChildren<TextMesh>().text = draggedObj.GetComponentInChildren<TextMesh> ().text;
-
-
 	}
 
 	public void FinalAnswer()
@@ -219,19 +215,19 @@ public class MultiplicationTable : MonoBehaviour {
 //		}
 
 		for (int j = 0; j < q1.Length; j++) {
-			if(!filledAns[0])
+			if(answerArray[0] != playerAnswerArray[0])
 				q1[j].GetComponent<TextMesh>().text = "";
 
-			if(!filledAns[1])
+			if(answerArray[1] != playerAnswerArray[1])
 				q2[j].GetComponent<TextMesh>().text = "";
 
-			if(!filledAns[2])
+			if(answerArray[2] != playerAnswerArray[2])
 				q3[j].GetComponent<TextMesh>().text = "";
 
-			if(!filledAns[3])
+			if(answerArray[3] != playerAnswerArray[3])
 				q4[j].GetComponent<TextMesh>().text = "";
 
-			if(!filledAns[4])
+			if(answerArray[4] != playerAnswerArray[4])
 				q5[j].GetComponent<TextMesh>().text = "";
 		}
 	}

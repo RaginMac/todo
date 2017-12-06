@@ -129,7 +129,6 @@ public class DivisionByMul : MonoBehaviour {
 
 	IEnumerator DisplayBaskets()
 	{
-		
 		yield return new WaitForSeconds (1);
 		baskets [basketIndex].SetActive (true);
 	}
@@ -139,6 +138,7 @@ public class DivisionByMul : MonoBehaviour {
 		hitObject.GetComponent<BasketScript> ().ShowEggsInBasket (secondNum);
 		hitObject.GetComponent<BasketScript> ().temp = basketIndex;
 		hitObject.GetComponent<BasketScript> ().moveBasket = true;
+		hitObject.GetComponent<BoxCollider> ().enabled = false;
 		parent.transform.gameObject.SetActive(false);
 		basketIndex++;
 	}

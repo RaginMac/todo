@@ -151,10 +151,10 @@ public class SetQuestionNumber : MonoBehaviour {
 	}
 	
 	public void DropAnswer(Transform snapCol){
-		draggedObject.transform.position = snapCol.position;
-
+		Vector3 tempPos = snapCol.position;
+		tempPos.z -= 0.5f;
+		draggedObject.transform.position = tempPos;
 		manager.CompareDraggedImage ();
-
 		//Invoke("Check", 1f);
 		//snappedObjName = objName;
 	}
