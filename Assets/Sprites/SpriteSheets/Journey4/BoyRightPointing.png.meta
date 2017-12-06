@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 6a758cc1965ce064696d349ea2520624
-timeCreated: 1507443677
+timeCreated: 1512448545
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -12,6 +12,9 @@ TextureImporter:
     21300010: BoyRightPointing_5
     21300012: BoyRightPointing_6
     21300014: BoyRightPointing_7
+    21300016: BoyRightPointing_8
+    21300018: BoyRightPointing_9
+    21300020: BoyRightPointing_10
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -20,8 +23,6 @@ TextureImporter:
     linearTexture: 0
     fadeOut: 0
     borderMipMap: 0
-    mipMapsPreserveCoverage: 0
-    alphaTestReferenceValue: 0.5
     mipMapFadeDistanceStart: 1
     mipMapFadeDistanceEnd: 3
   bumpmap:
@@ -37,13 +38,10 @@ TextureImporter:
   textureFormat: 1
   maxTextureSize: 2048
   textureSettings:
-    serializedVersion: 2
     filterMode: -1
     aniso: -1
     mipBias: -1
-    wrapU: 1
-    wrapV: -1
-    wrapW: -1
+    wrapMode: -1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -95,6 +93,71 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
+        y: 774
+        width: 198
+        height: 387
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: BoyRightPointing_1
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 774
+        width: 198
+        height: 387
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: BoyRightPointing_2
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 774
+        width: 198
+        height: 387
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: BoyRightPointing_3
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 774
+        width: 198
+        height: 387
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: BoyRightPointing_4
+      rect:
+        serializedVersion: 2
+        x: 792
+        y: 774
+        width: 198
+        height: 387
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: BoyRightPointing_5
+      rect:
+        serializedVersion: 2
+        x: 0
         y: 387
         width: 198
         height: 387
@@ -102,10 +165,9 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: BoyRightPointing_1
+      name: BoyRightPointing_6
       rect:
         serializedVersion: 2
         x: 198
@@ -116,10 +178,9 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: BoyRightPointing_2
+      name: BoyRightPointing_7
       rect:
         serializedVersion: 2
         x: 396
@@ -130,10 +191,9 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: BoyRightPointing_3
+      name: BoyRightPointing_8
       rect:
         serializedVersion: 2
         x: 594
@@ -144,10 +204,22 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: BoyRightPointing_4
+      name: BoyRightPointing_9
+      rect:
+        serializedVersion: 2
+        x: 792
+        y: 387
+        width: 198
+        height: 387
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: BoyRightPointing_10
       rect:
         serializedVersion: 2
         x: 0
@@ -158,52 +230,8 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: BoyRightPointing_5
-      rect:
-        serializedVersion: 2
-        x: 198
-        y: 0
-        width: 198
-        height: 387
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: BoyRightPointing_6
-      rect:
-        serializedVersion: 2
-        x: 396
-        y: 0
-        width: 198
-        height: 387
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: BoyRightPointing_7
-      rect:
-        serializedVersion: 2
-        x: 594
-        y: 0
-        width: 198
-        height: 387
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
       tessellationDetail: 0
     outline: []
-    physicsShape: []
   spritePackingTag: 
   userData: 
   assetBundleName: 

@@ -34,7 +34,10 @@ public class Keypad : MonoBehaviour {
 	public void  Erase()
 	{
 		print ("Erase");
-		inputArea.text = "";
+		if(inputArea != null)
+			inputArea.text = "";
+		else if(answerArea != null)
+			answerArea.text = "";
 	}
 
 	public void EraseAllText()
