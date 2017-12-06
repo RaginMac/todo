@@ -15,6 +15,7 @@ public class OriginalPos : MonoBehaviour {
 	public GameObject sprite;
 
 	// Use this for initialization
+
 	void Start () {
 		originalPos = this.transform.position;
 		isSnapped = false;

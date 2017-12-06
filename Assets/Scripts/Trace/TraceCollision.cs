@@ -40,7 +40,7 @@ public class TraceCollision : MonoBehaviour {
 			target = traceScript.traceColliderObjects [lookAtObject + 1].transform;
 			v_diff = (target.position - sprite.position);
 			atan2 = Mathf.Atan2 (v_diff.y, v_diff.x);
-			sprite.rotation = Quaternion.Slerp(currentRot, Quaternion.Euler (0f, 0f, atan2 * Mathf.Rad2Deg + 90), 0.1f);
+			sprite.rotation = Quaternion.Lerp(currentRot, Quaternion.Euler (0f, 0f, atan2 * Mathf.Rad2Deg + 90), 0.1f);
 
 		} else if(lookAtObject >= traceScript.traceColliderObjects.Count) {
 			

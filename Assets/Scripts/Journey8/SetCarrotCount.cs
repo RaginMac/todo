@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class SetCarrotCount : MonoBehaviour {
 
 	public GameObject[] carrots, rabbitCarrots;
+	public List<GameObject> newCarrots;
 	public Text number1, number2, answerText;
 	public string clickedAnswer;
 
@@ -72,17 +74,20 @@ public class SetCarrotCount : MonoBehaviour {
 		{
 			//ArrangeInOrder ();
 			//print ("pressing");
-			if(!draggedObj)
+			if(!EventSystem.current.IsPointerOverGameObject())
 			{
-				if(Physics.Raycast(ray, out hit, Mathf.Infinity)  && hit.collider.tag == "DraggableObject")
+				if(!draggedObj)
 				{
-					//print (hit.collider.tag);
-					//ResetAnswerText();
-					draggedObj = hit.transform;
-					//hit.transform.GetComponent<AudioSource> ().Play ();
-					hit.transform.GetComponent<BoxCollider>().enabled = false;
-					offset = draggedObj.position - ray.origin;
-					//ResetAnswer ();
+					if(Physics.Raycast(ray, out hit, Mathf.Infinity)  && hit.collider.tag == "DraggableObject")
+					{
+						//print (hit.collider.tag);
+						//ResetAnswerText();
+						draggedObj = hit.transform;
+						//hit.transform.GetComponent<AudioSource> ().Play ();
+						hit.transform.GetComponent<BoxCollider>().enabled = false;
+						offset = draggedObj.position - ray.origin;
+						//ResetAnswer ();
+					}
 				}
 			}
 		}
@@ -105,7 +110,8 @@ public class SetCarrotCount : MonoBehaviour {
 						//	answerPressed = draggedObj.GetComponentInChildren<TextMesh> ().text;
 						//	temp = answerPressed + temp;
 						//	answerPressed = temp;
-						DropAnswer (hit.collider);
+
+						DropAnswer (hit.collider, draggedObj.gameObject);
 
 					} else {
 						//						
@@ -115,17 +121,18 @@ public class SetCarrotCount : MonoBehaviour {
 				}
 			}
 
-			if (draggedObj != null) {
-				draggedObj.gameObject.GetComponent<BoxCollider> ().enabled = true;
-			}
+//			if (draggedObj != null) {
+//				draggedObj.gameObject.GetComponent<BoxCollider> ().enabled = true;
+//			}
 
 			draggedObj = null;
 		}
 	}
 
-	public void DropAnswer (Collider dropCol)
+	public void DropAnswer (Collider dropCol, GameObject drag)
 	{
-		draggedObj.GetComponent<Animator>().SetTrigger("CarrotBite");
+		newCarrots.Add(drag);
+		//draggedObj.GetComponent<Animator>().SetTrigger("CarrotBite");
 		Vector3 temp = rabbitCarrots[dropCount].transform.position;
 		temp.z -= 1f;
 		draggedObj.transform.position = temp;
@@ -137,7 +144,18 @@ public class SetCarrotCount : MonoBehaviour {
 		draggedObj.gameObject.GetComponent<OriginalPos>().indexValue = dropCount;
 		//finalAnswerNumbers[draggedObj.gameObject.GetComponent<OriginalPos>().indexValue] = draggedObj.gameObject.GetComponentInChildren<TextMesh>().text;
 		draggedObj.gameObject.GetComponent<OriginalPos>().isSnapped = true;
-
+		CheckIfAllDragged();
 
 	}
+
+	public void CheckIfAllDragged()
+	{
+		if(newCarrots.Count>=no2)
+		{
+			for (int i = 0; i < newCarrots.Count; i++) {
+				newCarrots[i].GetComponent<Animator>().SetTrigger("CarrotBite");
+			}
+		}
+	}
+
 }
