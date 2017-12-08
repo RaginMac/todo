@@ -31,6 +31,8 @@ public class Manager : MonoBehaviour {
 	public AudioClip UIClick, correctAudio, wrongAudio, popupAudio, starAudio, balloonPop;
 	public AudioSource questionSource;
 
+	public bool isGameComplete = false;
+
 //	int n1, n2;
 	// Use this for initialization
 	void Start () {
@@ -193,6 +195,7 @@ public class Manager : MonoBehaviour {
 		for (int i = 0; i < isCorrect; i++) {
 			popupStars [i].gameObject.SetActive (true);			
 		}
+		isGameComplete = true;
 		gameCompletePopup.SetActive (true);
 		
 	}

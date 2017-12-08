@@ -30,7 +30,9 @@ public class FishDrop : MonoBehaviour {	//j15
 	
 	// Update is called once per frame
 	void Update () {
-		DragObject2D();
+		if(!Manager.Instance.isGameComplete){
+			DragObject2D();
+		}
 	}
 
 	public void ShuffleSpawns(){

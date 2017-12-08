@@ -37,7 +37,9 @@ public class SetCarrotCount : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		DragObject ();
+		if(!Manager.Instance.isGameComplete){
+			DragObject ();
+		}
 	}
 
 	void PlayRabbitAudio(){

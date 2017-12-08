@@ -12,7 +12,8 @@ public class PullLever : MonoBehaviour {
 		
 		if(this.gameObject.tag=="Drop1"){
 			this.GetComponent<Animator>().SetTrigger("OneLever");
-			if(counterValOne!=10-pva.N1D1){
+			if(counterValOne!=pva.N2D1){
+				print("this1");
 				if(!pva.hasOnesShifted){
 					pva.SetDropLocation(this.gameObject.tag, pva.spawnedOneCoins, pva.dropIndexOne, pva.coinOneParent, pva.coinTenParent, pva.coinHunParent);
 				}else{
@@ -20,10 +21,13 @@ public class PullLever : MonoBehaviour {
 				}
 				UpdateCounter(this.transform.GetComponentInChildren<TextMesh>(), counterValOne, this.gameObject.tag);
 			}
+			else{
+				this.GetComponent<BoxCollider>().enabled = false;
+			}
 		}
 		else if(this.gameObject.tag=="Drop10"){
 			this.GetComponent<Animator>().SetTrigger("TenLever");
-			if(counterValTen!=10-pva.N1D2){
+			if(counterValTen!=pva.N2D2){
 				if(!pva.hasTensShifted){
 					pva.SetDropLocation(this.gameObject.tag, pva.spawnedTenCoins, pva.dropIndexTen, pva.coinOneParent, pva.coinTenParent, pva.coinHunParent);
 				}else{
@@ -32,13 +36,20 @@ public class PullLever : MonoBehaviour {
 				}
 				UpdateCounter(this.transform.GetComponentInChildren<TextMesh>(), counterValTen, this.gameObject.tag);
 			}
+			else{
+				this.GetComponent<BoxCollider>().enabled = false;
+			}
 		}
 		else if(this.gameObject.tag=="Drop100"){
 			this.GetComponent<Animator>().SetTrigger("HunLever");
-			if(counterValHun!=10-pva.N1D3){
+			if(counterValHun!=pva.N2D3){
 				pva.SetDropLocation(this.gameObject.tag, pva.spawnedHunCoins, pva.dropIndexHun, pva.coinOneParent, pva.coinTenParent, pva.coinHunParent);
 				UpdateCounter(this.transform.GetComponentInChildren<TextMesh>(), counterValHun, this.gameObject.tag);
 			}
+			else{
+				this.GetComponent<BoxCollider>().enabled = false;
+			}
+
 		}
 
 	}

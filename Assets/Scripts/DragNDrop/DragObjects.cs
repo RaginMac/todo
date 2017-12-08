@@ -25,6 +25,7 @@ public class DragObjects : MonoBehaviour {
 
 	public bool isText;
 	public int isAnswered = 0;
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -36,7 +37,9 @@ public class DragObjects : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
-		DragObject ();
+		if(!manager.isGameComplete){
+			DragObject ();
+		}
 	}
 
 	public void DragObject()
