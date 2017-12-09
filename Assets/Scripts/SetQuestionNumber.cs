@@ -54,9 +54,12 @@ public class SetQuestionNumber : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(isDragQuestion)
+		if(isDragQuestion )
 		{
-			DragObject2D();
+			if(!manager.isGameComplete)
+			{
+				DragObject2D();
+			}
 		}
 	}
 

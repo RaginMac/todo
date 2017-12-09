@@ -27,6 +27,7 @@ public class SetCarrotForAdd : MonoBehaviour {
 
 	public AudioSource source;
 	public AudioClip[] clips;
+	public string[] audios;
 
 	public int isAnswered = 0;
 
@@ -40,7 +41,8 @@ public class SetCarrotForAdd : MonoBehaviour {
 		else if(addType == AdditionType.Derived){
 			DisplayCarrots(no2, no1, answerNumber);
 		}
-		source.clip = clips [0];
+		print(PlayerPrefs.GetString("Language") + audios[answerNumber-1]);
+		//source.clip = clips [0];
 		Invoke ("PlayRabbitAudio", 1.5f);
 	}
 
@@ -53,6 +55,9 @@ public class SetCarrotForAdd : MonoBehaviour {
 	}
 
 	void PlayRabbitAudio(){
+		string path = PlayerPrefs.GetString("Language") + audios[answerNumber-1];	//get audio load path based on language
+		source.clip = Resources.Load(path) as AudioClip;							//load audio
+
 		if (Manager.Instance.noOfQuestionsAnswered <= Manager.Instance.totalNoOfQuestions) {
 			source.Play ();
 		} else if(Manager.Instance.noOfQuestionsAnswered > Manager.Instance.totalNoOfQuestions){

@@ -4,29 +4,62 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour {
 
-	public string baseURL_eng = "Sounds/English/";
-	public string baseURL_hin = "Sounds/Hindi/";
-	public string baseURL_kan = "Sounds/Kannada/";
+	public bool PlayAudioFromManager = false;
+
+//	public string baseURL_eng = "Sounds/English/";
+//	public string baseURL_hin = "Sounds/Hindi/";
+//	public string baseURL_kan = "Sounds/Kannada/";
 
 	public string baseURL = "Sounds/";
-	public string finalAudioPath, audio;
+	public string finalAudioPath;
 	public AudioSource source;
+	public string sound;
 
-	public static string language;
-
-
-
-	public void SetAudioURL(string whichLanguage)
+	void Awake()
 	{
-		finalAudioPath = baseURL + whichLanguage + "/" + audio;
-		PlayAudio(finalAudioPath);
+		if(PlayAudioFromManager && PlayerPrefs.HasKey("Language"))
+		{
+			PlayAudio(PlayerPrefs.GetString("Language"));
+		}
+	}
+
+	void Start()
+	{}
+
+	void Update()
+	{
+	}
+
+	public void SetAudioURL(string whichLanguage = "English")
+	{
+		finalAudioPath = baseURL + whichLanguage + "/";
+
+		PlayerPrefs.SetString("Language", finalAudioPath);			//save path of audio files for loadin
+
+		//PlayAudio(finalAudioPath);
 	}
 
 	public void PlayAudio(string path)
 	{
-		AudioClip clip = Resources.Load(path) as AudioClip;
-		source.clip = clip;
+		//AudioClip clip = Resources.Load(path) as AudioClip;
+		source.clip = Resources.Load(path+ sound) as AudioClip;
 		source.Play();
+		Invoke("ClearSource", source.clip.length);
+	}
+
+	public void ClearSource()
+	{
+		source.clip = null;
+	}
+
+	void CheckIfClipEnded()
+	{
+		float progress = Mathf.Clamp01(source.time/source.clip.length);
+
+		if(progress==1)
+		{
+			print("Clip has ended");
+		}
 	}
 
 }
