@@ -28,6 +28,7 @@ public class SetQuestionNumber : MonoBehaviour {
 	public SpriteRenderer imgRenderer;
 	public AudioSource crocodileAudio;
 	public AudioClip greaterOrless;
+	public string clip;
 	//public Sprite greater_old, greater_new;
 	public Manager manager;
 
@@ -47,7 +48,8 @@ public class SetQuestionNumber : MonoBehaviour {
 
 		if(crocodileAudio!=null){
 			
-			crocodileAudio.clip = greaterOrless;
+//			crocodileAudio.clip = greaterOrless;
+			crocodileAudio.clip = Resources.Load(PlayerPrefs.GetString("Language") + clip) as AudioClip;
 			crocodileAudio.Play();
 		}
 	}

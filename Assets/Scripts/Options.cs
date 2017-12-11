@@ -11,6 +11,7 @@ public class Options : MonoBehaviour {
 	public Animator anim;
 
 	public AudioClip[] countAudio;
+	public string[] countAudioNumbers;
 	public AudioSource audioSource;
 	public int clipNumber;
 	public int answerValue;
@@ -121,14 +122,14 @@ public class Options : MonoBehaviour {
 	{
 		//answerValue = int.Parse(this.GetComponent<Image>().sprite.name);
 
-		print("run +    " + answerValue );
+		//print("run +    " + answerValue );
 		if(clipNumber < answerValue) {
 			if (audioSource.isPlaying) {
 				audioSource.Stop ();
 			}
 
 			if (countAudio[clipNumber] != null) {
-				audioSource.clip = countAudio[clipNumber];
+				audioSource.clip = Resources.Load(PlayerPrefs.GetString("Language") + countAudioNumbers[clipNumber]) as AudioClip;//countAudio[clipNumber];
 			}
 			audioSource.Play ();
 
