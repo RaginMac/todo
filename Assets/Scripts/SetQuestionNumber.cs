@@ -56,7 +56,9 @@ public class SetQuestionNumber : MonoBehaviour {
 	void Update () {
 		if(isDragQuestion)
 		{
-			DragObject2D();
+			if (!manager.isGameComplete) {
+				DragObject2D ();
+			}
 		}
 	}
 

@@ -48,7 +48,9 @@ public class SwapNumbers : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		DragObject ();
+		
+		if(!manager.isGameComplete)
+			DragObject ();
 
 		if (arrangeInOrder)
 			ArrangeInOrder ();
@@ -182,7 +184,7 @@ public class SwapNumbers : MonoBehaviour {
 
 		Vector3 temp = other.gameObject.transform.position;
 		temp.z -= 1f;
-		temp.y -= 0.055f;
+		//temp.y -= 0.055f;
 		draggedObj.transform.position = temp;
 
 		int tempIndex = int.Parse(other.gameObject.name); 
@@ -197,7 +199,7 @@ public class SwapNumbers : MonoBehaviour {
 	{
 		Vector3 temp = other.gameObject.transform.position;
 		temp.z -= 1f;
-		temp.y -= 0.055f;
+		//temp.y -= 10f;
 		draggedObj.transform.position = temp;
 		other.gameObject.GetComponentInChildren<TextMesh> ().text = draggedObj.GetComponentInChildren<TextMesh> ().text;
 		other.gameObject.GetComponentInChildren<TextMesh> ().characterSize = 0;

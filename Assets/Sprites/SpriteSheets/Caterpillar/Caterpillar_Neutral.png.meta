@@ -1,27 +1,21 @@
 fileFormatVersion: 2
-guid: 0a2ca42cf236fa041b758f6ff835002f
-timeCreated: 1513074094
+guid: 3d90be3d0205dd540bba3af42576fba9
+timeCreated: 1513070852
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Crocodile_LessThan1_0
-    21300002: Crocodile_LessThan1_1
-    21300004: Crocodile_LessThan1_2
-    21300006: Crocodile_LessThan1_3
-    21300008: Crocodile_LessThan1_4
-    21300010: Crocodile_LessThan1_5
-    21300012: Crocodile_LessThan1_6
-    21300014: Crocodile_LessThan1_7
-    21300016: Crocodile_LessThan1_8
-    21300018: Crocodile_LessThan1_9
-    21300020: Crocodile_LessThan1_10
-    21300022: Crocodile_LessThan1_11
-    21300024: Crocodile_LessThan1_12
-    21300026: Crocodile_LessThan1_13
-    21300028: Crocodile_LessThan1_14
-    21300030: Crocodile_LessThan1_15
-    21300032: Crocodile_LessThan1_16
-    21300034: Crocodile_LessThan1_17
+    21300000: Caterpillar_Neutral_0
+    21300002: Caterpillar_Neutral_1
+    21300004: Caterpillar_Neutral_2
+    21300006: Caterpillar_Neutral_3
+    21300008: Caterpillar_Neutral_4
+    21300010: Caterpillar_Neutral_5
+    21300012: Caterpillar_Neutral_6
+    21300014: Caterpillar_Neutral_7
+    21300016: Caterpillar_Neutral_8
+    21300018: Caterpillar_Neutral_9
+    21300020: Caterpillar_Neutral_10
+    21300022: Caterpillar_Neutral_11
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -69,261 +63,183 @@ TextureImporter:
   textureFormatSet: 0
   platformSettings:
   - buildTarget: DefaultTexturePlatform
-    maxTextureSize: 1024
+    maxTextureSize: 2048
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
-    crunchedCompression: 1
+    crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
   - buildTarget: Standalone
-    maxTextureSize: 1024
+    maxTextureSize: 2048
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
-    crunchedCompression: 1
+    crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
   - buildTarget: Android
-    maxTextureSize: 1024
-    textureFormat: -1
+    maxTextureSize: 2048
+    textureFormat: 47
     textureCompression: 1
     compressionQuality: 50
-    crunchedCompression: 1
+    crunchedCompression: 0
     allowsAlphaSplitting: 0
-    overridden: 0
+    overridden: 1
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Crocodile_LessThan1_0
+      name: Caterpillar_Neutral_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 1304
-        width: 435
-        height: 326
+        y: 608
+        width: 297
+        height: 304
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Crocodile_LessThan1_1
+      name: Caterpillar_Neutral_1
       rect:
         serializedVersion: 2
-        x: 435
-        y: 1304
-        width: 435
-        height: 326
+        x: 297
+        y: 608
+        width: 297
+        height: 304
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Crocodile_LessThan1_2
+      name: Caterpillar_Neutral_2
       rect:
         serializedVersion: 2
-        x: 870
-        y: 1304
-        width: 435
-        height: 326
+        x: 594
+        y: 608
+        width: 297
+        height: 304
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Crocodile_LessThan1_3
+      name: Caterpillar_Neutral_3
       rect:
         serializedVersion: 2
-        x: 1305
-        y: 1304
-        width: 435
-        height: 326
+        x: 891
+        y: 608
+        width: 297
+        height: 304
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Crocodile_LessThan1_4
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 978
-        width: 435
-        height: 326
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Crocodile_LessThan1_5
-      rect:
-        serializedVersion: 2
-        x: 435
-        y: 978
-        width: 435
-        height: 326
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Crocodile_LessThan1_6
-      rect:
-        serializedVersion: 2
-        x: 870
-        y: 978
-        width: 435
-        height: 326
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Crocodile_LessThan1_7
-      rect:
-        serializedVersion: 2
-        x: 1305
-        y: 978
-        width: 435
-        height: 326
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Crocodile_LessThan1_8
+      name: Caterpillar_Neutral_4
       rect:
         serializedVersion: 2
         x: 0
-        y: 652
-        width: 435
-        height: 326
+        y: 304
+        width: 297
+        height: 304
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Crocodile_LessThan1_9
+      name: Caterpillar_Neutral_5
       rect:
         serializedVersion: 2
-        x: 435
-        y: 652
-        width: 435
-        height: 326
+        x: 297
+        y: 304
+        width: 297
+        height: 304
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Crocodile_LessThan1_10
+      name: Caterpillar_Neutral_6
       rect:
         serializedVersion: 2
-        x: 870
-        y: 652
-        width: 435
-        height: 326
+        x: 594
+        y: 304
+        width: 297
+        height: 304
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Crocodile_LessThan1_11
+      name: Caterpillar_Neutral_7
       rect:
         serializedVersion: 2
-        x: 1305
-        y: 652
-        width: 435
-        height: 326
+        x: 891
+        y: 304
+        width: 297
+        height: 304
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Crocodile_LessThan1_12
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 326
-        width: 435
-        height: 326
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Crocodile_LessThan1_13
-      rect:
-        serializedVersion: 2
-        x: 435
-        y: 326
-        width: 435
-        height: 326
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Crocodile_LessThan1_14
-      rect:
-        serializedVersion: 2
-        x: 870
-        y: 326
-        width: 435
-        height: 326
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Crocodile_LessThan1_15
-      rect:
-        serializedVersion: 2
-        x: 1305
-        y: 326
-        width: 435
-        height: 326
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Crocodile_LessThan1_16
+      name: Caterpillar_Neutral_8
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 435
-        height: 326
+        width: 297
+        height: 304
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Crocodile_LessThan1_17
+      name: Caterpillar_Neutral_9
       rect:
         serializedVersion: 2
-        x: 435
+        x: 297
         y: 0
-        width: 435
-        height: 326
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Neutral_10
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 0
+        width: 297
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Caterpillar_Neutral_11
+      rect:
+        serializedVersion: 2
+        x: 891
+        y: 0
+        width: 297
+        height: 304
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
