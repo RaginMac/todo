@@ -35,7 +35,7 @@ public class EnableScript : MonoBehaviour {
 
 		if (subScript.exchange100) {
 			exchangePanelAnimation.SetBool ("xchange100", true);
-		} else if (!subScript.exchange10) {
+		} else if (!subScript.exchange100) {
 			exchangePanelAnimation.SetBool ("xchange100", false);
 		}
 	}

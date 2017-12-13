@@ -31,6 +31,8 @@ public class Manager : MonoBehaviour {
 	public AudioClip UIClick, correctAudio, wrongAudio, popupAudio, starAudio, balloonPop;
 	public AudioSource questionSource;
 
+	public bool isGameComplete = false;
+
 //	int n1, n2;
 	// Use this for initialization
 	void Start () {
@@ -193,6 +195,7 @@ public class Manager : MonoBehaviour {
 		for (int i = 0; i < isCorrect; i++) {
 			popupStars [i].gameObject.SetActive (true);			
 		}
+		isGameComplete = true;
 		gameCompletePopup.SetActive (true);
 		
 	}
@@ -909,7 +912,7 @@ public class Manager : MonoBehaviour {
 		string a1 = "";
 		string a10 = "";
 		string a100 = "";
-//		bool allBlocksFilled = false;
+		bool allBlocksFilled = false;
 
 		if (questionArray [questionNumber].GetComponent<Subtraction> ().ans100.text == "") {
 			a100 = "0";
@@ -924,27 +927,19 @@ public class Manager : MonoBehaviour {
 		}
 
 		if (questionArray [questionNumber].GetComponent<Subtraction> ().ans1.text == "") {
-			a1 = "0";
+			allBlocksFilled = false;
 		} else if(questionArray [questionNumber].GetComponent<Subtraction> ().ans1.text != "") {
 			a1 = questionArray [questionNumber].GetComponent<Subtraction> ().ans1.text; 
+			allBlocksFilled = true;
 		}
-
 
 		questionArray [questionNumber].GetComponent<Subtraction> ().playerAnswer =  a100 + a10 + a1;
 
-//		if (questionArray [questionNumber].GetComponent<Subtraction> ().ans100.text != ""
-//			&& questionArray [questionNumber].GetComponent<Subtraction> ().ans10.text != ""
-//			&& questionArray [questionNumber].GetComponent<Subtraction> ().ans1.text != "") {
-//			allBlocksFilled = true;
-//
-//		} else {
-//			allBlocksFilled = false;
-//		}
 
 		int n1 = int.Parse (questionArray [questionNumber].GetComponent<Subtraction> ().answer);
 		int n2 = int.Parse (questionArray [questionNumber].GetComponent<Subtraction> ().playerAnswer);
 
-		if (n1 == n2 && !questionArray [questionNumber].GetComponent<Subtraction> ().answered) {
+		if (n1 == n2 && !questionArray [questionNumber].GetComponent<Subtraction> ().answered && allBlocksFilled) {
 			CountQuestionsAnswered(true);
 			questionArray [questionNumber].GetComponent<Subtraction> ().answered = true;
 			Invoke("NextQuestion", 2f);

@@ -55,8 +55,6 @@ TextureImporter:
     linearTexture: 0
     fadeOut: 0
     borderMipMap: 0
-    mipMapsPreserveCoverage: 0
-    alphaTestReferenceValue: 0.5
     mipMapFadeDistanceStart: 1
     mipMapFadeDistanceEnd: 3
   bumpmap:
@@ -72,13 +70,10 @@ TextureImporter:
   textureFormat: 1
   maxTextureSize: 2048
   textureSettings:
-    serializedVersion: 2
     filterMode: -1
     aniso: 16
     mipBias: -1
-    wrapU: -1
-    wrapV: -1
-    wrapW: -1
+    wrapMode: -1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -115,7 +110,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
   - buildTarget: Android
-    maxTextureSize: 512
+    maxTextureSize: 1024
     textureFormat: 47
     textureCompression: 1
     compressionQuality: 50
@@ -137,7 +132,6 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Caterpillar_Missing body part_1
@@ -151,7 +145,6 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Caterpillar_Missing body part_2
@@ -165,7 +158,6 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Caterpillar_Missing body part_3
@@ -179,7 +171,6 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Caterpillar_Missing body part_4
@@ -193,7 +184,6 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Caterpillar_Missing body part_5
@@ -207,7 +197,6 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Caterpillar_Missing body part_6
@@ -221,7 +210,6 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Caterpillar_Missing body part_7
@@ -235,7 +223,6 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Caterpillar_Missing body part_8
@@ -249,7 +236,6 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Caterpillar_Missing body part_9
@@ -263,7 +249,6 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Caterpillar_Missing body part_10
@@ -277,7 +262,6 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Caterpillar_Missing body part_11
@@ -291,7 +275,6 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Caterpillar_Missing body part_12
@@ -305,7 +288,6 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Caterpillar_Missing body part_13
@@ -319,7 +301,6 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Caterpillar_Missing body part_14
@@ -333,7 +314,6 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Caterpillar_Missing body part_15
@@ -347,7 +327,6 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Caterpillar_Missing body part_16
@@ -361,7 +340,6 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Caterpillar_Missing body part_17
@@ -375,7 +353,6 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Caterpillar_Missing body part_18
@@ -389,7 +366,6 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Caterpillar_Missing body part_19
@@ -403,7 +379,6 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Caterpillar_Missing body part_20
@@ -417,7 +392,6 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Caterpillar_Missing body part_21
@@ -431,7 +405,6 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Caterpillar_Missing body part_22
@@ -445,7 +418,6 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Caterpillar_Missing body part_23
@@ -459,7 +431,6 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Caterpillar_Missing body part_24
@@ -473,7 +444,6 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Caterpillar_Missing body part_25
@@ -487,7 +457,6 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Caterpillar_Missing body part_26
@@ -501,7 +470,6 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Caterpillar_Missing body part_27
@@ -515,7 +483,6 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Caterpillar_Missing body part_28
@@ -529,7 +496,6 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Caterpillar_Missing body part_29
@@ -543,7 +509,6 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Caterpillar_Missing body part_30
@@ -557,7 +522,6 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Caterpillar_Missing body part_31
@@ -571,7 +535,6 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Caterpillar_Missing body part_32
@@ -585,7 +548,6 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Caterpillar_Missing body part_33
@@ -599,7 +561,6 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Caterpillar_Missing body part_34
@@ -613,7 +574,6 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Caterpillar_Missing body part_35
@@ -627,7 +587,6 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Caterpillar_Missing body part_36
@@ -641,7 +600,6 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Caterpillar_Missing body part_37
@@ -655,7 +613,6 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Caterpillar_Missing body part_38
@@ -669,7 +626,6 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Caterpillar_Missing body part_39
@@ -683,7 +639,6 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Caterpillar_Missing body part_40
@@ -697,7 +652,6 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Caterpillar_Missing body part_41
@@ -711,7 +665,6 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Caterpillar_Missing body part_42
@@ -725,10 +678,8 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     outline: []
-    physicsShape: []
   spritePackingTag: 
   userData: 
   assetBundleName: 

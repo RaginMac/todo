@@ -42,8 +42,10 @@ public class BeforeNAfter : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		DragObject ();
+	void Update () 
+	{
+		if(!Manager.Instance.isGameComplete)
+			DragObject ();
 	}
 
 	void CreateQuestion()
@@ -124,8 +126,8 @@ public class BeforeNAfter : MonoBehaviour {
 	public void CreateOptions()
 	{
 		int indexNum = 0;
-		if (gameType == GameType.BeforeNAfter) {
-			
+		if (gameType == GameType.BeforeNAfter)
+		{
 			for (int i = 0; i < caterpillarBodies.Length; i++)
 			{
 				if (caterpillarBodies [i].GetComponent<OriginalPos> ().indexValue == 1) {
@@ -246,7 +248,7 @@ public class BeforeNAfter : MonoBehaviour {
 
 		Vector3 tempPos = other.position;
 		tempPos.z -= 1f;
-		tempPos.y -= 0.055f;
+		//tempPos.y -= 0.055f;
 		draggedObj.position = tempPos;
 		draggedObj.GetComponent<OriginalPos> ().isSnapped = true;
 		draggedObj.GetComponent<OriginalPos> ().indexValue = tempIndex;
@@ -255,7 +257,6 @@ public class BeforeNAfter : MonoBehaviour {
 
 	public void ResetAnswer ()
 	{
-		
 		for (int i = 0; i < answer.Length; i++)
 		{
 			if(caterpillarBodies [i] == null){
