@@ -24,6 +24,7 @@ public class SetCarrotCount : MonoBehaviour {
 
 	public AudioSource source;
 	public AudioClip[] clips;
+	public string[] audioClips;
 	public int isAnswered = 0;
 
 	// Use this for initialization
@@ -31,13 +32,15 @@ public class SetCarrotCount : MonoBehaviour {
 		cam = Camera.main;
 		CreateQuestions ();
 		DisplayCarrots ();
-		source.clip = clips [no2 - 1];
+		source.clip = Resources.Load(PlayerPrefs.GetString("Language") + audioClips[no2-1]) as AudioClip;  //clips [no2 - 1];
 		Invoke ("PlayRabbitAudio", 1.5f);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		DragObject ();
+		if(!Manager.Instance.isGameComplete){
+			DragObject ();
+		}
 	}
 
 	void PlayRabbitAudio(){

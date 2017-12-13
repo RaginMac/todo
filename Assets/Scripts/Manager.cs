@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class Manager : MonoBehaviour {
 	
 	public static Manager Instance;
+	public AudioManager audio_manager;
 
 	public Intantiation_G_1_3 fishSpawner;
 	public Image[] stars, popupStars, starsWrong;
@@ -42,8 +43,10 @@ public class Manager : MonoBehaviour {
 		if (questionArray.Length > 0) {
 			ShuffleQuestionArray ();
 
-			if(autoPlayAudio)
-				PlayAudio (questionArray [questionNumber].GetComponent<Question> ().question.questionAudio);
+			if(autoPlayAudio){
+				Invoke("PlayQuestionNumber", audio_manager.source.clip.length + 0.5f);
+				//PlayAudio (questionArray [questionNumber].GetComponent<Question> ().question.questionAudio);
+			}
 		}
 	}
 	
@@ -52,12 +55,25 @@ public class Manager : MonoBehaviour {
 		
 	}
 
+	void LoadAllNumbers()
+	{
+		
+	}
+
+	public void PlayQuestionNumber()
+	{
+		//print("PLAYQUESTIONAUDIO");
+		PlayAudio(PlayerPrefs.GetString("Language") + questionArray [questionNumber].GetComponent<Question> ().question.questionClip);
+	}
+
+
 	public void PlayClickAudio (){
 		UIAudioSource.clip = UIClick;
 		UIAudioSource.Play ();
 	}
 
 	public void PlayQuestionAudio(){
+	//print("PLAYQUESTIONAUDIO");
 		if (!questionArray [questionNumber].GetComponent<AudioSource> ().isPlaying) {
 			questionArray [questionNumber].GetComponent<AudioSource> ().Play ();
 		}
@@ -92,7 +108,8 @@ public class Manager : MonoBehaviour {
 				}
 
 				if ((questionArray [questionNumber].GetComponent<Question> ()!=null)&&(questionArray [questionNumber].GetComponent<Question> ().question.questionAudio != null) && autoPlayAudio){
-					PlayAudio (questionArray [questionNumber].GetComponent<Question> ().question.questionAudio);
+					//PlayAudio (questionArray [questionNumber].GetComponent<Question> ().question.questionAudio);
+					PlayQuestionNumber();
 				}
 			}
 		}
@@ -124,13 +141,15 @@ public class Manager : MonoBehaviour {
 	
 	}
 
-	public void PlayAudio(AudioClip clip)
+	public void PlayAudio(string path)
 	{
 		if (audioSource.isPlaying) {
 			audioSource.Stop ();
 		}
-		if (clip != null) {
-			audioSource.clip = clip;
+		//if (clip != null)
+		{
+			//audioSource.clip = clip;
+			audioSource.clip = Resources.Load(path) as AudioClip;
 		}
 		audioSource.Play ();
 	}

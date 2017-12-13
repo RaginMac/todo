@@ -18,7 +18,7 @@ public class SetQuestionNumber : MonoBehaviour {
 	public Animator crocAnime;
 	//public Transform snap;
 
-	public GameObject draggedObject;
+	public GameObject draggedObject, tempDrag;
 	private Vector3 originalObjPos;
 	private Vector3 offset;
 	public Camera cam;
@@ -28,13 +28,16 @@ public class SetQuestionNumber : MonoBehaviour {
 	public SpriteRenderer imgRenderer;
 	public AudioSource crocodileAudio;
 	public AudioClip greaterOrless;
+	public string clip;
 	//public Sprite greater_old, greater_new;
+	public Manager manager;
 
 	public int answered = 0;
 
 	// Use this for initialization
 	void Start () {
 		cam = Camera.main;
+		manager = GameObject.Find ("Manager").GetComponent<Manager> ();
 		crocAnime = this.transform.GetChild (0).GetComponent<Animator>();
 
 		if (qType == QuestionType.Text) {
@@ -43,18 +46,22 @@ public class SetQuestionNumber : MonoBehaviour {
 			SetAppleCount ();
 		}
 
-		if(crocodileAudio!=null){
-			
-			crocodileAudio.clip = greaterOrless;
+		if(crocodileAudio!=null&&clip!=null){
+			//crocodileAudio.clip = greaterOrless;
+			crocodileAudio.clip = Resources.Load(PlayerPrefs.GetString("Language") + clip) as AudioClip;
 			crocodileAudio.Play();
 		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(isDragQuestion)
+		if(isDragQuestion )
 		{
-			DragObject2D();
+
+			if (!manager.isGameComplete) {
+				DragObject2D ();
+
+			}
 		}
 	}
 
@@ -79,8 +86,10 @@ public class SetQuestionNumber : MonoBehaviour {
 				if (hit != null && hit.collider.tag == "DraggableObject")
 				{
 					draggedObject = hit.transform.gameObject;
+					tempDrag = draggedObject;
 					imgRenderer = draggedObject.transform.GetComponent<SpriteRenderer>();
 					imgRenderer.sprite = draggedObject.transform.GetComponent<SetSprites>().newSprite;
+					draggedObject.GetComponent<OriginalPos>().originalPos = hit.transform.position;
 					//originalObjPos = draggedObject.transform.position;
 					draggedObject.GetComponent<BoxCollider2D> ().enabled = false;
 					offset = draggedObject.transform.position - ray.origin;
@@ -104,8 +113,10 @@ public class SetQuestionNumber : MonoBehaviour {
 				imgRenderer = draggedObject.transform.GetComponent<SpriteRenderer>();
 				imgRenderer.sprite = draggedObject.transform.GetComponent<SetSprites>().oldSprite;
 				RaycastHit2D hit = Physics2D.Raycast (ray.origin, ray.direction, 100f);
+			
 				if (draggedObject && hit.collider.tag != "Snap") {
 //					draggedObject.transform.position = originalObjPos;
+					imgRenderer = null;
 					draggedObject.transform.position = draggedObject.GetComponent<OriginalPos>().originalPos;
 					draggedObject.transform.SetParent(options.transform);
 				} else {
@@ -145,10 +156,25 @@ public class SetQuestionNumber : MonoBehaviour {
 	}
 	
 	public void DropAnswer(Transform snapCol){
-		draggedObject.transform.position = snapCol.position;
+		Vector3 tempPos = snapCol.position;
+		tempPos.z -= 0.5f;
+		draggedObject.transform.position = tempPos;
+		manager.CompareDraggedImage ();
+		//Invoke("Check", 1f);
 		//snappedObjName = objName;
 	}
 
+	public void Check(){
+		manager.CompareDraggedImage();
+	}
+
+	public void Reset()
+	{
+		tempDrag.transform.SetParent(options.transform);
+		imgRenderer = null;
+		tempDrag.transform.position = tempDrag.GetComponent<OriginalPos>().originalPos;
+		tempDrag = null;
+	}
 //	public void CheckDraggedAnswer(){
 //		if(parent.transform.childCount>0){
 //			Manager.Instance.CompareDraggedImage(parent.GetChild(0).gameObject.name);

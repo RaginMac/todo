@@ -16,13 +16,17 @@ public class Move : MonoBehaviour {
 
 	void Update () {
 		if(target!=null){
-			this.transform.position = Vector3.MoveTowards(this.transform.position, target.position, 0.2f);
+			this.transform.position = Vector3.MoveTowards(this.transform.position, target.position, 0.35f);
 			if(Vector3.Distance(transform.position, target.transform.position)<0.1)
 			{
 				//target = null;
 				print("reached");
-				this.GetComponent<OriginalPos>().originalPos = target.transform.position;
-				this.GetComponent<Move>().enabled = false;
+				if(this.GetComponent<OriginalPos>()!=null){
+					this.GetComponent<OriginalPos>().originalPos = target.transform.position;
+				}
+				if(this.GetComponent<Move>()!=null){
+					this.GetComponent<Move>().enabled = false;
+				}
 
 			}
 		}
