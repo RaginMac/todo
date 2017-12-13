@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour {
 
-	public bool PlayAudioFromManager = false;
+	public bool PlayAudioFromManager = false, repeatQuestion = false;
 
 //	public string baseURL_eng = "Sounds/English/";
 //	public string baseURL_hin = "Sounds/Hindi/";
@@ -14,6 +14,9 @@ public class AudioManager : MonoBehaviour {
 	public string finalAudioPath;
 	public AudioSource source;
 	public string sound;
+
+	[SerializeField]
+	private AudioClip clip;
 
 	void Awake()
 	{
@@ -43,6 +46,7 @@ public class AudioManager : MonoBehaviour {
 	{
 		//AudioClip clip = Resources.Load(path) as AudioClip;
 		source.clip = Resources.Load(path+ sound) as AudioClip;
+		clip = source.clip;
 		source.Play();
 		Invoke("ClearSource", source.clip.length);
 	}
@@ -59,6 +63,15 @@ public class AudioManager : MonoBehaviour {
 		if(progress==1)
 		{
 			print("Clip has ended");
+		}
+	}
+
+	public void PlayAudioAgain()
+	{
+		if(repeatQuestion && !source.isPlaying)
+		{
+			source.clip = clip;
+			source.Play();
 		}
 	}
 

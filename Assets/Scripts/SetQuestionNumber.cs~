@@ -46,9 +46,8 @@ public class SetQuestionNumber : MonoBehaviour {
 			SetAppleCount ();
 		}
 
-		if(crocodileAudio!=null){
-			
-//			crocodileAudio.clip = greaterOrless;
+		if(crocodileAudio!=null&&clip!=null){
+			//crocodileAudio.clip = greaterOrless;
 			crocodileAudio.clip = Resources.Load(PlayerPrefs.GetString("Language") + clip) as AudioClip;
 			crocodileAudio.Play();
 		}

@@ -62,7 +62,7 @@ public class SetCarrotForAdd : MonoBehaviour {
 			path = PlayerPrefs.GetString("Language") + audios[no1-1];
 		}
 		source.clip = Resources.Load(path) as AudioClip;							//load audio
-
+//		source.clip = clips[0];							//load audio
 		if (Manager.Instance.noOfQuestionsAnswered <= Manager.Instance.totalNoOfQuestions) {
 			source.Play ();
 		} else if(Manager.Instance.noOfQuestionsAnswered > Manager.Instance.totalNoOfQuestions){
