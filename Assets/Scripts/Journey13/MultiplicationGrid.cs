@@ -12,7 +12,9 @@ public class MultiplicationGrid : MonoBehaviour {
 	public List<GameObject> numberBoxes = new List<GameObject>();
 	public List<GameObject> snapPoints = new List<GameObject>();
 
-	public List<int> randomNumBoxes = new List<int>();
+	private List<int> patternValues = new List<int>();
+	private List<int> randomNumBoxes = new List<int>();
+	List<int> tempValues = new List<int>();
 
 	private List<GameObject> BlockSet1 =  new List<GameObject>();
 	private List<GameObject> BlockSet2 = new List<GameObject>();
@@ -43,7 +45,6 @@ public class MultiplicationGrid : MonoBehaviour {
 	public Vector3 originalSize;
 
 
-	public bool g13_1;
 	public int noOfRandomBlocks;
 	public float startPosValue;
 	public int numBoxesLength;
@@ -56,24 +57,32 @@ public class MultiplicationGrid : MonoBehaviour {
 	}
 
 	void Start () {
+		ShuffleOptionsPositions ();
 		CreateQuestionGrid ();
 		CreateAnswerGrid (startPosValue);
+
 //		CreateSnapPointsGrid ();
 		cam = Camera.main;
 
-		if(g13_1){
-			StartCoroutine (RemoveBlockSet1 ());
-			StartCoroutine (RemoveBlockSet2 ());
-			StartCoroutine (RemoveBlockSet3 ());
-		}
-//		else{
-			//FindRandomBlocks(noOfRandomBlocks);
-			//ReplaceByTexts ();
-//		}
+		StartCoroutine (RemoveBlockSet1 ());
+		StartCoroutine (RemoveBlockSet2 ());
+		StartCoroutine (RemoveBlockSet3 ());
 	}
 
 	void Update () {
 		DragObject2D ();
+	}
+
+	void ShuffleOptionsPositions() 
+	{
+		
+		for (int i = 0; i < spawnPoints.Length; i++) {
+			Transform temp = spawnPoints [i];
+			int r = Random.Range (i, spawnPoints.Length);
+			spawnPoints [i] = spawnPoints [r];
+			spawnPoints [r] = temp;
+			//Debug.Log (r);
+		}
 	}
 
 	void CreateQuestionGrid()
@@ -131,14 +140,9 @@ public class MultiplicationGrid : MonoBehaviour {
 				tempObject.GetComponent<GridIndexValue> ().indexValue = iValue;
 				tempSnapObject.GetComponent<SnapIndexValue> ().indexValue = iValue;
 				iValue++;
-//
-//				if (!g13_1 && i == j) {
-//					tempObject.GetComponent<SpriteRenderer> ().color = m_color;
-//				}
 
 				numberBoxes.Add (tempObject);
 				snapPoints.Add (tempSnapObject);
-
 
 			}
 			xOffset.y -= 0.75f;
@@ -230,55 +234,43 @@ public class MultiplicationGrid : MonoBehaviour {
 
 	public void FindRandomBlocks(int randomNum) {
 		for (int i = 0; i < randomNum; i++) {
-			UniqueRandomInt(randomNumBoxes, 12, 120);
+			UniqueRandomInt(randomNumBoxes, 1, 10);
 		}
 	}
-
-//	public void ReplaceByTexts()
-//	{
-//		for (int i = 0; i < noOfRandomBlocks; i++) {
-//			randomNumberBoxIndex = randomNumBoxes [i];
-//
-//			Vector3 tempPos = numberBoxes [randomNumberBoxIndex].transform.position;
-//			tempPos.z -= 5f;
-//			textBoxes [i].transform.position = tempPos;
-//
-//			numberBoxes [randomNumberBoxIndex].SetActive (false);
-//			textBoxes[i].SetActive (true);
-//		}
-//	}
 
 	IEnumerator RemoveBlockSet1()
 	{
 		yield return new WaitForSeconds(0.1f);
-		tempIndex = UniqueRandomInt(randomNumBoxes, 22, 100);
+		tempIndex = UniqueRandomInt(tempValues, 1, 20);
 		int k = 0;
 
 		for (int i = 0; i < numBoxesLength; i++)
 		{
 			if (numberBoxes [tempIndex] != null) {
+				
+				int val = Random.Range(0, 4);
+				tempNeighTile = (numberBoxes [tempIndex].GetComponent<GridIndexValue> ().neighbouringTiles [val]);
+				while(tempNeighTile <= 0 || randomNumBoxes.Contains(tempNeighTile)) {
+					if (k > 10) {
+						break;
+					}
+
+					val = Random.Range(0, 4); 
+					tempNeighTile = (numberBoxes [tempIndex].GetComponent<GridIndexValue> ().neighbouringTiles [val]);
+					k++;
+				}
+
+				patternValues.Add (val);
+				randomNumBoxes.Add (tempIndex);
 				BlockSet1.Add (numberBoxes [tempIndex]);
 				numberBoxes [tempIndex].GetComponent<BoxCollider2D> ().enabled = true;
 				snapPoints [tempIndex].GetComponent<BoxCollider2D> ().enabled = true;
 				BlockSet1 [i].GetComponent<GridIndexValue> ().BlocksetNo = 1;
 
-				int val = Random.Range (0, 3);
-				tempNeighTile = (numberBoxes [tempIndex].GetComponent<GridIndexValue> ().neighbouringTiles [val]);
-
-				while(tempNeighTile <= 0 || randomNumBoxes.Contains(tempNeighTile)) {
-					if (k > 5) {
-						break;
-					}
-
-					val = Random.Range (0, 3); 
-					tempNeighTile = (numberBoxes [tempIndex].GetComponent<GridIndexValue> ().neighbouringTiles [val]);
-					k++;
-				}
-
 				if (tempNeighTile != 0) {
 					numberBoxes [tempIndex] = null;
 					tempIndex = tempNeighTile;
-					randomNumBoxes.Add (tempIndex);
+					tempValues.Add (tempIndex);
 				}
 
 			} else {
@@ -292,232 +284,123 @@ public class MultiplicationGrid : MonoBehaviour {
 		CheckBlockSet ();
 		parent.transform.localScale = reducedSize;
 		parent.transform.position = tempPosition;
-		parent = null;
-
+		parent = null; 
 	}
-
 
 	IEnumerator RemoveBlockSet2()
 	{
 		yield return new WaitForSeconds(0.15f);
-		tempIndex = UniqueRandomInt(randomNumBoxes, 22, 100);
-		int k = 0;
-
-		for (int i = 0; i < numBoxesLength; i++)
+		int val = 0;
+		int patternIndex = 0;
+		int counter = 0;
+	 	
+		do
 		{
-			if (numberBoxes [tempIndex] != null) {
-				BlockSet2.Add (numberBoxes [tempIndex]);
-				numberBoxes [tempIndex].GetComponent<BoxCollider2D> ().enabled = true;
-				snapPoints [tempIndex].GetComponent<BoxCollider2D> ().enabled = true;
-				BlockSet2 [i].GetComponent<GridIndexValue> ().BlocksetNo = 2;
+			BlockSet2.Clear();
+			patternIndex = 0;
+			counter = 0;
 
-				int val = Random.Range (0, 3);
-				tempNeighTile = (numberBoxes [tempIndex].GetComponent<GridIndexValue> ().neighbouringTiles [val]);
+			tempIndex = UniqueRandomInt(tempValues, 30, 50);
 
-				while(randomNumBoxes.Contains(tempNeighTile) || tempNeighTile <= 0  || k < 4) {
-					val = Random.Range (0, 3); 
+			for (int i = 0; i < numBoxesLength; i++)
+			{
+				if(numberBoxes [tempIndex] != null) 
+				{
+					val = patternValues[patternIndex];
 					tempNeighTile = (numberBoxes [tempIndex].GetComponent<GridIndexValue> ().neighbouringTiles [val]);
-					k++;
 
-					if (k > 5) {
+					if(randomNumBoxes.Contains(tempNeighTile) || tempNeighTile <= 0 || tempNeighTile == null || tempNeighTile == 0)
+					{
 						break;
+					} else {
+
+						BlockSet2.Add (numberBoxes [tempIndex]);
+						randomNumBoxes.Add (tempIndex);
+						snapPoints [tempIndex].GetComponent<BoxCollider2D> ().enabled = true;
+
+						tempIndex = tempNeighTile;
+						tempValues.Add (tempIndex);
+
+						patternIndex++;
+						counter++;
 					}
 				}
-
-				if (tempNeighTile != 0) {
-					numberBoxes [tempIndex] = null;
-					tempIndex = tempNeighTile;
-					randomNumBoxes.Add (tempIndex);
-				}
-
-			} else {
-				continue;
 			}
-		}
+		} 
+		while(counter <= 3);
 
-		Vector3 tempPosition = spawnPoints [1].transform.position;
-
-		parent = BlockSet2 [1].transform;
-		CheckBlockSet ();
-		parent.transform.localScale = reducedSize;
-		parent.transform.position = tempPosition;
-		parent = null;
-	}
-
-	IEnumerator RemoveBlockSet3()
-	{
-		yield return new WaitForSeconds(0.2f);
-		tempIndex = UniqueRandomInt(randomNumBoxes, 22, 100);
-		int k = 0;
-
-		for (int i = 0; i < numBoxesLength; i++)
-		{
-			if (numberBoxes [tempIndex] != null) {
-				BlockSet3.Add (numberBoxes [tempIndex]);
-				numberBoxes [tempIndex].GetComponent<BoxCollider2D> ().enabled = true;
-				snapPoints [tempIndex].GetComponent<BoxCollider2D> ().enabled = true;
-				BlockSet3 [i].GetComponent<GridIndexValue> ().BlocksetNo = 3;
-			
-				int val = Random.Range (0, 3);
-				tempNeighTile = (numberBoxes [tempIndex].GetComponent<GridIndexValue> ().neighbouringTiles [val]);
-
-				while(tempNeighTile <= 0 || randomNumBoxes.Contains(tempNeighTile)) {
-					val = Random.Range (0, 3); 
-					tempNeighTile = (numberBoxes [tempIndex].GetComponent<GridIndexValue> ().neighbouringTiles [val]);
-					k++;
-
-					if (k > 5) {
-						break;
-					}
-				}
-
-				if (tempNeighTile != 0) {
-					numberBoxes [tempIndex] = null;
-					tempIndex = tempNeighTile;
-					randomNumBoxes.Add (tempIndex);
-				}
-
-			} else {
-				continue;
-			}
+		for (int i = 0; i < BlockSet1.Count; i++) {
+			numberBoxes [BlockSet2 [i].GetComponent<GridIndexValue>().indexValue] = null;
+			BlockSet2 [i].GetComponent<BoxCollider2D> ().enabled = true;
+			BlockSet2 [i].GetComponent<GridIndexValue> ().BlocksetNo = 2;	
 		}
 
 		Vector3 tempPosition = spawnPoints [2].transform.position;
 
-		parent = BlockSet3 [1].transform;
+		parent = BlockSet2 [0].transform;
 		CheckBlockSet ();
 		parent.transform.localScale = reducedSize;
 		parent.transform.position = tempPosition;
 		parent = null;
 	}
-//	bool tempflag = false;
 
-//	public void RemoveBlockSet2()
-//	{
-//		List<int> tempValues = new List<int>();
-//		int k = 0;
-//		int count;
-//		int boxArrayLength = patternValues.Count;
-//
-//		while (!tempflag) 
-//		{
-//			tempIndex = UniqueRandomInt(randomNumBoxes, 12, 100);
-//			count = 0;
-//			for (int i = 0; i < boxArrayLength; i++) 
-//			{
-//				if (numberBoxes [tempIndex] != null) 
-//				{
-//					BlockSet2.Add (numberBoxes [tempIndex]);
-//					numberBoxes [tempIndex].GetComponent<BoxCollider2D> ().enabled = true;
-//					snapPoints [tempIndex].GetComponent<BoxCollider2D> ().enabled = true;
-//					BlockSet2 [i].GetComponent<GridIndexValue> ().BlocksetNo = 2;
-//
-//					int val = patternValues [k];
-//					tempNeighTile = (numberBoxes [tempIndex].GetComponent<GridIndexValue> ().neighbouringTiles [val]);
-//
-//					while (tempValues.Contains(tempNeighTile) || tempNeighTile <= 0 || randomNumBoxIndexes.Contains(tempNeighTile)) {
-//						tempValues.Clear ();
-//						break;
-//					}
-//
-//					randomNumBoxIndexes.Add (tempIndex);
-//					numberBoxes [tempIndex] = null;
-//					tempIndex = tempNeighTile;
-//					count++;
-//					k++;
-//				} else {
-//					continue;
-//				}
-//			}
-//			if (count >= boxArrayLength - 1) {
-//				tempflag = true;
-//			}
-//
-//		}
 
-//		int k = 0;
-//		List<int> tempValues = new List<int>();
-//		tempIndex = UniqueRandomInt(randomNumBoxes, 60, 88);
-//		int boxArrayLength = patternValues.Count;
-//
-//		for (int i = 0; i < boxArrayLength; i++) 
-//		{
-//			if (numberBoxes [tempIndex] != null) 
-//			{
-//				BlockSet2.Add (numberBoxes [tempIndex]);
-//				numberBoxes [tempIndex].GetComponent<BoxCollider2D> ().enabled = true;
-//				snapPoints [tempIndex].GetComponent<BoxCollider2D> ().enabled = true;
-//				BlockSet2 [i].GetComponent<GridIndexValue> ().BlocksetNo = 2;
-//				randomNumBoxIndexes.Add (tempIndex);
-//
-//				int val = patternValues [k];
-//				tempNeighTile = (numberBoxes [tempIndex].GetComponent<GridIndexValue> ().neighbouringTiles [val]);
-//
-//				while (tempValues.Contains(tempNeighTile) || tempNeighTile <= 0 || randomNumBoxIndexes.Contains(tempNeighTile)) {
-//					val = Random.Range (0, 3);
-//					tempNeighTile = (numberBoxes [tempIndex].GetComponent<GridIndexValue> ().neighbouringTiles [val]);
-//				}
-//
-//				numberBoxes [tempIndex] = null;
-//				tempIndex = tempNeighTile;
-//				k++;
-//
-//			} else {
-//				continue;
-//			}
-//		}
-//
-//		Vector3 tempPosition = spawnPoints [1].transform.position;
-//		tempPosition.z -= 10;
-//
-//		parent = BlockSet2 [1].transform;
-//		CheckBlockSet ();
-//		parent.transform.localScale = reducedSize;
-//		parent.transform.position = tempPosition;
-//		parent = null;
-//	}
+	IEnumerator RemoveBlockSet3()
+	{
+		yield return new WaitForSeconds(0.15f);
+		int val = 0;
+		int patternIndex = 0;
+		int counter = 0;
 
-//	public void RemoveBlockSet3()
-//	{
-//		int k = 0;
-//		List<int> tempValues = new List<int>();
-//		tempIndex = UniqueRandomInt(randomNumBoxes, 24, 88);
-//		int numBoxesLength = patternValues.Count;
-//
-//		for (int i = 0; i < numBoxesLength; i++) 
-//		{
-//			if (numberBoxes [tempIndex] != null) 
-//			{
-//				BlockSet3.Add (numberBoxes [tempIndex]);
-//				numberBoxes [tempIndex].GetComponent<BoxCollider2D> ().enabled = true;
-//				snapPoints [tempIndex].GetComponent<BoxCollider2D> ().enabled = true;
-//				BlockSet3 [i].GetComponent<GridIndexValue> ().BlocksetNo = 2;
-//				randomNumBoxIndexes.Add (tempIndex);
-//
-//				int val = patternValues [k];
-//				tempNeighTile = (numberBoxes [tempIndex].GetComponent<GridIndexValue> ().neighbouringTiles [val]);
-//
-//				while (tempValues.Contains(tempNeighTile) || tempNeighTile <= 0 || randomNumBoxIndexes.Contains(tempNeighTile)) {
-//					val = Random.Range (0, 3);
-//					tempNeighTile = (numberBoxes [tempIndex].GetComponent<GridIndexValue> ().neighbouringTiles [val]);
-//				}
-//
-//				numberBoxes [tempIndex] = null;
-//				tempIndex = tempNeighTile;
-//				k++;
-//
-//			}
-//		}
-//
-//		Vector3 tempPosition = spawnPoints [2].transform.position;
-//		tempPosition.z -= 10;
-//
-//		parent = BlockSet3 [1].transform;
-//		CheckBlockSet ();
-//		parent.transform.localScale = reducedSize;
-//		parent.transform.position = tempPosition;
-//		parent = null;
-//	}
+		do
+		{
+			BlockSet3.Clear();
+			patternIndex = 0;
+			counter = 0;
+
+			tempIndex = UniqueRandomInt(tempValues, 60, 90);
+
+			for (int i = 0; i < numBoxesLength; i++)
+			{
+				if(numberBoxes [tempIndex] != null) 
+				{
+					val = patternValues[patternIndex];
+					tempNeighTile = (numberBoxes [tempIndex].GetComponent<GridIndexValue> ().neighbouringTiles [val]);
+
+					if(randomNumBoxes.Contains(tempNeighTile) || tempNeighTile <= 0 || tempNeighTile == null || tempNeighTile == 0)
+					{
+						break;
+					} else {
+
+						BlockSet3.Add (numberBoxes [tempIndex]);
+						randomNumBoxes.Add (tempIndex);
+						snapPoints [tempIndex].GetComponent<BoxCollider2D> ().enabled = true;
+
+						tempIndex = tempNeighTile;
+						tempValues.Add (tempIndex);
+
+						patternIndex++;
+						counter++;
+					}
+				}
+			}
+		} 
+		while(counter <= 3);
+
+		for (int i = 0; i < BlockSet1.Count; i++) {
+			numberBoxes [BlockSet2 [i].GetComponent<GridIndexValue>().indexValue] = null;
+			BlockSet3 [i].GetComponent<BoxCollider2D> ().enabled = true;
+			BlockSet3 [i].GetComponent<GridIndexValue> ().BlocksetNo = 3;	
+		}
+
+		Vector3 tempPosition = spawnPoints [1].transform.position;
+
+		parent = BlockSet3 [0].transform;
+		CheckBlockSet ();
+		parent.transform.localScale = reducedSize;
+		parent.transform.position = tempPosition;
+		parent = null;
+	}
 
 	public void DropAnswer(GameObject other)
 	{
@@ -547,6 +430,7 @@ public class MultiplicationGrid : MonoBehaviour {
 							BlockSet2 [i] = null;
 							numberBoxes [tempIndex].GetComponent<BoxCollider2D> ().enabled = false;
 						}
+						//print ("BS2");
 					}
 
 				} else if (draggedObject.GetComponent<GridIndexValue> ().BlocksetNo == 3) {
@@ -559,7 +443,7 @@ public class MultiplicationGrid : MonoBehaviour {
 							numberBoxes [tempIndex].GetComponent<BoxCollider2D> ().enabled = false;
 						}
 					}
-
+					//print ("BS2");
 				}
 
 				draggedObject.transform.position = other.GetComponent<SnapIndexValue> ().transform.position;

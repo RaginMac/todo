@@ -46,7 +46,8 @@ public class ArrangeInOrder : MonoBehaviour {
 		
 		Arrange ();
 
-		DragObject ();
+		if(!Manager.Instance.isGameComplete)
+			DragObject ();
 	}
 
 	public void CreateQuestions()
@@ -245,7 +246,7 @@ public class ArrangeInOrder : MonoBehaviour {
 
 		Vector3 tempPos = other.position;
 		tempPos.z -= 1f;
-		tempPos.y -= 0.055f;
+		//tempPos.y -= 0.055f;
 		draggedObj.position = tempPos;
 		draggedObj.GetComponent<OriginalPos> ().isSnapped = true;
 		draggedObj.GetComponent<OriginalPos> ().indexValue = tempIndex;

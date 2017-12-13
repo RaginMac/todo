@@ -46,7 +46,11 @@ public class GreaterOrLesser_2 : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		DragObject ();
+		
+		if (!manager.isGameComplete) {
+			DragObject ();
+		}
+
 		ArrangeInOrder();
 		FindFinalAnswers ();
 	}

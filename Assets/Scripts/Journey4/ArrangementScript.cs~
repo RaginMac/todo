@@ -48,9 +48,10 @@ public class ArrangementScript : MonoBehaviour {
 
 	void Update () 
 	{
-		if(!manager.isGameComplete){
+		if (!manager.isGameComplete) {
 			DragObject ();
 		}
+
 		ArrangeInOrder();
 		BoyJump();
     }

@@ -271,23 +271,25 @@ public class Subtraction : MonoBehaviour {
 			}
 		}
 
-		for (int i = Coin10Array.Count - 1; i >= 0; i--) {
-			if (Coin10Array [i] != null) {
-				Coin10Array [i].GetComponent<BoxCollider2D> ().enabled = true;
-				exchangeDrop = false;
-				exchange100 = false;
-				//CheckExchange (); 
-				break;
-			} else if (i == 0 && Coin10Array [i] == null) {
-				exchangeDrop = true;
-				exchange100 = true;
-				//CheckExchange (); 
-			} else {
-				continue;
+		if(exchange10 || counterPanel1.GetComponent<EnableScript>().counter >= thirdDigit) {
+			for (int i = Coin10Array.Count - 1; i >= 0; i--) {
+				if (Coin10Array [i] != null) {
+					Coin10Array [i].GetComponent<BoxCollider2D> ().enabled = true;
+					exchangeDrop = false;
+					exchange100 = false;
+					//CheckExchange (); 
+					break;
+				} else if (i == 0 && Coin10Array [i] == null) {
+					exchangeDrop = true;
+					exchange100 = true;
+					//CheckExchange (); 
+				} else {
+					continue;
+				}
 			}
 		}
 
-		if (diff == Difficulty.Grade3) {
+		if (diff == Difficulty.Grade3 && (exchange100 || counterPanel10.GetComponent<EnableScript>().counter  >= secondDigit)) {
 			for (int i = Coin100Array.Count - 1; i >= 0; i--) {
 				if (Coin100Array [i] != null) {
 					Coin100Array [i].GetComponent<BoxCollider2D> ().enabled = true;
@@ -482,8 +484,8 @@ public class Subtraction : MonoBehaviour {
 
 		if (Input.GetMouseButtonUp (0))
 		{
-			if (draggedObject != null) {
-				//RaycastHit2D hit = Physics2D.Raycast (ray.origin, ray.direction, 100f);
+			if (draggedObject != null)
+			{
 				DropInCounter (hit.transform.gameObject);
 
 				if(subWithBorrow)
