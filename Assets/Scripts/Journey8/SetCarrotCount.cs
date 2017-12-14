@@ -32,6 +32,7 @@ public class SetCarrotCount : MonoBehaviour {
 		cam = Camera.main;
 		CreateQuestions ();
 		DisplayCarrots ();
+		PlayerPrefs.SetString("Language", "Sounds/English/");
 		source.clip = Resources.Load(PlayerPrefs.GetString("Language") + audioClips[no2-1]) as AudioClip;  //clips [no2 - 1];
 		Invoke ("PlayRabbitAudio", 1.5f);
 	}

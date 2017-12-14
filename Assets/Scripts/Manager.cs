@@ -770,9 +770,10 @@ public class Manager : MonoBehaviour {
 //		NextQuestion ();
 	}
 
-	public void CountFishesInBowl(bool hasRemainder){
+	public void CountFishesInBowl(){
 		FishDrop fish = questionArray[questionNumber].GetComponent<FishDrop>();
-		if(!hasRemainder){
+
+		if(fish.qType==FishDrop.QuestionType.withoutRemainder){
 			if(fish.clickedAns==fish.answer)
 			{
 				CountQuestionsAnswered(true);
@@ -787,7 +788,7 @@ public class Manager : MonoBehaviour {
 				fish.ShowFishAnim(false);
 			}
 		}
-		else if(hasRemainder)
+		else if(fish.qType==FishDrop.QuestionType.withRemainder)
 		{
 			print("with");
 			if(fish.clickedAns==fish.answerInPot && fish.clickedRemainder==fish.answer)
@@ -974,7 +975,9 @@ public class Manager : MonoBehaviour {
 		int playerAns = int.Parse (questionArray [questionNumber].GetComponent<MulByRepeatedAdd> ().playerAns);
 		if (playerAns == questionArray [questionNumber].GetComponent<MulByRepeatedAdd> ().answer) {
 			CountQuestionsAnswered (true);
-			Invoke("NextQuestion",2f);
+			questionArray [questionNumber].GetComponent<MulByRepeatedAdd> ().playerAns = "";
+			Invoke("NextQuestion", 0.2f);
+			questionArray [questionNumber].GetComponent<MulByRepeatedAdd>().ResetKeypad();
 			//Invoke("ScrollAnimation",2f);
 			//print ("correct");
 		}else {
