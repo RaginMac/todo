@@ -19,6 +19,7 @@ public class FishDrop : MonoBehaviour {	//j15
 
 	public Sprite wrong, correct;
 	public Image checkButton;
+	public GameObject remainderArea;
 
 	// Use this for initialization
 	void Start () {
@@ -26,6 +27,11 @@ public class FishDrop : MonoBehaviour {	//j15
 		cam = Camera.main;
 		ShuffleSpawns();
 		SpawnFishes();
+		if(qType==QuestionType.withoutRemainder){
+			remainderArea.SetActive(false);
+		}else{
+			remainderArea.SetActive(true);
+		}
 	}
 	
 	// Update is called once per frame

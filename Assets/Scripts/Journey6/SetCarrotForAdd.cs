@@ -34,6 +34,7 @@ public class SetCarrotForAdd : MonoBehaviour {
 	string path;
 	// Use this for initialization
 	void Start () {
+		PlayerPrefs.SetString("Language", "Sounds/English/");	//Set only english language now
 		cam = Camera.main;
 		CreateQuestions ();
 		if(addType == AdditionType.Simple){
