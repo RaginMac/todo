@@ -251,6 +251,8 @@ public class ArrangeInOrder : MonoBehaviour {
 		draggedObj.GetComponent<OriginalPos> ().isSnapped = true;
 		draggedObj.GetComponent<OriginalPos> ().indexValue = tempIndex;
 		caterpillarBodies [tempIndex] = draggedObj.gameObject;
+
+		Manager.Instance.PlayDragDropAudio ();
 	}
 
 
@@ -287,6 +289,19 @@ public class ArrangeInOrder : MonoBehaviour {
 		if (draggedObj.GetComponent<OriginalPos> ().isSnapped) {
 			draggedObj.GetComponent<OriginalPos> ().isSnapped = false;
 			caterpillarBodies [tempIndex] = null;
+		}
+	}
+
+	public void ResetOptions(){
+		for (int i = 0; i < answer.Length; i++)
+		{
+			if(caterpillarBodies [i] == null){
+				continue;
+			} else if (caterpillarBodies [i].GetComponent<OriginalPos> ().isSnapped) {
+				caterpillarBodies [i].transform.position = caterpillarBodies [i].gameObject.GetComponent<OriginalPos> ().originalPos;
+				caterpillarBodies [i].GetComponent<OriginalPos>().isSnapped = false;
+				caterpillarBodies [i] = null;
+			}
 		}
 	}
 }

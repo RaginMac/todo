@@ -446,11 +446,13 @@ public class MultiplicationGrid : MonoBehaviour {
 					//print ("BS2");
 				}
 
+				Manager.Instance.PlayDragDropAudio ();
 				draggedObject.transform.position = other.GetComponent<SnapIndexValue> ().transform.position;
 			} else {
 				draggedObject.transform.position = originalObjPos;
 				draggedObject.gameObject.GetComponent<BoxCollider2D> ().enabled = true;
 				parent.transform.localScale = reducedSize;
+				Manager.Instance.PlayWrongSound ();
 			}
 		}
 	}

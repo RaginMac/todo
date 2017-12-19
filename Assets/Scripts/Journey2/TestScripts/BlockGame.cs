@@ -336,6 +336,8 @@ public class BlockGame : MonoBehaviour {
 				parent.transform.localScale = reducedSize;
 			}
 		}
+
+		Manager.Instance.PlayDragDropAudio();
 	}
 
 	public void CheckBlockSet()

@@ -52,11 +52,10 @@ public class SwapNumbers : MonoBehaviour {
 		if(!manager.isGameComplete)
 			DragObject ();
 
-		if (arrangeInOrder)
-			ArrangeInOrder ();
-		else
-			//dropFlag = false;
-			Arrange();
+//		if (arrangeInOrder)
+//			ArrangeInOrder ();
+//		else
+//			Arrange();
 
 	}
 
@@ -115,8 +114,7 @@ public class SwapNumbers : MonoBehaviour {
 						draggedObj.GetComponent<OriginalPos> ().originalPos = hit.transform.position;
 
 					}
-						
-					
+
 					hit.transform.GetComponent<BoxCollider>().enabled = false;
 					offset = draggedObj.position - ray.origin;
 					ResetAnswer ();
@@ -168,20 +166,6 @@ public class SwapNumbers : MonoBehaviour {
 
 	public void SwapNumber(GameObject other)
 	{
-//		Vector3 temp = draggedObj.gameObject.GetComponent<OriginalPos> ().originalPos;
-//		draggedObj.gameObject.GetComponent<OriginalPos> ().originalPos = other.gameObject.GetComponent<OriginalPos> ().originalPos;
-//		draggedObj.transform.position = other.gameObject.GetComponent<OriginalPos> ().originalPos;
-//		other.gameObject.GetComponent<OriginalPos> ().originalPos = temp;
-//		other.transform.position = temp;
-//
-//		GameObject tempObj = numberArray[draggedObj.gameObject.GetComponent<OriginalPos> ().indexValue];
-//		numberArray[draggedObj.gameObject.GetComponent<OriginalPos> ().indexValue] = numberArray[other.gameObject.GetComponent<OriginalPos> ().indexValue];
-//		numberArray[other.gameObject.GetComponent<OriginalPos> ().indexValue] = tempObj;
-//
-//		int tempValue = draggedObj.gameObject.GetComponent<OriginalPos> ().indexValue;
-//		draggedObj.gameObject.GetComponent<OriginalPos> ().indexValue = other.gameObject.GetComponent<OriginalPos> ().indexValue;
-//		other.gameObject.GetComponent<OriginalPos> ().indexValue = tempValue;
-
 		Vector3 temp = other.gameObject.transform.position;
 		temp.z -= 1f;
 		//temp.y -= 0.055f;
@@ -193,6 +177,7 @@ public class SwapNumbers : MonoBehaviour {
 		draggedObj.gameObject.GetComponent<OriginalPos> ().indexValue = tempIndex;
 		draggedObj.gameObject.GetComponent<OriginalPos> ().isSnapped = true;
 
+		manager.PlayDragDropAudio ();
 	}
 
 	public void DropAnswer (GameObject other)
@@ -222,7 +207,7 @@ public class SwapNumbers : MonoBehaviour {
 			if (draggedObj != null && draggedObj.gameObject.GetComponent<OriginalPos> ().isSnapped) {
 				int tempIndex = draggedObj.gameObject.GetComponent<OriginalPos> ().indexValue;
 				newAnswerArray [tempIndex] = "";
-				snapPoints [previousSnapIndex].GetComponent<BoxCollider> ().enabled = false;
+				//snapPoints [previousSnapIndex].GetComponent<BoxCollider> ().enabled = false;
 				draggedObj.gameObject.GetComponent<OriginalPos> ().indexValue = 0;
 				draggedObj.gameObject.GetComponent<OriginalPos> ().isSnapped = false;
 			}
@@ -258,6 +243,21 @@ public class SwapNumbers : MonoBehaviour {
 				snapPoints [i].GetComponent<BoxCollider> ().enabled = true;
 				previousSnapIndex = i;
 				break;
+			}
+		}
+	}
+
+	public void ResetOptions() {
+		for (int i = 0; i < answerArray.Length; i++)
+		{
+			newAnswerArray [i] = "";
+
+			if(answerArray [i] == null){
+				continue;
+			} else if (answerArray [i].GetComponent<OriginalPos> ().isSnapped) {
+				answerArray [i].transform.position = answerArray [i].gameObject.GetComponent<OriginalPos> ().originalPos;
+				answerArray [i].GetComponent<OriginalPos> ().isSnapped = false;
+				//answerArray [i] = null;
 			}
 		}
 	}

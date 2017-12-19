@@ -10,6 +10,8 @@ public class BubbleAnimationScript : MonoBehaviour {
 	public Animator balloonAnimator;
 	public string whichBalloonColor;
 
+	public AudioSource source;
+	public AudioClip blowBallon;
 	public Vector3 startPosition;
 	public bool isReady = false;
 
@@ -22,6 +24,8 @@ public class BubbleAnimationScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 //		balloonAnimator.SetTrigger("BalloonSpa");
+		source.clip = blowBallon;
+		source.Play ();
 	}
 	
 	// Update is called once per frame
@@ -43,8 +47,6 @@ public class BubbleAnimationScript : MonoBehaviour {
 			Manager.Instance.UIAudioSource.clip = Manager.Instance.balloonPop;
 			Manager.Instance.UIAudioSource.Play ();
 		}
-
-
 		//Invoke ("BalloonPop", 1f);
 	}
 

@@ -153,6 +153,8 @@ public class GetSubFromAdd : MonoBehaviour {
 		draggedObj.gameObject.GetComponent<OriginalPos>().isSnapped = true;
 		//FinalAnswer ();
 
+		Manager.Instance.PlayDragDropAudio ();
+
 	}
 
 	public void ResetAnswer()

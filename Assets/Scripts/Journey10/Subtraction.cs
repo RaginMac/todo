@@ -83,14 +83,13 @@ public class Subtraction : MonoBehaviour {
 	void Start () {
 		 
 		cam = Camera.main;
-		camAnimation = cam.GetComponent<Animator> ();
+		//camAnimation = cam.GetComponent<Animator> ();
+
 		if (subWithoutBorrow) {
 			CreateQuestionsSWOB ();
 		} else if (subWithBorrow) {
 			CreateQuestionsSWB ();
 		}
-
-		CheckFirstCoin ();
 	}
 
 	void Update () {
@@ -111,8 +110,8 @@ public class Subtraction : MonoBehaviour {
 			n1 = tempN1.ToString () + tempN2.ToString ();
 			n2 = tempN3.ToString () + tempN4.ToString ();
 
-			firstDigit = tempN3;
-			secondDigit = tempN4;
+			secondDigit = tempN3;
+			thirdDigit = tempN4;
 
 			InstantiateCoins (tempN1, tempN2, 0);
 			StartCoroutine(DisplayQuestion("0", tempN1.ToString (), tempN2.ToString (), "0", tempN3.ToString (), tempN4.ToString ()));
@@ -127,8 +126,8 @@ public class Subtraction : MonoBehaviour {
 			n1 = tempN1.ToString () + tempN2.ToString ();
 			n2 = tempN3.ToString () + tempN4.ToString ();
 
-			firstDigit = tempN3;
-			secondDigit = tempN4;
+			secondDigit = tempN3;
+			thirdDigit = tempN4;
 
 			InstantiateCoins (tempN1, tempN2, 0);
 			StartCoroutine(DisplayQuestion("0", tempN1.ToString (), tempN2.ToString (), "0", tempN3.ToString (), tempN4.ToString ()));
@@ -154,6 +153,8 @@ public class Subtraction : MonoBehaviour {
 			StartCoroutine(DisplayQuestion(tempN1.ToString (), tempN2.ToString (), tempN3.ToString (), tempN4.ToString (), tempN5.ToString (), tempN6.ToString ()));
 			FindAnswer (n1, n2);
 		}
+
+		CheckFirstCoin ();
 	}
 
 
@@ -171,8 +172,8 @@ public class Subtraction : MonoBehaviour {
 			n1 = tempN1.ToString () + tempN2.ToString ();
 			n2 = tempN3.ToString () + tempN4.ToString ();
 
-			firstDigit = tempN3;
-			secondDigit = tempN4;
+			secondDigit = tempN3;
+			thirdDigit = tempN4;
 
 			InstantiateCoins (tempN1, tempN2, 0);
 			StartCoroutine(DisplayQuestion("0", tempN1.ToString (), tempN2.ToString (), "0", tempN3.ToString (), tempN4.ToString ()));
@@ -188,8 +189,8 @@ public class Subtraction : MonoBehaviour {
 			n1 = tempN1.ToString () + tempN2.ToString ();
 			n2 = tempN3.ToString () + tempN4.ToString ();
 
-			firstDigit = tempN3;
-			secondDigit = tempN4;
+			secondDigit = tempN3;
+			thirdDigit = tempN4;
 
 			InstantiateCoins (tempN1, tempN2, 0);
 
@@ -216,6 +217,8 @@ public class Subtraction : MonoBehaviour {
 			StartCoroutine(DisplayQuestion(tempN1.ToString (), tempN2.ToString (), tempN3.ToString (), tempN4.ToString (), tempN5.ToString (), tempN6.ToString ()));
 			FindAnswer (n1, n2);
 		}
+
+		CheckFirstCoin ();
 	}
 
 	void FindAnswer(string num1, string num2){
@@ -245,7 +248,7 @@ public class Subtraction : MonoBehaviour {
 		ans10.text = "?";
 		ans100.text = "?";
 
-		camAnimation.SetBool ("moveCamera", true);
+		//camAnimation.SetBool ("moveCamera", true);
 
 		yield return new WaitForSeconds (1);
 		ans1.text = "";
@@ -255,8 +258,10 @@ public class Subtraction : MonoBehaviour {
 
 	void CheckFirstCoin()
 	{
-		for (int i = Coin1Array.Count - 1; i >= 0; i--) {
-			if (Coin1Array [i] != null) {
+		for (int i = Coin1Array.Count - 1; i >= 0; i--) 
+		{
+			if (Coin1Array [i] != null) 
+			{
 				Coin1Array [i].GetComponent<BoxCollider2D> ().enabled = true;
 				exchangeDrop = false;
 				exchange10 = false;
@@ -271,7 +276,8 @@ public class Subtraction : MonoBehaviour {
 			}
 		}
 
-		if(exchange10 || counterPanel1.GetComponent<EnableScript>().counter >= thirdDigit) {
+		if(exchange10 || counterPanel1.GetComponent<EnableScript>().counter >= thirdDigit) 
+		{
 			for (int i = Coin10Array.Count - 1; i >= 0; i--) {
 				if (Coin10Array [i] != null) {
 					Coin10Array [i].GetComponent<BoxCollider2D> ().enabled = true;
@@ -377,7 +383,7 @@ public class Subtraction : MonoBehaviour {
 				Coin1Array [i].GetComponent <OriginalPos> ().indexValue = i;
 				Coin1Array [i].GetComponent <CoinFallScript> ().target = coin1Spawn[i];
 
-				yield return new WaitForSeconds (1f);
+				yield return new WaitForSeconds (0.8f);
 			}
 
 		} else if (hitObject.tag == "ExchangePanel100" && draggedObject.tag == "Coin100" && exchange100) {
@@ -390,7 +396,7 @@ public class Subtraction : MonoBehaviour {
 				Coin10Array [i].GetComponent <OriginalPos> ().indexValue = i;
 				Coin10Array [i].GetComponent <CoinFallScript> ().target = coin10Spawn[i];
 
-				yield return new WaitForSeconds (1);
+				yield return new WaitForSeconds (0.8f);
 			}
 		}
 
@@ -401,7 +407,7 @@ public class Subtraction : MonoBehaviour {
 	void CheckCounter()
 	{
 		if (diff == Difficulty.Grade2 || diff == Difficulty.Grade1) {
-			if (secondDigit == counterPanel1.GetComponent<EnableScript> ().counter) {
+			if (thirdDigit == counterPanel1.GetComponent<EnableScript> ().counter) {
 				counterPanel10.GetComponent<BoxCollider2D> ().enabled = true;
 			}
 

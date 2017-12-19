@@ -10,8 +10,9 @@ public class Keypad : MonoBehaviour {
 
 	public Text[] allInputAreas;
 
-	public void SetText(string input){
-		if(answerArea!=null){
+	public void SetText(string input) 
+	{
+		if(answerArea!=null) {
 			answerArea.text = input;
 		}else if(inputArea!=null){
 			if(inputArea.text.Length<2){
@@ -33,7 +34,7 @@ public class Keypad : MonoBehaviour {
 
 	public void  Erase()
 	{
-		print ("Erase");
+		//print ("Erase");
 		if(inputArea != null)
 			inputArea.text = "";
 		else if(answerArea != null)
@@ -46,7 +47,5 @@ public class Keypad : MonoBehaviour {
 			allInputAreas[i].text = "";
 		}
 	}
-
-
 
 }

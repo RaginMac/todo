@@ -127,6 +127,8 @@ public class GreaterOrLesser : MonoBehaviour {
         draggedObj.gameObject.GetComponent<OriginalPos>().indexValue = dropCount;
         finalAnswerNumbers[dropCount] = draggedObj.gameObject.GetComponentInChildren<TextMesh>().text;
         draggedObj.gameObject.GetComponent<OriginalPos>().isSnapped = true;
+
+		manager.PlayDragDropAudio ();
     }
 
     public void ResetAnswer()

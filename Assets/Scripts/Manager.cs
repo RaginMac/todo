@@ -29,7 +29,7 @@ public class Manager : MonoBehaviour {
 	public GameObject gameCompletePopup;
 	public int isCorrect;
 
-	public AudioClip UIClick, correctAudio, wrongAudio, popupAudio, starAudio, balloonPop;
+	public AudioClip UIClick, correctAudio, wrongAudio, popupAudio, starAudio, dragDropAudio, balloonPop;
 	public AudioSource questionSource;
 
 	public bool isGameComplete = false;
@@ -66,10 +66,14 @@ public class Manager : MonoBehaviour {
 		PlayAudio(PlayerPrefs.GetString("Language") + questionArray [questionNumber].GetComponent<Question> ().question.questionClip);
 	}
 
+	public void PlayDragDropAudio(){
+		UIAudioSource2.clip = dragDropAudio;
+		UIAudioSource2.Play ();
+	}
 
 	public void PlayClickAudio (){
-		UIAudioSource.clip = UIClick;
-		UIAudioSource.Play ();
+		UIAudioSource2.clip = UIClick;
+		UIAudioSource2.Play ();
 	}
 
 	public void PlayQuestionAudio(){
@@ -256,20 +260,24 @@ public class Manager : MonoBehaviour {
 	public void PlayNextGame()
 	{
 		SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex + 1);
+		PlayClickAudio ();
 	}
 
 	public void RepeatGame()
 	{
 		SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex);
+		PlayClickAudio ();
 	}
 
 	public void GoToStartScreen()
 	{
 		SceneManager.LoadScene ("StartScene");
+		PlayClickAudio ();
 	}
 
 	public void GoToHomeScreen(string home){
 		SceneManager.LoadScene (home);
+		PlayClickAudio ();
 	}
 	//G2.2
 	public void CheckAnswerArray()
@@ -300,6 +308,8 @@ public class Manager : MonoBehaviour {
 				//print ("Wrong");
 				questionArray[questionNumber].GetComponent<SwapNumbers>().animator.SetTrigger("SadCat");
 				CountQuestionsAnswered(false);
+				questionArray [questionNumber].GetComponent<SwapNumbers> ().ResetOptions ();
+
 				if (countWrongAnswer) {
 					// CountQuestionsAnswered(false);
 					questionArray[questionNumber].GetComponent<SwapNumbers>().ansClicked = true;
@@ -340,6 +350,8 @@ public class Manager : MonoBehaviour {
 			} else {
 				questionArray [questionNumber].GetComponent<ArrangeInOrder> ().anime.SetTrigger ("SadCat");
 				CountQuestionsAnswered (false);
+				questionArray [questionNumber].GetComponent<ArrangeInOrder> ().ResetOptions ();
+
 				if (countWrongAnswer) {
 					//CountQuestionsAnswered(false);
 					questionArray[questionNumber].GetComponent<ArrangeInOrder>().ansClicked = true;
@@ -536,12 +548,12 @@ public class Manager : MonoBehaviour {
 				else {
 					//CountQuestionsAnswered(false);
 					questionArray [questionNumber].GetComponent<SetQuestionNumber> ().Reset();
+					PlayWrongSound ();
 				}
 			}
 			//questionArray [questionNumber].GetComponent<SetQuestionNumber> ().answered = 1;
 			//NextQuestion();
 		}
-
 	}
 
 	public void CheckAnswer()
@@ -963,7 +975,7 @@ public class Manager : MonoBehaviour {
 			CountQuestionsAnswered(true);
 			questionArray [questionNumber].GetComponent<Subtraction> ().answered = true;
 			Invoke("NextQuestion", 2f);
-			questionArray [questionNumber].GetComponent<Subtraction> ().camAnimation.SetBool ("moveCamera", false); 
+			//questionArray [questionNumber].GetComponent<Subtraction> ().camAnimation.SetBool ("moveCamera", false); 
 		} else {
 			CountQuestionsAnswered(false);
 		}
@@ -972,7 +984,13 @@ public class Manager : MonoBehaviour {
 	//J11 check answer
 	public void CheckMulByRepeatedAdd()
 	{
-		int playerAns = int.Parse (questionArray [questionNumber].GetComponent<MulByRepeatedAdd> ().playerAns);
+		int playerAns = 0;
+		if (questionArray [questionNumber].GetComponent<MulByRepeatedAdd> ().playerAns == "") {
+			questionArray [questionNumber].GetComponent<MulByRepeatedAdd> ().playerAns = "0";
+		}else {
+			playerAns = int.Parse (questionArray [questionNumber].GetComponent<MulByRepeatedAdd> ().playerAns);
+		}
+
 		if (playerAns == questionArray [questionNumber].GetComponent<MulByRepeatedAdd> ().answer) {
 			CountQuestionsAnswered (true);
 			questionArray [questionNumber].GetComponent<MulByRepeatedAdd> ().playerAns = "";
@@ -1049,6 +1067,8 @@ public class Manager : MonoBehaviour {
 			questionArray [questionNumber].GetComponent<multiply> ().eggTrayObj.SetActive (true);
 			questionArray [questionNumber].GetComponent<multiply> ().hintPressed = true;
 		}
+
+		PlayClickAudio ();
 	}
 
 

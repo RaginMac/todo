@@ -88,6 +88,7 @@ public class Options : MonoBehaviour {
 				this.GetComponent<Animator>().SetTrigger("OptionShake");
 			}
 		}
+			
 	}
 
 
@@ -109,7 +110,7 @@ public class Options : MonoBehaviour {
 					}
 				}
 			}
-			//		manager.NextQuestion ();
+			//manager.NextQuestion ();
 
 		}
 	}

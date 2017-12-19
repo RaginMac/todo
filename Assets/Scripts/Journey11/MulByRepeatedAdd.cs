@@ -95,7 +95,9 @@ public class MulByRepeatedAdd : MonoBehaviour {
 
 	public void ResetKeypad()
 	{
-		keypad.GetComponent<Animator>().SetBool("KeypadShow", false);
+		if (keypad != null) {
+			keypad.GetComponent<Animator> ().SetBool ("KeypadShow", false);
+		}
 	}
 
 	public void CreateQuestion()
@@ -282,6 +284,8 @@ public class MulByRepeatedAdd : MonoBehaviour {
 				{
 					if(hit.collider.tag == "Snap")
 					{
+						Manager.Instance.PlayDragDropAudio ();
+
 						Vector3 tempPos = hit.transform.position;
 						tempPos.z -= 1f;
 						draggedObj.transform.position = tempPos;

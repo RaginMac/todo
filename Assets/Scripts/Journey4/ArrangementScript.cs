@@ -213,11 +213,14 @@ public class ArrangementScript : MonoBehaviour {
 			playerAnswer [dropCount] = draggedObj.gameObject.GetComponentInChildren<TextMesh> ().text;
 			draggedObj.gameObject.GetComponent<OriginalPos> ().indexValue = dropCount;
 			draggedObj.gameObject.GetComponent<OriginalPos> ().isSnapped = true;
-				
+			manager.PlayDragDropAudio ();
 		} else {
 			boyAnime.SetTrigger ("Wrong");
+			manager.PlayWrongSound();
 			draggedObj.transform.position = draggedObj.gameObject.GetComponent<OriginalPos> ().originalPos;
 		}
+
+
     }
 
 	public void ResetAnswer()

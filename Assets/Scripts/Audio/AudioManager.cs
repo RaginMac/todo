@@ -13,6 +13,11 @@ public class AudioManager : MonoBehaviour {
 	public string baseURL = "Sounds/";
 	public string finalAudioPath;
 	public AudioSource source;
+	public AudioSource source2;
+
+	public AudioClip bubbles;
+	public AudioClip rabbit; 
+
 	public string sound;
 
 	[SerializeField]
@@ -27,10 +32,20 @@ public class AudioManager : MonoBehaviour {
 	}
 
 	void Start()
-	{}
+	{
+		if (bubbles != null) {
+			source2.clip = bubbles;
+			InvokeRepeating ("PlayBubbleAudio", 2f, 10f);
+		}
+
+		if (rabbit != null) {
+			InvokeRepeating ("PlayRabbitAudio", 2f, 10f);
+		}
+	}
 
 	void Update()
 	{
+		
 	}
 
 	public void SetAudioURL(string whichLanguage = "English")
@@ -48,7 +63,9 @@ public class AudioManager : MonoBehaviour {
 		source.clip = Resources.Load(path+ sound) as AudioClip;
 		clip = source.clip;
 		source.Play();
-		Invoke("ClearSource", source.clip.length);
+		if (source.clip != null) {
+			Invoke ("ClearSource", source.clip.length);
+		}
 	}
 
 	public void ClearSource()
@@ -73,6 +90,20 @@ public class AudioManager : MonoBehaviour {
 			source.clip = clip;
 			source.Play();
 		}
+
+		Manager.Instance.PlayClickAudio ();
 	}
 
+	void PlayBubbleAudio()
+	{
+		print ("bubbles");
+//		source2.clip = Manager.Instance.bubblesAudio;
+		source2.Play ();
+	}
+
+	void PlayRabbitAudio()
+	{
+		source2.clip = rabbit;
+		source2.Play ();
+	}
 }

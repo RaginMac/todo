@@ -173,6 +173,8 @@ public class MultiplicationTable : MonoBehaviour {
 			}
 			iNum += 10;
 		}
+
+		Manager.Instance.PlayDragDropAudio ();
 	}
 
 	public void DropAnswer(GameObject other)
