@@ -290,7 +290,6 @@ public class Manager : MonoBehaviour {
 				//print (questionArray [questionNumber].GetComponent<SwapNumbers> ().answerArray [i].GetComponentInChildren<TextMesh>().text);
 				if (questionArray[questionNumber].GetComponent<SwapNumbers>().answerArray[i].GetComponentInChildren<TextMesh>().text == questionArray[questionNumber].GetComponent<SwapNumbers>().newAnswerArray[i]) {
 					questionArray[questionNumber].GetComponent<SwapNumbers>().answerCounter++;
-
 				}
 				else {
 					continue;
