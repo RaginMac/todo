@@ -86,13 +86,9 @@ public class SetCarrotCount : MonoBehaviour {
 				{
 					if(Physics.Raycast(ray, out hit, Mathf.Infinity)  && hit.collider.tag == "DraggableObject")
 					{
-						//print (hit.collider.tag);
-						//ResetAnswerText();
 						draggedObj = hit.transform;
-						//hit.transform.GetComponent<AudioSource> ().Play ();
 						hit.transform.GetComponent<BoxCollider>().enabled = false;
 						offset = draggedObj.position - ray.origin;
-						//ResetAnswer ();
 					}
 				}
 			}
@@ -111,16 +107,13 @@ public class SetCarrotCount : MonoBehaviour {
 				{
 					if(hit.collider.tag == "Snap")
 					{
-						//	print ("drop collider" + hit.collider.tag);
+                       // hit.transform.GetComponent<BoxCollider>().enabled = false;
 						draggedObj.transform.SetParent(hit.collider.transform);
-						//	answerPressed = draggedObj.GetComponentInChildren<TextMesh> ().text;
-						//	temp = answerPressed + temp;
-						//	answerPressed = temp;
-
+					
 						DropAnswer (hit.collider, draggedObj.gameObject);
 
 					} else {
-						//		
+								
 						draggedObj.transform.GetComponent<BoxCollider>().enabled = true;
 						draggedObj.transform.position = draggedObj.gameObject.GetComponent<OriginalPos> ().originalPos;
 
@@ -128,10 +121,6 @@ public class SetCarrotCount : MonoBehaviour {
 					}
 				}
 			}
-
-//			if (draggedObj != null) {
-//				draggedObj.gameObject.GetComponent<BoxCollider> ().enabled = true;
-//			}
 
 			draggedObj = null;
 		}
