@@ -173,6 +173,8 @@ public class MultiplicationTable : MonoBehaviour {
 			}
 			iNum += 10;
 		}
+
+		Manager.Instance.PlayDragDropAudio ();
 	}
 
 	public void DropAnswer(GameObject other)
@@ -201,6 +203,8 @@ public class MultiplicationTable : MonoBehaviour {
 
 	public void Reset()
 	{
+		iNum = 1;
+		dropCount = 0;
 		for (int i = 0; i < eggTrays.Length; i++) {
 			eggTrays[i].transform.GetChild (0).gameObject.SetActive (false);
 		}

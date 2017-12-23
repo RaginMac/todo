@@ -125,6 +125,7 @@ public class ArrangementScript : MonoBehaviour {
 	{
 		for (int i = 0; i < spawnPoints.Length; i++) {
 			Vector3 tempPos = spawnPoints [i].position;
+			tempPos.z -= 0.001f;
 			optionTexts [i].GetComponentInParent<BoxCollider> ().transform.position = tempPos;
 		}
 	}
@@ -213,11 +214,14 @@ public class ArrangementScript : MonoBehaviour {
 			playerAnswer [dropCount] = draggedObj.gameObject.GetComponentInChildren<TextMesh> ().text;
 			draggedObj.gameObject.GetComponent<OriginalPos> ().indexValue = dropCount;
 			draggedObj.gameObject.GetComponent<OriginalPos> ().isSnapped = true;
-				
+			manager.PlayDragDropAudio ();
 		} else {
 			boyAnime.SetTrigger ("Wrong");
+			manager.PlayWrongSound();
 			draggedObj.transform.position = draggedObj.gameObject.GetComponent<OriginalPos> ().originalPos;
 		}
+
+
     }
 
 	public void ResetAnswer()

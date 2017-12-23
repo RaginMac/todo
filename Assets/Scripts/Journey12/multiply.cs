@@ -10,13 +10,12 @@ public class multiply : MonoBehaviour {
 
 	public GameObject eggTrayObj;
 	public Text T1, T2;
-	public GameObject[] answerText;
-    public int stringLength;
+
+	public Text[] answerText;
 
     public int t1Number, t2Number;
 
 	public string finalAnswer, answer;
-	public int i;
 
 	public GameObject[] eggTrays;
 	public GameObject[] eggs;
@@ -37,8 +36,10 @@ public class multiply : MonoBehaviour {
 	RaycastHit hit;
 
 	public bool Arrange;
+
 	public Animator anime;
 	public Animator moveCalci;
+	public Animator hintbutton;
 
 	public bool hintPressed;
 
@@ -57,8 +58,8 @@ public class multiply : MonoBehaviour {
 			eggTrayObj.SetActive (false);
 		}
 
-		if(anime == null)
-			anime = this.GetComponent<Animator> ();
+		if(moveCalci == null)
+			moveCalci = this.GetComponent<Animator> ();
 	}
 	
 	// Update is called once per frame
@@ -70,8 +71,7 @@ public class multiply : MonoBehaviour {
 	public void CreateQuestion()
 	{
 		if (diff == Difficulty.Grade0) {
-			answerText[0].GetComponentInChildren<Text>().text = "";
-			answerText[1].GetComponentInChildren<Text>().text = "";
+			answerText[0].text = "";
 
 			t1Number = Random.Range (1, 4);
 			t2Number = Random.Range (1, 10);
@@ -89,8 +89,7 @@ public class multiply : MonoBehaviour {
 //			int tempAns = t1Number * t2Number;
 //			answer = tempAns.ToString ();
 
-			answerText[0].GetComponentInChildren<Text>().text = "";
-			answerText[1].GetComponentInChildren<Text>().text = "";
+			answerText[0].text = "";
 
 			t1Number = Random.Range (1, 6);
 			t2Number = Random.Range (1, 10);
@@ -108,8 +107,7 @@ public class multiply : MonoBehaviour {
 //			int tempAns = t1Number * t2Number;
 //			answer = tempAns.ToString ();
 
-			answerText[0].GetComponentInChildren<Text>().text = "";
-			answerText[1].GetComponentInChildren<Text>().text = "";
+			answerText[0].text = "";
 
 			t1Number = Random.Range (6, 8);
 			t2Number = Random.Range (1, 10);
@@ -128,8 +126,7 @@ public class multiply : MonoBehaviour {
 //			int tempAns = t1Number * t2Number;
 //			answer = tempAns.ToString ();
 
-			answerText[0].GetComponentInChildren<Text>().text = "";
-			answerText[1].GetComponentInChildren<Text>().text = "";
+			answerText[0].text = "";
 
 			t1Number = Random.Range (8, 10);
 			t2Number = Random.Range (1, 10);
@@ -137,42 +134,13 @@ public class multiply : MonoBehaviour {
 			answer = tempAns.ToString ();
 		}
 
-        stringLength = answer.Length;
-        if (stringLength == 1)
-        {
-            //print(stringLength);
-            answerText[0].SetActive(true);
-            answerText[1].SetActive(false);
-        }
-        else if (stringLength == 2)
-        {
-            //print(stringLength);
-            answerText[0].SetActive(true);
-            answerText[1].SetActive(true);
-        }
-        //print(stringLength);
         T1.text = t1Number.ToString();
 		T2.text = t2Number.ToString ();
     }
 
 	public void FinalAnswer()
 	{
-		if (diff == Difficulty.Grade0) {
-            if (stringLength == 1)
-            {
-                finalAnswer = answerText[0].GetComponentInChildren<Text>().text;
-            }
-            else if (stringLength == 2)
-            {
-                finalAnswer = answerText[0].GetComponentInChildren<Text>().text + answerText[1].GetComponentInChildren<Text>().text;
-            }
-        } else if (diff == Difficulty.Grade1) {
-			finalAnswer = answerText [0].GetComponentInChildren<Text>().text + answerText [1].GetComponentInChildren<Text>().text; 
-		} else if (diff == Difficulty.Grade2) {
-			finalAnswer = answerText [0].GetComponentInChildren<Text>().text + answerText [1].GetComponentInChildren<Text>().text;
-		} else if (diff == Difficulty.Grade3) {
-			finalAnswer = answerText [0].GetComponentInChildren<Text>().text + answerText [1].GetComponentInChildren<Text>().text;
-		}
+		finalAnswer = answerText [0].GetComponentInChildren<Text>().text;
 	}
 
 	public void CreateEggTrayGrid()
@@ -256,11 +224,7 @@ public class multiply : MonoBehaviour {
 					if(hit.collider.tag == "Snap")
 					{
 						DropEggs ();
-
-
-
 					} else {
-
 						draggedObj.transform.position = tempObjPos;
 						//draggedObj.transform.SetParent (parent);
 					}
@@ -297,6 +261,8 @@ public class multiply : MonoBehaviour {
 			}
 			iNum += 10;
 		}
+
+		Manager.Instance.PlayDragDropAudio ();
 	}
 
 	public void SettingParent()
@@ -308,19 +274,14 @@ public class multiply : MonoBehaviour {
 		}
 	}
 
-	public void Reset()
+	public void ResetEggTray()
 	{
-//
-//		finalAnswer = "";
-//		for (int i = 0; i < eggTrays.Length; i++) {
-//			eggTrays[i].transform.GetChild (0).gameObject.SetActive (false);
-//		}
-//		dropCount = 0;
-//		iNum = 1;
-//		int i = -1;
-//		for (i = 0; i < answerText.Length; i++) {
-//			answerText [i].GetComponentInChildren<Text>().text = "";
-//		}
+		iNum = 1;
+		dropCount = 0;
+		answerText [0].GetComponentInChildren<Text>().text = "";
+		for (int i = 0; i < eggTrays.Length; i++) {
+			eggTrays[i].transform.GetChild (0).gameObject.SetActive (false);
+		}
 	}
 
 }

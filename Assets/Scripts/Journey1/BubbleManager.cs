@@ -59,7 +59,7 @@ public class BubbleManager : MonoBehaviour {
 		SpawnAndResetOptions ();
 	}
 
-	void PlayNumberAudio()
+	public void PlayNumberAudio()
 	{
 		Manager.Instance.PlayAudio (PlayerPrefs.GetString("Language") + question.options [Manager.Instance.questionNumber].answerClip);
 	}

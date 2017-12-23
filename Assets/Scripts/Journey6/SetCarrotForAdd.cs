@@ -26,6 +26,8 @@ public class SetCarrotForAdd : MonoBehaviour {
 	RaycastHit hit;
 
 	public AudioSource source;
+	public AudioSource carrotBite;
+
 	public AudioClip[] clips;
 	public string[] audios;
 
@@ -34,7 +36,7 @@ public class SetCarrotForAdd : MonoBehaviour {
 	string path;
 	// Use this for initialization
 	void Start () {
-		PlayerPrefs.SetString("Language", "Sounds/English/");	//Set only english language now
+		//PlayerPrefs.SetString("Language", "Sounds/English/");	//Set only english language now
 		cam = Camera.main;
 		CreateQuestions ();
 		if(addType == AdditionType.Simple){
@@ -200,6 +202,8 @@ public class SetCarrotForAdd : MonoBehaviour {
 			for (int i = 0; i < newCarrots.Count; i++) {
 				newCarrots[i].GetComponent<Animator>().SetTrigger("CarrotBite");
 			}
+				
+			carrotBite.Play ();
 		}
 	}
 

@@ -8,14 +8,15 @@ public class BlockGame : MonoBehaviour {
 	public Camera cam;
 
 	public GameObject[] numberBoxes;
-	public GameObject[] BlockSet1;
-	public GameObject[] BlockSet2;
+	public List<GameObject> BlockSet1 =  new List<GameObject>();
+	public List<GameObject> BlockSet2 = new List<GameObject>();
 	public GameObject[] BlockSet3;
 	public Transform[] snapPoints;
 
 
 	public List<int> randomNumBoxes = new List<int>();
 	public List<int> randomNeighNumBoxes = new List<int>();
+	public List<int> patternValues = new List<int>();
 
 	public int noOfNumberBoxes;
 	public int columns;
@@ -51,9 +52,9 @@ public class BlockGame : MonoBehaviour {
 		CreateSnapPointsGrid ();
 
 		cam = Camera.main;
-		Invoke("RemoveBlockSet1", 0.01f);
-		Invoke("RemoveBlockSet2", 0.01f);
-		//Invoke("RemoveBlockSet3", 0.01f);
+
+		StartCoroutine (RemoveBlockSet1 ());
+		//StartCoroutine (RemoveBlockSet2 ());
 	}
 
 	void Update () {
@@ -156,47 +157,51 @@ public class BlockGame : MonoBehaviour {
 		while (myList.Contains (val) || numberBoxes[val] == null) {
 			val = Random.Range (min, max);
 		}
-		myList.Add (val);
+		//myList.Add (val);
 		return val;
 	}
 
-	public void RemoveBlockSet1()
+	int numBoxesLength = 3;
+	IEnumerator RemoveBlockSet1()
 	{
-		randomNumberBoxIndex = UniqueRandomInt(randomNumBoxes, 1, 18);
-		tempIndex = randomNumberBoxIndex;
-
-		int numBoxesLength = Random.Range (2, 5);
-		BlockSet1 = new GameObject[numBoxesLength];
+		yield return new WaitForSeconds(0.01f);
+		tempIndex = UniqueRandomInt(randomNumBoxes, 1, 35);
+		int k = 0;
 
 		for (int i = 0; i < numBoxesLength; i++)
 		{
 			if (numberBoxes [tempIndex] != null) {
-				BlockSet1 [i] = numberBoxes [tempIndex];
+
+				int val = Random.Range(0, 4);
+				tempNeighTile = (numberBoxes [tempIndex].GetComponent<IndexValue> ().neighbouringTiles [val]);
+				while(tempNeighTile <= 0 || randomNumBoxes.Contains(tempNeighTile)) {
+					if (k > 10) {
+						break;
+					}
+
+					val = Random.Range(0, 4); 
+					tempNeighTile = (numberBoxes [tempIndex].GetComponent<IndexValue> ().neighbouringTiles [val]);
+					k++;
+				}
+
+				patternValues.Add (val);
+				randomNumBoxes.Add (tempIndex);
+				BlockSet1.Add (numberBoxes [tempIndex]);
 				numberBoxes [tempIndex].GetComponent<BoxCollider2D> ().enabled = true;
 				snapPoints [tempIndex].GetComponent<BoxCollider2D> ().enabled = true;
 				BlockSet1 [i].GetComponent<IndexValue> ().BlocksetNo = 1;
 
-				for (int j = 0; j < 4; j++) {
-					randomNeighbouringTile = Random.Range(0, 4);
-					tempNeighTile = numberBoxes [tempIndex].GetComponent<IndexValue> ().neighbouringTiles [randomNeighbouringTile];
-
-					if (tempNeighTile <= 0) {
-						continue;
-					} else if (tempNeighTile > 0) {
-						numberBoxes [tempIndex] = null;
-						tempIndex = tempNeighTile;
-						break;
-					}
+				if (tempNeighTile != 0) {
+					numberBoxes [tempIndex] = null;
+					tempIndex = tempNeighTile;
 				}
 
 			} else {
 				continue;
 			}
-
 		}
 
 		Vector3 tempPosition = spawnPoints [0].transform.position;
-		tempPosition.z -= 10;
 
 		parent = BlockSet1 [1].transform;
 		CheckBlockSet ();
@@ -205,97 +210,65 @@ public class BlockGame : MonoBehaviour {
 		parent = null;
 	}
 
-	public void RemoveBlockSet2()
+	IEnumerator RemoveBlockSet2()
 	{
-		randomNumberBoxIndex = UniqueRandomInt(randomNumBoxes, 18, 36);
-		tempIndex = randomNumberBoxIndex;
+		yield return new WaitForSeconds(0.15f);
 
-		int numBoxesLength = Random.Range (2, 5);
-		BlockSet2 = new GameObject[numBoxesLength];
+		tempIndex = UniqueRandomInt(randomNumBoxes, 1, 35);
 
-		for (int i = 0; i < numBoxesLength; i++)
-		{
-			if (numberBoxes [tempIndex] != null) {
-				BlockSet2 [i] = numberBoxes [tempIndex];
-				numberBoxes [tempIndex].GetComponent<BoxCollider2D> ().enabled = true;
-				snapPoints [tempIndex].GetComponent<BoxCollider2D> ().enabled = true;
-				BlockSet2 [i].GetComponent<IndexValue> ().BlocksetNo = 2;
 
-				for (int j = 0; j < 4; j++) {
-					randomNeighbouringTile = Random.Range (0, 4);
-					tempNeighTile = numberBoxes [tempIndex].GetComponent<IndexValue> ().neighbouringTiles [randomNeighbouringTile];
-
-					if (tempNeighTile <= 0 && numberBoxes [tempNeighTile] == null) {
-						continue;
-					} else if (tempNeighTile > 0 && numberBoxes [tempNeighTile] != null) {
-						numberBoxes [tempIndex] = null;
-						tempIndex = tempNeighTile;
-						break;
-					}
-				}
-
-			} else {
-				continue;
-			}
-
-		}
-
-		Vector3 tempPosition = spawnPoints [1].transform.position;
-		tempPosition.z -= 10;
-
-		parent = BlockSet2 [1].transform;
-		CheckBlockSet ();
-		parent.transform.localScale = reducedSize;
-		parent.transform.position = tempPosition;
-		parent = null;
-	}
-
-//	public void RemoveBlockSet3()
-//	{
-//		randomNumberBoxIndex = Random.Range (9, 27);
-//		tempIndex = randomNumberBoxIndex;
+//		int val = 0;
+//		int patternIndex = 0;
+//		int counter = 0;
 //
-//		if (numberBoxes [tempIndex] != null) {
-//			parent = numberBoxes [randomNumberBoxIndex].transform;
-//			for (int i = 0; i < 3; i++) {
-//				BlockSet3 [i] = numberBoxes [tempIndex];
-//				numberBoxes [tempIndex].transform.SetParent (parent);
-//				numberBoxes [tempIndex].GetComponent<BoxCollider2D> ().enabled = true;
-//				snapPoints [tempIndex].GetComponent<BoxCollider2D> ().enabled = true;
-//				randomNeighbouringTile = Random.Range (0, 4);
-//				 tempNeighTile = numberBoxes [tempIndex].GetComponent<IndexValue> ().neighbouringTiles [randomNeighbouringTile];
-//				numberBoxes [tempIndex] = null;
-//				if (tempNeighTile < 0) {
-//					randomNeighbouringTile = Random.Range (0, 4);
-//				} else {
-//					tempIndex = tempNeighTile;
+//		do
+//		{
+//			BlockSet2.Clear();
+//			patternIndex = 0;
+//			counter = 0;
+//
+//			tempIndex = UniqueRandomInt(randomNumBoxes, 22, 28);
+//
+//			for (int i = 0; i < numBoxesLength; i++)
+//			{
+//				if(numberBoxes [tempIndex] != null) 
+//				{
+//					val = patternValues[patternIndex];
+//					tempNeighTile = (numberBoxes [tempIndex].GetComponent<IndexValue> ().neighbouringTiles [val]);
+//
+//					if(randomNumBoxes.Contains(tempNeighTile) || tempNeighTile <= 0 || tempNeighTile == null || tempNeighTile == 0)
+//					{
+//						break;
+//					} else {
+//
+//						BlockSet2.Add (numberBoxes [tempIndex]);
+//						randomNumBoxes.Add (tempIndex);
+//						snapPoints [tempIndex].GetComponent<BoxCollider2D> ().enabled = true;
+//
+//						tempIndex = tempNeighTile;
+//
+//						patternIndex++;
+//						counter++;
+//					}
 //				}
 //			}
+//		} 
+//		while(counter <= 2);
 //
-//			parent.transform.position = spawnPoints [2].transform.position;
-//		} else {
-//			randomNumberBoxIndex = Random.Range (9, 27);
-//			tempIndex = randomNumberBoxIndex;
-//
-//		parent = numberBoxes [randomNumberBoxIndex].transform;
-//		for (int i = 0; i < 3; i++) {
-//			BlockSet3 [i] = numberBoxes [tempIndex];
-//			numberBoxes [tempIndex].transform.SetParent (parent);
-//			numberBoxes [tempIndex].GetComponent<BoxCollider2D> ().enabled = true;
-//			snapPoints [tempIndex].GetComponent<BoxCollider2D> ().enabled = true;
-//			randomNeighbouringTile = Random.Range (0, 4);
-//			tempNeighTile = numberBoxes [tempIndex].GetComponent<IndexValue> ().neighbouringTiles [randomNeighbouringTile];
-//			numberBoxes [tempIndex] = null;
-//			if (tempNeighTile < 0) {
-//				randomNeighbouringTile = Random.Range (0, 4);
-//			} else {
-//				tempIndex = tempNeighTile;
-//			}
+//		for (int i = 0; i < BlockSet1.Count; i++) {
+//			numberBoxes [BlockSet2 [i].GetComponent<IndexValue>().indexValue] = null;
+//			BlockSet2 [i].GetComponent<BoxCollider2D> ().enabled = true;
+//			BlockSet2 [i].GetComponent<IndexValue> ().BlocksetNo = 2;	
 //		}
 //
-//		parent.transform.position = spawnPoints [2].transform.position;
-//		}
-//	}
+//		Vector3 tempPosition = spawnPoints [2].transform.position;
+//
+//		parent = BlockSet2 [0].transform;
+//		CheckBlockSet ();
+//		parent.transform.localScale = reducedSize;
+//		parent.transform.position = tempPosition;
+//		parent = null;
+	}
 
 	public void DropAnswer(GameObject other)
 	{
@@ -305,7 +278,7 @@ public class BlockGame : MonoBehaviour {
 			{
 				if (draggedObject.GetComponent<IndexValue> ().BlocksetNo == 1)
 				{
-					for (int i = 0; i < BlockSet1.Length; i++) {
+					for (int i = 0; i < BlockSet1.Count; i++) {
 						if (BlockSet1 [i] != null) {
 							
 							int tempIndex = BlockSet1 [i].GetComponent<IndexValue> ().indexValue;
@@ -317,7 +290,7 @@ public class BlockGame : MonoBehaviour {
 					}
 							
 				} else if (draggedObject.GetComponent<IndexValue> ().BlocksetNo == 2) {
-					for (int i = 0; i < BlockSet2.Length; i++) {
+					for (int i = 0; i < BlockSet2.Count; i++) {
 						if (BlockSet2 [i] != null) {
 							BlockSet2 [i].GetComponent<BoxCollider2D> ().enabled = false;
 							int tempIndex = BlockSet2 [i].GetComponent<IndexValue> ().indexValue;
@@ -336,18 +309,20 @@ public class BlockGame : MonoBehaviour {
 				parent.transform.localScale = reducedSize;
 			}
 		}
+
+		Manager.Instance.PlayDragDropAudio();
 	}
 
 	public void CheckBlockSet()
 	{
 
 		if (parent.GetComponent<IndexValue> ().BlocksetNo == 1) {
-			for (int i = 0; i < BlockSet1.Length; i++) {
+			for (int i = 0; i < BlockSet1.Count; i++) {
 				if(BlockSet1 [i] != null)
 					BlockSet1 [i].transform.SetParent (parent);
 			}
 		} else if (parent.GetComponent<IndexValue> ().BlocksetNo == 2) {
-			for (int i = 0; i < BlockSet2.Length; i++) {
+			for (int i = 0; i < BlockSet2.Count; i++) {
 				if(BlockSet2 [i] != null)
 					BlockSet2 [i].transform.SetParent (parent);
 			}

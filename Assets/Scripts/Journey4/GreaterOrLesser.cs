@@ -35,6 +35,10 @@ public class GreaterOrLesser : MonoBehaviour {
 	public Animator ElephantAnime;
 	public Animator RatAnime;
 
+
+	public AudioSource elephantAudio;
+	public AudioSource ratAudio;
+
     // Use this for initialization
     void Start () {
         manager = GameObject.Find("Manager").GetComponent<Manager>();
@@ -127,6 +131,8 @@ public class GreaterOrLesser : MonoBehaviour {
         draggedObj.gameObject.GetComponent<OriginalPos>().indexValue = dropCount;
         finalAnswerNumbers[dropCount] = draggedObj.gameObject.GetComponentInChildren<TextMesh>().text;
         draggedObj.gameObject.GetComponent<OriginalPos>().isSnapped = true;
+
+		manager.PlayDragDropAudio ();
     }
 
     public void ResetAnswer()

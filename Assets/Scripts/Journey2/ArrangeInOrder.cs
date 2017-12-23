@@ -54,7 +54,7 @@ public class ArrangeInOrder : MonoBehaviour {
 	{
 		if (diff == Difficulty.Grade1) {
 			
-			noOfOptions = 3;
+			//noOfOptions = 3;
 			firstNumber = 1;
 			answer = new string[questionSpawnPoints.Length];
 
@@ -72,7 +72,7 @@ public class ArrangeInOrder : MonoBehaviour {
 			}
 		} else if (diff == Difficulty.Grade2) {
 			
-			noOfOptions = 4;
+			//noOfOptions = 4;
 			firstNumber = Random.Range (10, 91);
 			answer = new string[questionSpawnPoints.Length];
 
@@ -91,7 +91,7 @@ public class ArrangeInOrder : MonoBehaviour {
 			}
 		} else if (diff == Difficulty.Grade3) {
 			
-			noOfOptions = 5;
+			//noOfOptions = 5;
 			firstNumber = Random.Range(100, 991);
 			answer = new string[questionSpawnPoints.Length];
 
@@ -251,6 +251,8 @@ public class ArrangeInOrder : MonoBehaviour {
 		draggedObj.GetComponent<OriginalPos> ().isSnapped = true;
 		draggedObj.GetComponent<OriginalPos> ().indexValue = tempIndex;
 		caterpillarBodies [tempIndex] = draggedObj.gameObject;
+
+		Manager.Instance.PlayDragDropAudio ();
 	}
 
 
@@ -287,6 +289,19 @@ public class ArrangeInOrder : MonoBehaviour {
 		if (draggedObj.GetComponent<OriginalPos> ().isSnapped) {
 			draggedObj.GetComponent<OriginalPos> ().isSnapped = false;
 			caterpillarBodies [tempIndex] = null;
+		}
+	}
+
+	public void ResetOptions(){
+		for (int i = 0; i < answer.Length; i++)
+		{
+			if(caterpillarBodies [i] == null){
+				continue;
+			} else if (caterpillarBodies [i].GetComponent<OriginalPos> ().isSnapped) {
+				caterpillarBodies [i].transform.position = caterpillarBodies [i].gameObject.GetComponent<OriginalPos> ().originalPos;
+				caterpillarBodies [i].GetComponent<OriginalPos>().isSnapped = false;
+				caterpillarBodies [i] = null;
+			}
 		}
 	}
 }

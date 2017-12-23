@@ -253,6 +253,8 @@ public class BeforeNAfter : MonoBehaviour {
 		draggedObj.GetComponent<OriginalPos> ().isSnapped = true;
 		draggedObj.GetComponent<OriginalPos> ().indexValue = tempIndex;
 		caterpillarBodies [tempIndex] = draggedObj.gameObject;
+
+		Manager.Instance.PlayDragDropAudio ();
 	}
 
 	public void ResetAnswer ()

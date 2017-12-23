@@ -292,6 +292,7 @@ public class DrawGrid : MonoBehaviour {
 			}
 		}
 
+		Manager.Instance.PlayDragDropAudio ();
 
 	}
 //

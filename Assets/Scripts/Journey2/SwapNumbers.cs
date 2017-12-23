@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class SwapNumbers : MonoBehaviour {
 
-	public Manager manager;
-	public Animator animator;
-	public GameObject[] numberArray;
-	public GameObject[] answerArray;
+	public enum Difficulty {Grade1, Grade2, Grade3};
+	public Difficulty diff;
 
-	public GameObject[] options;
+	public Manager manager;
+
+	public Animator animator;
+
+	public GameObject[] caterpillarBodies;
+	public GameObject[] optionSpawn;
+	public Transform[] snapPoints;
+	public string[] answerArray;
+	public string[] newAnswerArray;
+
+	public List<int> usedRandomNumbers = new List<int>();
 
 	public int answerCounter;
-	public Transform[] snapPoints;
 
 	public Transform draggedObj;
 	public Camera cam;
@@ -20,10 +27,7 @@ public class SwapNumbers : MonoBehaviour {
 	RaycastHit hit;
 	public bool isSwap;
 
-
-	public GameObject[] caterpillarBodies;
-
-	public string[] newAnswerArray;
+	public int noOfOptions;
 	public int newAnswerArrayIndex;
 	public bool dropFlag;
 	public bool arrangeInOrder;
@@ -32,69 +36,107 @@ public class SwapNumbers : MonoBehaviour {
 
 	public bool ansClicked;
 
-	// Use this for initialization
+	public int firstNumber;
+
 	void Start () {
 		manager = GameObject.Find ("Manager").GetComponent<Manager>();
 		cam = Camera.main;
+
 		ShuffleOptionsPositions ();
+		CreateQuestions ();
+
 		animator.SetTrigger ("Missing");
-		//draggedObj = null;
-//		if(isSwap)
-//		{
-//			ShuffleNumberArray ();
-//			SpawnObjects ();
-//		}
+
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
 		
 		if(!manager.isGameComplete)
 			DragObject ();
 
-		if (arrangeInOrder)
-			ArrangeInOrder ();
-		else
-			//dropFlag = false;
-			Arrange();
+//		if (arrangeInOrder)
+//			ArrangeInOrder ();
+//		else
+//			Arrange();
 
 	}
 
-	public void ShuffleNumberArray() 
+	public int UniqueRandomInt(int min, int max)
 	{
-		if (numberArray.Length > 0) {
-			for (int i = 0; i < numberArray.Length; i++) {
-				GameObject temp = numberArray [i];
-				int r = Random.Range (i, numberArray.Length);
-				numberArray [i] = numberArray [r];
-				numberArray [r] = temp;
+		int val = Random.Range (min, max);
+
+		while (usedRandomNumbers.Contains (val)) {
+			val = Random.Range (min, max);
+		}
+
+		usedRandomNumbers.Add (val);
+		return val;
+	}
+
+	public void CreateQuestions()
+	{
+		if (diff == Difficulty.Grade1) {
+			firstNumber = Random.Range (1, 15);
+			answerArray = new string[noOfOptions];
+
+			for (int i = 0; i <= noOfOptions - 1; i++) {
+				answerArray [i] = firstNumber.ToString ();
+				snapPoints [i].GetComponent<SnapIndexValue> ().indexValue = i;
+
+				Vector3 tempPosition = optionSpawn [i].transform.position;
+				tempPosition.z -= 0.001f;
+				caterpillarBodies [i].transform.position = tempPosition;
+
+				caterpillarBodies [i].GetComponent<OriginalPos> ().indexValue = i;
+				caterpillarBodies [i].GetComponentInChildren<TextMesh> ().text = firstNumber.ToString ();
+				caterpillarBodies [i].GetComponentInChildren<TextMesh> ().fontSize = 50;
+				firstNumber++;
+			}
+		} else if (diff == Difficulty.Grade2) {
+			firstNumber = Random.Range (20, 96);
+			answerArray = new string[noOfOptions];
+
+			for (int i = 0; i <= noOfOptions - 1; i++) {
+				answerArray [i] = firstNumber.ToString ();
+				snapPoints [i].GetComponent<SnapIndexValue> ().indexValue = i;
+
+				Vector3 tempPosition = optionSpawn [i].transform.position;
+				tempPosition.z -= 0.001f;
+				caterpillarBodies [i].transform.position = tempPosition;
+
+				caterpillarBodies [i].GetComponent<OriginalPos> ().indexValue = i;
+				caterpillarBodies [i].GetComponentInChildren<TextMesh> ().text = firstNumber.ToString ();
+				caterpillarBodies [i].GetComponentInChildren<TextMesh> ().fontSize = 40;
+				firstNumber++;
+			}
+		} else if (diff == Difficulty.Grade3) {
+			firstNumber = Random.Range (100, 996);
+			answerArray = new string[noOfOptions];
+
+			for (int i = 0; i <= noOfOptions - 1; i++) {
+				answerArray [i] = firstNumber.ToString ();
+				snapPoints [i].GetComponent<SnapIndexValue> ().indexValue = i;
+
+				Vector3 tempPosition = optionSpawn [i].transform.position;
+				tempPosition.z -= 0.001f;
+				caterpillarBodies [i].transform.position = tempPosition;
+
+				caterpillarBodies [i].GetComponent<OriginalPos> ().indexValue = i;
+				caterpillarBodies [i].GetComponentInChildren<TextMesh> ().text = firstNumber.ToString ();
+				caterpillarBodies [i].GetComponentInChildren<TextMesh> ().fontSize = 30;
+				firstNumber++;
 			}
 		}
-	}
+	} 
 
 	public void ShuffleOptionsPositions() 
 	{
-		if (options.Length > 0) {
-			for (int i = 0; i < options.Length; i++) {
-				Vector3 temp = options [i].transform.position;
-				int r = Random.Range (i, options.Length);
-				options [i].transform.position = options [r].transform.position;
-				options [i].GetComponent<OriginalPos> ().originalPos = options [i].transform.position;
-				options [r].transform.position = temp;
-				options [r].GetComponent<OriginalPos> ().originalPos = options [r].transform.position;
-			}
-		}
-	}
-
-	public void SpawnObjects()
-	{
-		for (int i = 0; i < numberArray.Length; i++) {
-			Vector3 tempPos = snapPoints [i].position;
-//			GameObject obj = (GameObject)Instantiate (numberArray[i], tempPos, Quaternion.identity);
-			numberArray[i].transform.position = tempPos;
-			numberArray [i].gameObject.GetComponent<OriginalPos> ().indexValue = i;
-			numberArray [i].SetActive (true);
-
+		for (int i = 0; i < optionSpawn.Length; i++)
+		{
+			GameObject temp = optionSpawn [i];
+			int r = Random.Range (i, optionSpawn.Length);
+			optionSpawn [i] = optionSpawn [r];
+			optionSpawn [r] = temp;
 		}
 	}
 
@@ -108,15 +150,13 @@ public class SwapNumbers : MonoBehaviour {
 			{
 				if(Physics.Raycast(ray, out hit, Mathf.Infinity)  && hit.collider.tag == "DraggableObject")
 				{
-					
 					draggedObj = hit.transform;
 
 					if (!draggedObj.GetComponent<OriginalPos> ().isSnapped) {
 						draggedObj.GetComponent<OriginalPos> ().originalPos = hit.transform.position;
 
 					}
-						
-					
+
 					hit.transform.GetComponent<BoxCollider>().enabled = false;
 					offset = draggedObj.position - ray.origin;
 					ResetAnswer ();
@@ -144,17 +184,6 @@ public class SwapNumbers : MonoBehaviour {
 							draggedObj.transform.position = draggedObj.gameObject.GetComponent<OriginalPos> ().originalPos;
 						
 					} 
-					else {
-						if ((!draggedObj.gameObject.GetComponent<OriginalPos> ().isSnapped)) {
-							if (hit.collider.tag == "Snap") {
-								DropAnswer (hit.collider.gameObject);
-							} else {
-								draggedObj.transform.position = draggedObj.gameObject.GetComponent<OriginalPos> ().originalPos;
-							}
-						} else {
-							draggedObj.transform.position = draggedObj.gameObject.GetComponent<OriginalPos> ().originalPos;
-						}
-					}
 				}
 			}
 
@@ -168,46 +197,16 @@ public class SwapNumbers : MonoBehaviour {
 
 	public void SwapNumber(GameObject other)
 	{
-//		Vector3 temp = draggedObj.gameObject.GetComponent<OriginalPos> ().originalPos;
-//		draggedObj.gameObject.GetComponent<OriginalPos> ().originalPos = other.gameObject.GetComponent<OriginalPos> ().originalPos;
-//		draggedObj.transform.position = other.gameObject.GetComponent<OriginalPos> ().originalPos;
-//		other.gameObject.GetComponent<OriginalPos> ().originalPos = temp;
-//		other.transform.position = temp;
-//
-//		GameObject tempObj = numberArray[draggedObj.gameObject.GetComponent<OriginalPos> ().indexValue];
-//		numberArray[draggedObj.gameObject.GetComponent<OriginalPos> ().indexValue] = numberArray[other.gameObject.GetComponent<OriginalPos> ().indexValue];
-//		numberArray[other.gameObject.GetComponent<OriginalPos> ().indexValue] = tempObj;
-//
-//		int tempValue = draggedObj.gameObject.GetComponent<OriginalPos> ().indexValue;
-//		draggedObj.gameObject.GetComponent<OriginalPos> ().indexValue = other.gameObject.GetComponent<OriginalPos> ().indexValue;
-//		other.gameObject.GetComponent<OriginalPos> ().indexValue = tempValue;
-
 		Vector3 temp = other.gameObject.transform.position;
 		temp.z -= 1f;
-		//temp.y -= 0.055f;
 		draggedObj.transform.position = temp;
 
 		int tempIndex = int.Parse(other.gameObject.name); 
-		//print (tempIndex);
 		newAnswerArray [tempIndex] = draggedObj.GetComponentInChildren<TextMesh> ().text;
 		draggedObj.gameObject.GetComponent<OriginalPos> ().indexValue = tempIndex;
 		draggedObj.gameObject.GetComponent<OriginalPos> ().isSnapped = true;
 
-	}
-
-	public void DropAnswer (GameObject other)
-	{
-		Vector3 temp = other.gameObject.transform.position;
-		temp.z -= 1f;
-		//temp.y -= 10f;
-		draggedObj.transform.position = temp;
-		other.gameObject.GetComponentInChildren<TextMesh> ().text = draggedObj.GetComponentInChildren<TextMesh> ().text;
-		other.gameObject.GetComponentInChildren<TextMesh> ().characterSize = 0;
-		//draggedObj.GetChild (1).gameObject.SetActive (false);
-		draggedObj.gameObject.GetComponent<OriginalPos> ().snappedObject = other.gameObject;
-		draggedObj.gameObject.GetComponent<OriginalPos> ().isSnapped = true;
-
-		//draggedObj.gameObject.SetActive (false);
+		manager.PlayDragDropAudio ();
 	}
 
 	public void ResetAnswer()
@@ -222,7 +221,7 @@ public class SwapNumbers : MonoBehaviour {
 			if (draggedObj != null && draggedObj.gameObject.GetComponent<OriginalPos> ().isSnapped) {
 				int tempIndex = draggedObj.gameObject.GetComponent<OriginalPos> ().indexValue;
 				newAnswerArray [tempIndex] = "";
-				snapPoints [previousSnapIndex].GetComponent<BoxCollider> ().enabled = false;
+				//snapPoints [previousSnapIndex].GetComponent<BoxCollider> ().enabled = false;
 				draggedObj.gameObject.GetComponent<OriginalPos> ().indexValue = 0;
 				draggedObj.gameObject.GetComponent<OriginalPos> ().isSnapped = false;
 			}
@@ -258,6 +257,21 @@ public class SwapNumbers : MonoBehaviour {
 				snapPoints [i].GetComponent<BoxCollider> ().enabled = true;
 				previousSnapIndex = i;
 				break;
+			}
+		}
+	}
+
+	public void ResetOptions() {
+		for (int i = 0; i < answerArray.Length; i++)
+		{
+			newAnswerArray [i] = "";
+
+			if(answerArray [i] == null){
+				continue;
+			} else if (caterpillarBodies [i].GetComponent<OriginalPos> ().isSnapped) {
+				caterpillarBodies [i].transform.position = caterpillarBodies [i].gameObject.GetComponent<OriginalPos> ().originalPos;
+				caterpillarBodies [i].GetComponent<OriginalPos> ().isSnapped = false;
+				//answerArray [i] = null;
 			}
 		}
 	}

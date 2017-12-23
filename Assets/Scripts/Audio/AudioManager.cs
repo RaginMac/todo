@@ -13,6 +13,11 @@ public class AudioManager : MonoBehaviour {
 	public string baseURL = "Sounds/";
 	public string finalAudioPath;
 	public AudioSource source;
+	public AudioSource source2;
+
+	public AudioClip bubbles;
+	public AudioClip rabbit; 
+
 	public string sound;
 
 	[SerializeField]
@@ -27,10 +32,23 @@ public class AudioManager : MonoBehaviour {
 	}
 
 	void Start()
-	{}
+	{
+		if (bubbles != null) {
+			source2.clip = bubbles;
+			InvokeRepeating ("PlayBubbleAudio", 2f, 10f);
+		}
+
+		if (rabbit != null) {
+			if (!source.isPlaying) {
+				source2.clip = rabbit;
+			}
+			InvokeRepeating ("PlayRabbitAudio", 2f, 10f);
+		}
+	}
 
 	void Update()
 	{
+		
 	}
 
 	public void SetAudioURL(string whichLanguage = "English")
@@ -48,7 +66,9 @@ public class AudioManager : MonoBehaviour {
 		source.clip = Resources.Load(path+ sound) as AudioClip;
 		clip = source.clip;
 		source.Play();
-		Invoke("ClearSource", source.clip.length);
+		if (source.clip != null) {
+			Invoke ("ClearSource", source.clip.length);
+		}
 	}
 
 	public void ClearSource()
@@ -56,16 +76,16 @@ public class AudioManager : MonoBehaviour {
 		source.clip = null;
 	}
 
-	void CheckIfClipEnded()
-	{
-		float progress = Mathf.Clamp01(source.time/source.clip.length);
-
-		if(progress==1)
-		{
-			print("Clip has ended");
-		}
-	}
-
+//	void CheckIfClipEnded()
+//	{
+//		float progress = Mathf.Clamp01(source.time/source.clip.length);
+//
+//		if(progress==1)
+//		{
+//			print("Clip has ended");
+//		}
+//	}
+//
 	public void PlayAudioAgain()
 	{
 		if(repeatQuestion && !source.isPlaying)
@@ -73,6 +93,19 @@ public class AudioManager : MonoBehaviour {
 			source.clip = clip;
 			source.Play();
 		}
+
+		Manager.Instance.PlayClickAudio ();
 	}
 
+	void PlayBubbleAudio()
+	{
+		print ("bubbles");
+//		source2.clip = Manager.Instance.bubblesAudio;
+		source2.Play ();
+	}
+
+	void PlayRabbitAudio()
+	{
+		source2.Play ();
+	}
 }

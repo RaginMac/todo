@@ -82,13 +82,15 @@ public class DragObjects : MonoBehaviour {
 						}
 					}
 					else {
+						manager.PlayDragDropAudio ();
+
 						draggedObj.position = basketSnapPoints[snapIndex].transform.position;
 						//draggedObj.transform.SetParent(basket.transform);
 						placedMangoes.Add(draggedObj.transform);
 						numberOfMangoes++;
 						snapIndex++;
 						checkAnswer.SetActive (true);
-
+					
 						//print(numberOfMangoes);
 					}
 				}

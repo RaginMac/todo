@@ -22,7 +22,8 @@ public class DivideCarrots : MonoBehaviour {
 	public GameObject draggedObject,keypad;
 	public Camera cam;
 	public Vector3 offset;
-
+	public AudioSource source;
+	public AudioClip carrotBite;
 
 	[SerializeField]
 	int dropIndex = -1;
@@ -30,7 +31,7 @@ public class DivideCarrots : MonoBehaviour {
 	int noOfRabbits = 0;
 
 	bool readyToMove = false;
-
+	public Keypad keys;
 
 
 
@@ -44,6 +45,7 @@ public class DivideCarrots : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		keys = keypad.GetComponent<Keypad> ();
 		thoughtBubble.SetBool("Think", true);
 
 		number1 = GetDividend(randomNumbers);
@@ -65,7 +67,9 @@ public class DivideCarrots : MonoBehaviour {
 			MoveRabbit();
 		}
 
-		DragObject2D();
+		if (!Manager.Instance.isGameComplete && !keys.show) {
+			DragObject2D ();
+		}
 	}
 
 	int FindRandomNumber(int n1, int n2)
@@ -120,6 +124,8 @@ public class DivideCarrots : MonoBehaviour {
 
 	public void ResetAnimation()
 	{
+		source.clip = carrotBite;
+		source.Play ();
 		thoughtBubble.SetBool("Think", false);
 		Invoke("SetMoveStatus", 0.8f);
 	}
@@ -128,6 +134,7 @@ public class DivideCarrots : MonoBehaviour {
 	{
 		readyToMove = true;
 		activeRabbit.GetComponent<PlayAnimFromRabbit>().PlayRunAnimation(true);
+
 	}
 
 	void SetNextTargetPosition()
@@ -168,7 +175,7 @@ public class DivideCarrots : MonoBehaviour {
 			{
 				RaycastHit2D hit = Physics2D.Raycast (ray.origin, ray.direction, 100f);
 
-				if (hit != null && hit.collider!=null && hit.collider.tag == "DraggableObject")
+				if (hit.collider!=null && hit.collider.tag == "DraggableObject")
 				{
 					print(hit.collider.tag);
 					draggedObject = hit.transform.gameObject;
@@ -206,6 +213,7 @@ public class DivideCarrots : MonoBehaviour {
 
 	void DropObjects(Transform hit, Transform drag)
 	{
+		Manager.Instance.PlayDragDropAudio ();
 		drag.position = drag.gameObject.GetComponent<OriginalPos> ().originalPos;
 		if(dropIndex<number2-1)
 		{
@@ -227,6 +235,7 @@ public class DivideCarrots : MonoBehaviour {
 	public void ResetKeypad()
 	{
 		keypad.GetComponent<Animator>().SetBool("KeypadShow", false);
+		keypad.GetComponent<Keypad> ().keypadBG.SetActive (false);
 	}
 }
 

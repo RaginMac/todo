@@ -71,8 +71,6 @@ public class MulByRepeatedAdd : MonoBehaviour {
 		Invoke("ScrollAnimation",0.5f);
 		CreateQuestion ();
 		CreateAppleSets ();
-
-
 	}
 	
 	// Update is called once per frame
@@ -86,16 +84,18 @@ public class MulByRepeatedAdd : MonoBehaviour {
 			}
 		}
 
-		if(g11_2){
-			playerAns = collide1.GetComponent<ScrollValues> ().contentName + collide2.GetComponent<ScrollValues> ().contentName;
-		} else {
+		//if(g11_2){
+			//playerAns = collide1.GetComponent<ScrollValues> ().contentName + collide2.GetComponent<ScrollValues> ().contentName;
+		//} else {
 			playerAns = answerText.text;
-		}
+		//}
 	}
 
 	public void ResetKeypad()
 	{
-		keypad.GetComponent<Animator>().SetBool("KeypadShow", false);
+		if (keypad != null) {
+			keypad.GetComponent<Animator> ().SetBool ("KeypadShow", false);
+		}
 	}
 
 	public void CreateQuestion()
@@ -282,6 +282,8 @@ public class MulByRepeatedAdd : MonoBehaviour {
 				{
 					if(hit.collider.tag == "Snap")
 					{
+						Manager.Instance.PlayDragDropAudio ();
+
 						Vector3 tempPos = hit.transform.position;
 						tempPos.z -= 1f;
 						draggedObj.transform.position = tempPos;
