@@ -71,8 +71,6 @@ public class MulByRepeatedAdd : MonoBehaviour {
 		Invoke("ScrollAnimation",0.5f);
 		CreateQuestion ();
 		CreateAppleSets ();
-
-
 	}
 	
 	// Update is called once per frame
@@ -86,11 +84,11 @@ public class MulByRepeatedAdd : MonoBehaviour {
 			}
 		}
 
-		if(g11_2){
-			playerAns = collide1.GetComponent<ScrollValues> ().contentName + collide2.GetComponent<ScrollValues> ().contentName;
-		} else {
+		//if(g11_2){
+			//playerAns = collide1.GetComponent<ScrollValues> ().contentName + collide2.GetComponent<ScrollValues> ().contentName;
+		//} else {
 			playerAns = answerText.text;
-		}
+		//}
 	}
 
 	public void ResetKeypad()

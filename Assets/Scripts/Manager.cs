@@ -287,8 +287,7 @@ public class Manager : MonoBehaviour {
 			questionArray[questionNumber].GetComponent<SwapNumbers>().answerCounter = 0;
 
 			for (int i = 0; i < questionArray[questionNumber].GetComponent<SwapNumbers>().answerArray.Length; i++) {
-				//print (questionArray [questionNumber].GetComponent<SwapNumbers> ().answerArray [i].GetComponentInChildren<TextMesh>().text);
-				if (questionArray[questionNumber].GetComponent<SwapNumbers>().answerArray[i].GetComponentInChildren<TextMesh>().text == questionArray[questionNumber].GetComponent<SwapNumbers>().newAnswerArray[i]) {
+				if (questionArray[questionNumber].GetComponent<SwapNumbers>().answerArray[i] == questionArray[questionNumber].GetComponent<SwapNumbers>().newAnswerArray[i]) {
 					questionArray[questionNumber].GetComponent<SwapNumbers>().answerCounter++;
 				}
 				else {
@@ -296,21 +295,19 @@ public class Manager : MonoBehaviour {
 				}
 			}
 
-			if (questionArray[questionNumber].GetComponent<SwapNumbers>().answerCounter == questionArray[questionNumber].GetComponent<SwapNumbers>().answerArray.Length) {
-				//print ("Correct");
+			if (questionArray[questionNumber].GetComponent<SwapNumbers>().answerCounter == questionArray[questionNumber].GetComponent<SwapNumbers>().answerArray.Length) 
+			{
 				questionArray[questionNumber].GetComponent<SwapNumbers>().animator.SetTrigger("HappyCat");
 				CountQuestionsAnswered(true);
 				questionArray[questionNumber].GetComponent<SwapNumbers>().ansClicked = true;
 				Invoke("NextQuestion", 2.5f);
 
 			} else {
-				//print ("Wrong");
 				questionArray[questionNumber].GetComponent<SwapNumbers>().animator.SetTrigger("SadCat");
 				CountQuestionsAnswered(false);
 				questionArray [questionNumber].GetComponent<SwapNumbers> ().ResetOptions ();
 
 				if (countWrongAnswer) {
-					// CountQuestionsAnswered(false);
 					questionArray[questionNumber].GetComponent<SwapNumbers>().ansClicked = true;
 					Invoke("NextQuestion", 2.5f);
 				}
@@ -600,6 +597,10 @@ public class Manager : MonoBehaviour {
 				CountQuestionsAnswered(true);
 				questionArray [questionNumber].GetComponent<GreaterOrLesser> ().ElephantAnime.SetTrigger ("ElephantHappy");
 				questionArray [questionNumber].GetComponent<GreaterOrLesser> ().RatAnime.SetTrigger ("Rat_Happy");
+
+				questionArray [questionNumber].GetComponent<GreaterOrLesser> ().elephantAudio.Play ();
+				questionArray [questionNumber].GetComponent<GreaterOrLesser> ().ratAudio.Play ();
+
 				Invoke ("NextQuestion", 2.5f);
 			}
 			else
@@ -636,6 +637,10 @@ public class Manager : MonoBehaviour {
 				CountQuestionsAnswered(true);
 				questionArray [questionNumber].GetComponent<GreaterOrLesser_2> ().ElephantAnime.SetTrigger ("ElephantHappy");
 				questionArray [questionNumber].GetComponent<GreaterOrLesser_2> ().RatAnime.SetTrigger ("Rat_Happy");
+
+				questionArray [questionNumber].GetComponent<GreaterOrLesser_2> ().elephantAudio.Play ();
+				questionArray [questionNumber].GetComponent<GreaterOrLesser_2> ().ratAudio.Play ();
+
 				Invoke ("NextQuestion", 2.5f);
 			}
 			else
@@ -1020,7 +1025,7 @@ public class Manager : MonoBehaviour {
 			CountQuestionsAnswered (false);
 			//wrongAns.Play();
 			questionArray [questionNumber].GetComponent<multiply> ().anime.SetTrigger ("CalculatorShake");
-			questionArray [questionNumber].GetComponent<multiply> ().Reset ();
+			questionArray [questionNumber].GetComponent<multiply> ().ResetEggTray ();
 		}
 
 	}
@@ -1063,6 +1068,7 @@ public class Manager : MonoBehaviour {
 		{
 			questionArray [questionNumber].GetComponent<multiply> ().CreateEggTrayGrid ();
 			questionArray [questionNumber].GetComponent<multiply> ().moveCalci.SetTrigger ("Move");
+			questionArray [questionNumber].GetComponent<multiply> ().hintbutton.SetTrigger ("StopGlow");
 			questionArray [questionNumber].GetComponent<multiply> ().eggTrayObj.SetActive (true);
 			questionArray [questionNumber].GetComponent<multiply> ().hintPressed = true;
 		}
@@ -1072,8 +1078,6 @@ public class Manager : MonoBehaviour {
 
 
 	//j16.1
-
-
 	public void CheckCarrotDivision()
 	{
 		DivideCarrots carrotDivQuestion =  questionArray[questionNumber].GetComponent<DivideCarrots>();

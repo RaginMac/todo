@@ -347,7 +347,7 @@ public class MultiplicationGrid : MonoBehaviour {
 
 	IEnumerator RemoveBlockSet3()
 	{
-		yield return new WaitForSeconds(0.15f);
+		yield return new WaitForSeconds(0.2f);
 		int val = 0;
 		int patternIndex = 0;
 		int counter = 0;
@@ -388,7 +388,7 @@ public class MultiplicationGrid : MonoBehaviour {
 		while(counter <= 3);
 
 		for (int i = 0; i < BlockSet1.Count; i++) {
-			numberBoxes [BlockSet2 [i].GetComponent<GridIndexValue>().indexValue] = null;
+			numberBoxes [BlockSet3 [i].GetComponent<GridIndexValue>().indexValue] = null;
 			BlockSet3 [i].GetComponent<BoxCollider2D> ().enabled = true;
 			BlockSet3 [i].GetComponent<GridIndexValue> ().BlocksetNo = 3;	
 		}
@@ -452,7 +452,7 @@ public class MultiplicationGrid : MonoBehaviour {
 				draggedObject.transform.position = originalObjPos;
 				draggedObject.gameObject.GetComponent<BoxCollider2D> ().enabled = true;
 				parent.transform.localScale = reducedSize;
-				Manager.Instance.PlayWrongSound ();
+			//	Manager.Instance.PlayWrongSound ();
 			}
 		}
 	}

@@ -39,6 +39,9 @@ public class AudioManager : MonoBehaviour {
 		}
 
 		if (rabbit != null) {
+			if (!source.isPlaying) {
+				source2.clip = rabbit;
+			}
 			InvokeRepeating ("PlayRabbitAudio", 2f, 10f);
 		}
 	}
@@ -73,16 +76,16 @@ public class AudioManager : MonoBehaviour {
 		source.clip = null;
 	}
 
-	void CheckIfClipEnded()
-	{
-		float progress = Mathf.Clamp01(source.time/source.clip.length);
-
-		if(progress==1)
-		{
-			print("Clip has ended");
-		}
-	}
-
+//	void CheckIfClipEnded()
+//	{
+//		float progress = Mathf.Clamp01(source.time/source.clip.length);
+//
+//		if(progress==1)
+//		{
+//			print("Clip has ended");
+//		}
+//	}
+//
 	public void PlayAudioAgain()
 	{
 		if(repeatQuestion && !source.isPlaying)
@@ -103,7 +106,6 @@ public class AudioManager : MonoBehaviour {
 
 	void PlayRabbitAudio()
 	{
-		source2.clip = rabbit;
 		source2.Play ();
 	}
 }

@@ -21,6 +21,8 @@ public class FishDrop : MonoBehaviour {	//j15
 	public Image checkButton;
 	public GameObject remainderArea;
 
+	public Vector3[] rotations;
+
 	// Use this for initialization
 	void Start () {
 		GameObject.Find("Keypad").GetComponent<KeyPadShow>().isPlaying = 0;
@@ -63,6 +65,7 @@ public class FishDrop : MonoBehaviour {	//j15
 			answer = noToSpawn/3;
 		}
 		for (int i = 0; i < noToSpawn; i++) {
+			spawnPoints [i].rotation = Quaternion.Euler (rotations[Random.Range(0,rotations.Length)]);
 			spawnPoints[i].gameObject.SetActive(true);
 		}
 	}
@@ -121,6 +124,7 @@ public class FishDrop : MonoBehaviour {	//j15
 	}
 
 	void DropObjects(Transform hit, Transform drag){
+		Manager.Instance.PlayDragDropAudio ();
 		dropIndex++;
 		drag.transform.position = drag.gameObject.GetComponent<OriginalPos> ().originalPos;
 		drag.gameObject.SetActive(false);

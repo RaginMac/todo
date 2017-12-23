@@ -36,8 +36,10 @@ public class multiply : MonoBehaviour {
 	RaycastHit hit;
 
 	public bool Arrange;
+
 	public Animator anime;
 	public Animator moveCalci;
+	public Animator hintbutton;
 
 	public bool hintPressed;
 
@@ -56,8 +58,8 @@ public class multiply : MonoBehaviour {
 			eggTrayObj.SetActive (false);
 		}
 
-		if(anime == null)
-			anime = this.GetComponent<Animator> ();
+		if(moveCalci == null)
+			moveCalci = this.GetComponent<Animator> ();
 	}
 	
 	// Update is called once per frame
@@ -222,11 +224,7 @@ public class multiply : MonoBehaviour {
 					if(hit.collider.tag == "Snap")
 					{
 						DropEggs ();
-
-
-
 					} else {
-
 						draggedObj.transform.position = tempObjPos;
 						//draggedObj.transform.SetParent (parent);
 					}
@@ -276,19 +274,14 @@ public class multiply : MonoBehaviour {
 		}
 	}
 
-	public void Reset()
+	public void ResetEggTray()
 	{
-//
-//		finalAnswer = "";
-//		for (int i = 0; i < eggTrays.Length; i++) {
-//			eggTrays[i].transform.GetChild (0).gameObject.SetActive (false);
-//		}
-//		dropCount = 0;
-//		iNum = 1;
-//		int i = -1;
-//		for (i = 0; i < answerText.Length; i++) {
-//			answerText [i].GetComponentInChildren<Text>().text = "";
-//		}
+		iNum = 1;
+		dropCount = 0;
+		answerText [0].GetComponentInChildren<Text>().text = "";
+		for (int i = 0; i < eggTrays.Length; i++) {
+			eggTrays[i].transform.GetChild (0).gameObject.SetActive (false);
+		}
 	}
 
 }

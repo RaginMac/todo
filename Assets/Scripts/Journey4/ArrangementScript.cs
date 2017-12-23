@@ -125,6 +125,7 @@ public class ArrangementScript : MonoBehaviour {
 	{
 		for (int i = 0; i < spawnPoints.Length; i++) {
 			Vector3 tempPos = spawnPoints [i].position;
+			tempPos.z -= 0.001f;
 			optionTexts [i].GetComponentInParent<BoxCollider> ().transform.position = tempPos;
 		}
 	}

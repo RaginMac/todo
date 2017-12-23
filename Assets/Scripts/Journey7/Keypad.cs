@@ -7,11 +7,14 @@ public class Keypad : MonoBehaviour {
 	public TextMesh answerArea;
 	public Text inputArea;
 	public Manager manager;
-
+	public GameObject keypadBG;
 	public Text[] allInputAreas;
+
+	public bool show = false;
 
 	public void SetText(string input) 
 	{
+		manager.PlayClickAudio ();
 		if(answerArea!=null) {
 			answerArea.text = input;
 		}else if(inputArea!=null){
@@ -34,6 +37,7 @@ public class Keypad : MonoBehaviour {
 
 	public void  Erase()
 	{
+		manager.PlayClickAudio ();
 		//print ("Erase");
 		if(inputArea != null)
 			inputArea.text = "";
@@ -48,4 +52,10 @@ public class Keypad : MonoBehaviour {
 		}
 	}
 
+	public void HideBG(bool hide)
+	{
+		keypadBG.SetActive (hide);
+		show = false;
+		this.GetComponent<Animator>().SetBool("KeypadShow", false);
+	}
 }

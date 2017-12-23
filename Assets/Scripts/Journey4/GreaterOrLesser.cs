@@ -35,6 +35,10 @@ public class GreaterOrLesser : MonoBehaviour {
 	public Animator ElephantAnime;
 	public Animator RatAnime;
 
+
+	public AudioSource elephantAudio;
+	public AudioSource ratAudio;
+
     // Use this for initialization
     void Start () {
         manager = GameObject.Find("Manager").GetComponent<Manager>();

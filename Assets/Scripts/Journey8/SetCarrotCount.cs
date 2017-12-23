@@ -23,6 +23,8 @@ public class SetCarrotCount : MonoBehaviour {
 	RaycastHit hit;
 
 	public AudioSource source;
+	public AudioSource carrotBite;
+
 	public AudioClip[] clips;
 	public string[] audioClips;
 	public int isAnswered = 0;
@@ -32,7 +34,7 @@ public class SetCarrotCount : MonoBehaviour {
 		cam = Camera.main;
 		CreateQuestions ();
 		DisplayCarrots ();
-		PlayerPrefs.SetString("Language", "Sounds/English/");
+//		PlayerPrefs.SetString("Language", "Sounds/English/");
 		source.clip = Resources.Load(PlayerPrefs.GetString("Language") + audioClips[no2-1]) as AudioClip;  //clips [no2 - 1];
 		Invoke ("PlayRabbitAudio", 1.5f);
 	}
@@ -118,8 +120,10 @@ public class SetCarrotCount : MonoBehaviour {
 						DropAnswer (hit.collider, draggedObj.gameObject);
 
 					} else {
-						//						
+						//		
+						draggedObj.transform.GetComponent<BoxCollider>().enabled = true;
 						draggedObj.transform.position = draggedObj.gameObject.GetComponent<OriginalPos> ().originalPos;
+
 						//draggedObj.transform.SetParent (parent);
 					}
 				}
@@ -159,6 +163,8 @@ public class SetCarrotCount : MonoBehaviour {
 			for (int i = 0; i < newCarrots.Count; i++) {
 				newCarrots[i].GetComponent<Animator>().SetTrigger("CarrotBite");
 			}
+
+			carrotBite.Play ();
 		}
 	}
 

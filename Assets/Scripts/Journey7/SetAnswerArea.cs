@@ -10,7 +10,10 @@ public class SetAnswerArea : MonoBehaviour {
 	public TextMesh answerArea;
 	public Text inputArea;
 
+
 	public GameObject[] toHighlight, toHide;
+
+
 
 	void Start()
 	{
@@ -22,6 +25,14 @@ public class SetAnswerArea : MonoBehaviour {
 	public void OnMouseDown()
 	{
 		//keypadAnimator.SetTrigger("ShowKeypad");
+		Manager.Instance.PlayClickAudio();
+
+
+		if (keypad.keypadBG != null) {
+			keypad.show = true;
+			keypad.keypadBG.SetActive (keypad.show);
+		}
+
 		keypadAnimator.SetBool("KeypadShow", true);
 		ShowSelection ();
 		if(answerArea!=null){
@@ -41,4 +52,7 @@ public class SetAnswerArea : MonoBehaviour {
 			toHide[j].SetActive (false);
 		}
 	}
+
+
+
 }

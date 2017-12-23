@@ -33,6 +33,9 @@ public class GreaterOrLesser_2 : MonoBehaviour {
 	public Animator ElephantAnime;
 	public Animator RatAnime;
 
+	public AudioSource elephantAudio;
+	public AudioSource ratAudio;
+
 	public Manager manager;
 
 	// Use this for initialization
