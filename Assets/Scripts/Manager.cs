@@ -55,11 +55,6 @@ public class Manager : MonoBehaviour {
 		
 	}
 
-	void LoadAllNumbers()
-	{
-		
-	}
-
 	public void PlayQuestionNumber()
 	{
 		//print("PLAYQUESTIONAUDIO");
@@ -67,6 +62,7 @@ public class Manager : MonoBehaviour {
 	}
 
 	public void PlayDragDropAudio(){
+		print ("plalll");
 		UIAudioSource2.clip = dragDropAudio;
 		UIAudioSource2.Play ();
 	}

@@ -22,6 +22,7 @@ public class PullLever : MonoBehaviour {
 				UpdateCounter(this.transform.GetComponentInChildren<TextMesh>(), counterValOne, this.gameObject.tag);
 			}
 			else{
+				print ("off");
 				this.GetComponent<BoxCollider>().enabled = false;
 			}
 		}

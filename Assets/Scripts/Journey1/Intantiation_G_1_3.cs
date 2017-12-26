@@ -12,6 +12,7 @@ public class Intantiation_G_1_3 : MonoBehaviour {
 	public GameObject parent;
 	public GameObject[] spawedFishes;
 	public Vector3[] rotations;
+	public float[] speeds;
 
 	// Use this for initialization
 	void Start () {
@@ -41,6 +42,9 @@ public class Intantiation_G_1_3 : MonoBehaviour {
 			Vector2 tempPos = spawnPoints [i].position;
 			Vector3 rot = rotations[Random.Range(0, rotations.Length)];
 			GameObject obj = (GameObject)Instantiate (objectToInstantiate[Manager.Instance.questionNumber], tempPos, Quaternion.Euler(rot));
+			obj.GetComponent<FishAnim> ().gm1 = spawnPoints [i].GetChild (0).transform;
+			obj.GetComponent<FishAnim> ().gm2 = spawnPoints [i].GetChild (1).transform;
+			obj.GetComponent<FishAnim> ().speed = speeds[Random.Range(0, speeds.Length)];
 			//spawedFishes [i] = obj;
 			obj.transform.SetParent (parent.transform, true);
 		}

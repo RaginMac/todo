@@ -6,6 +6,7 @@ public class ObjectPosition : MonoBehaviour {
 
 	public Vector3 originalPos;
 	public Animator anim;
+
 	// Use this for initialization
 	void Start () {
 		originalPos = this.transform.position;
@@ -26,5 +27,15 @@ public class ObjectPosition : MonoBehaviour {
 //		for (int i = 0; i < temp.Length; i++) {
 //			temp [i].GetComponent<Animator> ().SetTrigger ("ShakeMango");
 //		}
+	}
+
+	public void Init()
+	{
+		Invoke ("PlayJump", Random.Range (0.01f, 0.5f));
+	}
+
+	public void PlayJump()
+	{
+		this.GetComponent<Animator>().SetTrigger("JumpMango");
 	}
 }

@@ -94,10 +94,13 @@ public class DivideCarrots : MonoBehaviour {
 	public int GetDivisor()
 	{
 		int val  = FindRandomNumber(2, 10);
-		if(qType == QuestionType.withoutRemainder){
-			while(number1%val!=0)
-			{
-				val  = FindRandomNumber(2, 10);
+		if (qType == QuestionType.withoutRemainder) {
+			while (number1 % val != 0) {
+				val = FindRandomNumber (2, 10);
+			}
+		} else {
+			while (number1 % val == 0) {
+				val = FindRandomNumber (2, 10);
 			}
 		}
 		return val;
@@ -234,8 +237,10 @@ public class DivideCarrots : MonoBehaviour {
 
 	public void ResetKeypad()
 	{
-		keypad.GetComponent<Animator>().SetBool("KeypadShow", false);
-		keypad.GetComponent<Keypad> ().keypadBG.SetActive (false);
+//		keypad.GetComponent<Animator>().SetBool("KeypadShow", false);
+//		keypad.GetComponent<Keypad> ().keypadBG.SetActive (false);
+		keypad.GetComponent<Keypad> ().HideBG(false);
+
 	}
 }
 

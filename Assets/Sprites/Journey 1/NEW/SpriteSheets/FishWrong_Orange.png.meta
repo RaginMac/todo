@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: efe35a6558b1a484984d0484e3dc72d4
-timeCreated: 1508219528
+timeCreated: 1514281922
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -32,6 +32,8 @@ TextureImporter:
     linearTexture: 0
     fadeOut: 0
     borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
     mipMapFadeDistanceStart: 1
     mipMapFadeDistanceEnd: 3
   bumpmap:
@@ -47,10 +49,13 @@ TextureImporter:
   textureFormat: 1
   maxTextureSize: 2048
   textureSettings:
+    serializedVersion: 2
     filterMode: -1
     aniso: 16
     mipBias: -1
-    wrapMode: -1
+    wrapU: -1
+    wrapV: -1
+    wrapW: -1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -102,221 +107,238 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 705
+        y: 780
         width: 286
-        height: 141
+        height: 156
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: FishWrong_Orange_1
       rect:
         serializedVersion: 2
         x: 286
-        y: 705
+        y: 780
         width: 286
-        height: 141
+        height: 156
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: FishWrong_Orange_2
       rect:
         serializedVersion: 2
         x: 572
-        y: 705
+        y: 780
         width: 286
-        height: 141
+        height: 156
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: FishWrong_Orange_3
       rect:
         serializedVersion: 2
         x: 858
-        y: 705
+        y: 780
         width: 286
-        height: 141
+        height: 156
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: FishWrong_Orange_4
       rect:
         serializedVersion: 2
         x: 0
-        y: 564
+        y: 624
         width: 286
-        height: 141
+        height: 156
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: FishWrong_Orange_5
       rect:
         serializedVersion: 2
         x: 286
-        y: 564
+        y: 624
         width: 286
-        height: 141
+        height: 156
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: FishWrong_Orange_6
       rect:
         serializedVersion: 2
         x: 572
-        y: 564
+        y: 624
         width: 286
-        height: 141
+        height: 156
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: FishWrong_Orange_7
       rect:
         serializedVersion: 2
         x: 858
-        y: 564
+        y: 624
         width: 286
-        height: 141
+        height: 156
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: FishWrong_Orange_8
       rect:
         serializedVersion: 2
         x: 0
-        y: 423
+        y: 468
         width: 286
-        height: 141
+        height: 156
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: FishWrong_Orange_9
       rect:
         serializedVersion: 2
         x: 286
-        y: 423
+        y: 468
         width: 286
-        height: 141
+        height: 156
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: FishWrong_Orange_10
       rect:
         serializedVersion: 2
         x: 572
-        y: 423
+        y: 468
         width: 286
-        height: 141
+        height: 156
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: FishWrong_Orange_11
       rect:
         serializedVersion: 2
         x: 0
-        y: 282
+        y: 312
         width: 286
-        height: 141
+        height: 156
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: FishWrong_Orange_12
       rect:
         serializedVersion: 2
         x: 286
-        y: 282
+        y: 312
         width: 286
-        height: 141
+        height: 156
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: FishWrong_Orange_13
       rect:
         serializedVersion: 2
         x: 572
-        y: 282
+        y: 312
         width: 286
-        height: 141
+        height: 156
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: FishWrong_Orange_14
       rect:
         serializedVersion: 2
         x: 0
-        y: 141
+        y: 156
         width: 286
-        height: 141
+        height: 156
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: FishWrong_Orange_15
       rect:
         serializedVersion: 2
         x: 286
-        y: 141
+        y: 156
         width: 286
-        height: 141
+        height: 156
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: FishWrong_Orange_16
       rect:
         serializedVersion: 2
         x: 572
-        y: 141
+        y: 156
         width: 286
-        height: 141
+        height: 156
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: FishWrong_Orange_17
@@ -325,11 +347,12 @@ TextureImporter:
         x: 0
         y: 0
         width: 286
-        height: 141
+        height: 156
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: FishWrong_Orange_18
@@ -338,11 +361,12 @@ TextureImporter:
         x: 286
         y: 0
         width: 286
-        height: 141
+        height: 156
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: FishWrong_Orange_19
@@ -351,13 +375,15 @@ TextureImporter:
         x: 572
         y: 0
         width: 286
-        height: 141
+        height: 156
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     outline: []
+    physicsShape: []
   spritePackingTag: 
   userData: 
   assetBundleName: 

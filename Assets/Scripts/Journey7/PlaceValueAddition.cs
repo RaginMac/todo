@@ -136,7 +136,6 @@ public class PlaceValueAddition : MonoBehaviour {
 		}
 	}
 
-
 	//AWOB Addition without carry
 	void CreateQuestionsAWOB()
 	{
@@ -204,7 +203,7 @@ public class PlaceValueAddition : MonoBehaviour {
 	{
 		if (diff == Difficulty.Grade1) {
 			int tempN1 = Random.Range (1, 9);
-			int tempN2 = Random.Range (1, 9);
+			int tempN2 = Random.Range (10-tempN1, 9);
 
 			n1 = tempN1.ToString ();
 			n2 = tempN2.ToString ();
@@ -219,7 +218,7 @@ public class PlaceValueAddition : MonoBehaviour {
 			int tempN2 = Random.Range (1, 9);
 
 			int tempN3 = Random.Range (1, 9);
-			int tempN4 = Random.Range (1, 9);
+			int tempN4 = Random.Range (10-tempN1, 9);
 
 			n1 = tempN1.ToString () + tempN2.ToString ();
 			n2 = tempN3.ToString () + tempN4.ToString ();
@@ -238,7 +237,7 @@ public class PlaceValueAddition : MonoBehaviour {
 
 			int tempN4 = Random.Range (1, 8 - tempN1);
 			int tempN5 = Random.Range (1, 9);
-			int tempN6 = Random.Range (1, 9);
+			int tempN6 = Random.Range (10-tempN1, 9);
 
 			N2D1 = (tempN6);
 			N2D2 = (tempN5);
@@ -341,8 +340,6 @@ public class PlaceValueAddition : MonoBehaviour {
 
 		if(spawn.gameObject.tag=="Drop1")
 		{
-			print("1");
-
 			//temp.transform.SetParent(coinOneParent);
 			AddToDropList(droppedOneCoins, temp);
 			if(addWithCarry){
@@ -350,20 +347,20 @@ public class PlaceValueAddition : MonoBehaviour {
 			}
 		}
 		else if(spawn.gameObject.tag=="Drop10"){
-			print("10");
-			if(lever1.enabled==false){
-				SetLeverColliders(lever1, true);
-			}
+			//if(lever1.enabled==false)
+//			{
+//				SetLeverColliders(lever1, true);
+//			}
 			//temp.transform.SetParent(coinTenParent);
 			AddToDropList(droppedTenCoins, temp);
 			if(addWithCarry){
 				CheckForShift(droppedTenCoins);
 			}
 		}else{
-			print("100");
-			if(lever10.enabled==false){
-				SetLeverColliders(lever10, true);
-			}
+			//if(lever10.enabled==false)
+//			{
+//				SetLeverColliders(lever10, true);
+//			}
 			//temp.transform.SetParent(coinHunParent);
 			AddToDropList(droppedHunCoins, temp);
 		}
@@ -396,12 +393,12 @@ public class PlaceValueAddition : MonoBehaviour {
 		if(droppedCoinsList==droppedOneCoins){
 		//	Move(coinOneParent, shiftOne);
 			shiftOnes = true;
-			SetLeverColliders(lever1, false);
+		//	SetLeverColliders(lever1, false);
 			//	Showoutline(outlineOne);
 		}
 		else if(droppedCoinsList==droppedTenCoins){
 			shiftTens = true;
-			SetLeverColliders(lever10, false);
+		//	SetLeverColliders(lever10, false);
 			//Showoutline (outlineTen);
 		}
 	}
@@ -556,4 +553,5 @@ public class PlaceValueAddition : MonoBehaviour {
 	{
 		col.enabled = status;
 	}
+
 }

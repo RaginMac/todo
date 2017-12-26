@@ -143,11 +143,11 @@ public class DistributedCoins : MonoBehaviour {
 
 	public int GetDivisorNumber()
 	{
-		int val = Random.Range(1, 5);
+		int val = Random.Range(2, 5);
 		if(qType==QuestionType.withoutRemainder){
 			while(numberOne%val!=0)
 			{
-				val = Random.Range(1, 5);
+				val = Random.Range(2, 5);
 			}
 		}
 
