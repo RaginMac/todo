@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 15167eb6668c4cf49a51bb31704b3987
-timeCreated: 1507524549
+timeCreated: 1514277962
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -28,6 +28,8 @@ TextureImporter:
     linearTexture: 0
     fadeOut: 0
     borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
     mipMapFadeDistanceStart: 1
     mipMapFadeDistanceEnd: 3
   bumpmap:
@@ -43,10 +45,13 @@ TextureImporter:
   textureFormat: 1
   maxTextureSize: 2048
   textureSettings:
+    serializedVersion: 2
     filterMode: -1
     aniso: 16
     mipBias: -1
-    wrapMode: -1
+    wrapU: -1
+    wrapV: -1
+    wrapW: -1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -98,210 +103,213 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 11
-        y: 375
+        y: 258
         width: 84
-        height: 89
+        height: 84
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Ball_Idle_1
       rect:
         serializedVersion: 2
         x: 117
-        y: 375
+        y: 258
         width: 84
-        height: 89
+        height: 84
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Ball_Idle_2
       rect:
         serializedVersion: 2
         x: 223
-        y: 375
+        y: 258
         width: 84
-        height: 89
+        height: 84
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Ball_Idle_3
       rect:
         serializedVersion: 2
         x: 329
-        y: 375
+        y: 258
         width: 84
-        height: 89
+        height: 84
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Ball_Idle_4
       rect:
         serializedVersion: 2
         x: 435
-        y: 375
+        y: 258
         width: 84
-        height: 89
+        height: 84
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Ball_Idle_5
       rect:
         serializedVersion: 2
         x: 11
-        y: 253
+        y: 136
         width: 84
-        height: 89
+        height: 84
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Ball_Idle_6
       rect:
         serializedVersion: 2
         x: 117
-        y: 253
+        y: 136
         width: 84
-        height: 89
+        height: 84
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Ball_Idle_7
       rect:
         serializedVersion: 2
         x: 223
-        y: 253
+        y: 136
         width: 84
-        height: 89
+        height: 84
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Ball_Idle_8
       rect:
         serializedVersion: 2
         x: 329
-        y: 253
+        y: 136
         width: 84
-        height: 89
+        height: 84
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Ball_Idle_9
       rect:
         serializedVersion: 2
         x: 435
-        y: 253
+        y: 136
         width: 84
-        height: 89
+        height: 84
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Ball_Idle_10
       rect:
         serializedVersion: 2
         x: 11
-        y: 131
+        y: 14
         width: 84
-        height: 89
+        height: 84
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Ball_Idle_11
       rect:
         serializedVersion: 2
         x: 117
-        y: 131
+        y: 14
         width: 84
-        height: 89
+        height: 84
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Ball_Idle_12
       rect:
         serializedVersion: 2
         x: 223
-        y: 131
+        y: 14
         width: 84
-        height: 89
+        height: 84
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Ball_Idle_13
       rect:
         serializedVersion: 2
         x: 329
-        y: 131
+        y: 14
         width: 84
-        height: 89
+        height: 84
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Ball_Idle_14
       rect:
         serializedVersion: 2
         x: 435
-        y: 131
+        y: 14
         width: 84
-        height: 89
+        height: 84
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Ball_Idle_15
-      rect:
-        serializedVersion: 2
-        x: 11
-        y: 9
-        width: 84
-        height: 89
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
+      physicsShape: []
       tessellationDetail: 0
     outline: []
+    physicsShape: []
   spritePackingTag: 
   userData: 
   assetBundleName: 

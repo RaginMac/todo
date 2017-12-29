@@ -17,7 +17,7 @@ public class Keypad : MonoBehaviour {
 	{
 		manager.PlayClickAudio ();
 		if(answerArea!=null) {
-			answerArea.text = input;
+			answerArea.text += input;
 		}else if(inputArea!=null){
 			if(inputArea.text.Length<2){
 				inputArea.text += input;
@@ -38,7 +38,7 @@ public class Keypad : MonoBehaviour {
 
 	public void  Erase()
 	{
-		manager.PlayClickAudio ();
+		//manager.PlayClickAudio ();
 		//print ("Erase");
 		if(inputArea != null)
 			inputArea.text = "";
@@ -61,7 +61,9 @@ public class Keypad : MonoBehaviour {
 
 	public void HideBG(bool hide)
 	{
-		keypadBG.SetActive (hide);
+		if(keypadBG!=null){
+			keypadBG.SetActive (hide);
+		}
 		show = false;
 		this.GetComponent<Animator>().SetBool("KeypadShow", false);
 	}

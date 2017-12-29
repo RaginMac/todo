@@ -55,11 +55,6 @@ public class Manager : MonoBehaviour {
 		
 	}
 
-	void LoadAllNumbers()
-	{
-		
-	}
-
 	public void PlayQuestionNumber()
 	{
 		//print("PLAYQUESTIONAUDIO");
@@ -867,6 +862,7 @@ public class Manager : MonoBehaviour {
 			Invoke("NextQuestion", 2f);
 			questionArray[questionNumber].GetComponent<PlaceValueAddition>().ResetAnim();
 		}else{
+			questionArray [questionNumber].GetComponent<PlaceValueAddition> ().ResetEverything ();	//Reset if wrong
 			CountQuestionsAnswered(false);
 		}
 
@@ -1168,6 +1164,8 @@ public class Manager : MonoBehaviour {
 				NextQuestion();
 			}else{
 				CountQuestionsAnswered(false);
+                trayCoin.ResetEverything();
+                trayCoin.ResetKeypad();
 			}
 
 		}
@@ -1180,7 +1178,9 @@ public class Manager : MonoBehaviour {
 				NextQuestion();
 			}else{
 				CountQuestionsAnswered(false);
-			}
+                trayCoin.ResetKeypad();
+                trayCoin.ResetEverything();
+            }
 
 		}
 	}

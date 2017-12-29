@@ -13,7 +13,6 @@ public class PullLever : MonoBehaviour {
 		if(this.gameObject.tag=="Drop1"){
 			this.GetComponent<Animator>().SetTrigger("OneLever");
 			if(counterValOne!=pva.N2D1){
-				print("this1");
 				if(!pva.hasOnesShifted){
 					pva.SetDropLocation(this.gameObject.tag, pva.spawnedOneCoins, pva.dropIndexOne, pva.coinOneParent, pva.coinTenParent, pva.coinHunParent);
 				}else{
@@ -80,5 +79,20 @@ public class PullLever : MonoBehaviour {
 		if(counterValTen==pva.N2D2 && (pva.diff == PlaceValueAddition.Difficulty.Grade3)){
 			leverHun.GetComponent<BoxCollider>().enabled = true;
 		}
+	}
+
+	public void Reset()
+	{
+		counterValOne = 0;
+		counterValTen = 0;
+		counterValHun = 0;
+
+		leverOne.transform.GetComponentInChildren<TextMesh> ().text = "0";
+		leverHun.transform.GetComponentInChildren<TextMesh> ().text = "0";
+		leverTen.transform.GetComponentInChildren<TextMesh> ().text = "0";
+
+		leverOne.transform.GetComponent<BoxCollider> ().enabled = true;
+		leverHun.transform.GetComponent<BoxCollider> ().enabled = false;
+		leverTen.transform.GetComponent<BoxCollider> ().enabled = false;
 	}
 }

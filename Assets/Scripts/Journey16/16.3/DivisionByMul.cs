@@ -34,9 +34,11 @@ public class DivisionByMul : MonoBehaviour {
 	public Transform draggedObj;
 	public GameObject keypad;
 
+
 	public Camera cam;
 	Vector3 offset;
 	RaycastHit hit;
+
 
 	void Start() {
 		cam = Camera.main;
@@ -53,7 +55,9 @@ public class DivisionByMul : MonoBehaviour {
 
 	void Update()
 	{
-		DragObject ();
+		if (!Manager.Instance.isGameComplete && !keypad.GetComponent<Keypad>().show) {
+			DragObject ();
+		}
 	}
 
 	int FindRandomNumber(int n1, int n2) 
@@ -142,6 +146,8 @@ public class DivisionByMul : MonoBehaviour {
 
 	void DropEggs(GameObject hitObject)
 	{
+		print ("Play");	
+		Manager.Instance.PlayDragDropAudio ();
 		hitObject.GetComponent<BasketScript> ().ShowEggsInBasket (secondNum);
 		hitObject.GetComponent<BasketScript> ().temp = basketIndex;
 		hitObject.GetComponent<BasketScript> ().moveBasket = true;
@@ -210,6 +216,8 @@ public class DivisionByMul : MonoBehaviour {
 
 	public void ResetKeypad()
 	{
-		keypad.GetComponent<Animator>().SetBool("KeypadShow", false);
+//		keypad.GetComponent<Animator>().SetBool("KeypadShow", false);
+//		keypad.GetComponent<Keypad> ().keypadBG.SetActive (false);
+		keypad.GetComponent<Keypad> ().HideBG(false);
 	}
 }

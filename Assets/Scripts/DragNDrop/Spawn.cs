@@ -94,7 +94,7 @@ public class Spawn : MonoBehaviour {
 
 	public void PlayQuestionAudio()
 	{
-		if(question.options [Manager.Instance.questionNumber].answerAudio != null){
+		if(question.options [Manager.Instance.questionNumber].answerClip != null){
 			print(PlayerPrefs.GetString("Language") + question.options [Manager.Instance.questionNumber].answerClip);
 			Manager.Instance.PlayAudio (PlayerPrefs.GetString("Language") + question.options [Manager.Instance.questionNumber].answerClip);
 			//Manager.Instance.PlayAudio 
