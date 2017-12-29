@@ -62,7 +62,6 @@ public class Manager : MonoBehaviour {
 	}
 
 	public void PlayDragDropAudio(){
-		print ("plalll");
 		UIAudioSource2.clip = dragDropAudio;
 		UIAudioSource2.Play ();
 	}
@@ -862,6 +861,7 @@ public class Manager : MonoBehaviour {
 			Invoke("NextQuestion", 2f);
 			questionArray[questionNumber].GetComponent<PlaceValueAddition>().ResetAnim();
 		}else{
+			questionArray [questionNumber].GetComponent<PlaceValueAddition> ().ResetEverything ();	//Reset if wrong
 			CountQuestionsAnswered(false);
 		}
 
@@ -1156,6 +1156,8 @@ public class Manager : MonoBehaviour {
 				NextQuestion();
 			}else{
 				CountQuestionsAnswered(false);
+                trayCoin.ResetEverything();
+                trayCoin.ResetKeypad();
 			}
 
 		}
@@ -1168,7 +1170,9 @@ public class Manager : MonoBehaviour {
 				NextQuestion();
 			}else{
 				CountQuestionsAnswered(false);
-			}
+                trayCoin.ResetKeypad();
+                trayCoin.ResetEverything();
+            }
 
 		}
 	}

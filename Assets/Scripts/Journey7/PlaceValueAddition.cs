@@ -10,6 +10,7 @@ public class PlaceValueAddition : MonoBehaviour {
 	public bool addWithCarry;
 	public bool addWithoutCarry;
 	public bool answered = false;
+	public Manager manager;
 
 
 	[Header("Spawn stuff")]
@@ -106,14 +107,24 @@ public class PlaceValueAddition : MonoBehaviour {
 	public GameObject outlineTen;
 	public BoxCollider lever1, lever10, lever100;
 
+	[Header("Reset Stuff")]
+	public int tempNoOnes, tempNoTens, tempNoHuns;
+	public GameObject[] oldSpawnOnes, oldSpawnTens, oldSpawnHuns;
+
+	Vector3 parentOnePos, parentTenPos;
+	public List<GameObject> addedCoins;
+
+	public GameObject l_y, l_b, l_g;
 
 	void Awake(){
 	//	ResetAnim();
 	}
 
 	void Start () {
-		
+		parentOnePos = coinOneParent.position;
+		parentTenPos = coinTenParent.position;
 		//coinOneAnim = coinOneAnimImage.GetComponent<Animator>();
+
 		cam = Camera.main;
 		if (addWithoutCarry) {
 			CreateQuestionsAWOB ();
@@ -121,6 +132,10 @@ public class PlaceValueAddition : MonoBehaviour {
 		else if (addWithCarry) {
 			CreateQuestionsAWB ();
 		}
+
+		oldSpawnOnes = spawnedOneCoins;
+		oldSpawnTens = spawnedTenCoins;
+		oldSpawnHuns = spawnedHunCoins;
 	}
 
 	void Update () {
@@ -131,7 +146,7 @@ public class PlaceValueAddition : MonoBehaviour {
 		if(shiftTens){
 			Move(coinTenParent, shiftTen);
 		}
-		if(!Manager.Instance.isGameComplete){
+		if(!manager.isGameComplete){
 			DragObject2D();
 		}
 	}
@@ -147,6 +162,10 @@ public class PlaceValueAddition : MonoBehaviour {
 			n2 = tempN2.ToString ();
 			N1D1 = tempN1;
 			N2D1 = (tempN2);
+
+			tempNoHuns = 0;
+			tempNoTens = 0;
+			tempNoOnes = tempN1;
 
 
 			StartCoroutine(DisplayQuestion("0", "0", tempN1.ToString (), "0", "0", tempN2.ToString ()));
@@ -166,6 +185,9 @@ public class PlaceValueAddition : MonoBehaviour {
 			N2D1 = (tempN4);
 			N2D2 = (tempN3);
 
+			tempNoHuns = 0;
+			tempNoTens = tempN1;
+			tempNoOnes = tempN2;
 
 			StartCoroutine(DisplayQuestion("0", tempN1.ToString (), tempN2.ToString (), "0", tempN3.ToString (), tempN4.ToString ()));
 			FindAnswer (n1, n2);
@@ -182,6 +204,7 @@ public class PlaceValueAddition : MonoBehaviour {
 
 			n1 = tempN1.ToString () + tempN2.ToString () + tempN3.ToString();
 			n2 = tempN4.ToString () + tempN5.ToString () + tempN6.ToString();
+
 			N1D1 = (tempN3);
 			N1D2 = (tempN2);
 			N1D3 = (tempN1);
@@ -189,6 +212,10 @@ public class PlaceValueAddition : MonoBehaviour {
 			N2D1 = (tempN6);
 			N2D2 = (tempN5);
 			N2D3 = (tempN4);
+
+			tempNoHuns = tempN1;
+			tempNoTens = tempN2;
+			tempNoOnes = tempN3;
 
 			StartCoroutine(DisplayQuestion(tempN1.ToString (), tempN2.ToString (), tempN3.ToString (), tempN4.ToString (), tempN5.ToString (), tempN6.ToString ()));
 			FindAnswer (n1, n2);
@@ -209,6 +236,10 @@ public class PlaceValueAddition : MonoBehaviour {
 			n2 = tempN2.ToString ();
 			N2D1 = (tempN2);
 
+			tempNoHuns = 0;
+			tempNoTens = 0;
+			tempNoOnes = tempN1;
+
 			FindAnswer (n1, n2);
 			StartCoroutine(DisplayQuestion("0", "0", tempN1.ToString (), "0", "0", tempN2.ToString ()));
 			SetCoinsOnStart(0, 0, tempN1);
@@ -226,6 +257,10 @@ public class PlaceValueAddition : MonoBehaviour {
 			N2D1 = (tempN4);
 			N2D2 = (tempN3);
 
+			tempNoHuns = 0;
+			tempNoTens = tempN1;
+			tempNoOnes = tempN2;
+
 			StartCoroutine(DisplayQuestion("0", tempN1.ToString (), tempN2.ToString (), "0", tempN3.ToString (), tempN4.ToString ())); 
 			FindAnswer (n1, n2);
 			SetCoinsOnStart(0,tempN1, tempN2);
@@ -242,6 +277,10 @@ public class PlaceValueAddition : MonoBehaviour {
 			N2D1 = (tempN6);
 			N2D2 = (tempN5);
 			N2D3 = (tempN4);
+
+			tempNoHuns = tempN1;
+			tempNoTens = tempN2;
+			tempNoOnes = tempN3;
 
 			n1 = tempN1.ToString () + tempN2.ToString () + tempN3.ToString();
 			n2 = tempN4.ToString () + tempN5.ToString () + tempN6.ToString();
@@ -334,8 +373,10 @@ public class PlaceValueAddition : MonoBehaviour {
 
 	public void DropMoreCoins(Transform target, GameObject coin, Transform spawn, Transform parent){
 		GameObject temp = Instantiate(coin, spawn.position, Quaternion.identity); 
+		manager.PlayDragDropAudio ();
 		temp.GetComponent<Move>().target = target;
 		temp.transform.SetParent(parent);
+		AddToDropList (addedCoins, temp);			//this array is used to reset, clearing this array will remove all the dropped coins from the scene.
 
 
 		if(spawn.gameObject.tag=="Drop1")
@@ -372,7 +413,7 @@ public class PlaceValueAddition : MonoBehaviour {
 	}
 
 	public void ResetAnim(){
-		CamAnime.SetBool("moveCamera", false);
+		//CamAnime.SetBool("moveCamera", false);
 		GameObject.Find("Keypad").GetComponent<Animator>().SetBool("KeypadShow", false);
 		return;
 	}
@@ -515,9 +556,10 @@ public class PlaceValueAddition : MonoBehaviour {
 
 
 	void DropObjects(Transform drop, GameObject drag){
-		drag.SetActive(false);
-	
 
+		manager.PlayDragDropAudio ();
+
+		drag.SetActive(false);
 		if(drop.gameObject.tag=="Snap1"){
 			//coinOneAnimImage.SetActive(true);
 			ExchangeAllCoins(coinOneAnimImage);
@@ -532,14 +574,6 @@ public class PlaceValueAddition : MonoBehaviour {
 
 	void ExchangeAllCoins(GameObject image){
 		image.SetActive(true);
-//		if(image==coinOneAnimImage){
-//			dropArea10.GetComponent<BoxCollider2D>().enabled = false;
-//			dropArea1.GetComponent<BoxCollider2D>().enabled = true;
-//		}else{
-//			dropArea10.GetComponent<BoxCollider2D>().enabled = true;
-//			dropArea1.GetComponent<BoxCollider2D>().enabled = false;
-//		}
-		//coinOneParent.gameObject.SetActive(false);
 	}
 
 
@@ -553,5 +587,81 @@ public class PlaceValueAddition : MonoBehaviour {
 	{
 		col.enabled = status;
 	}
+
+
+	public void ResetEverything()
+	{
+		ClearArrays ();
+		ClearObjects ();
+		ResetPositionsAndVars ();
+	
+		l_y.GetComponent<PullLever> ().Reset ();
+		l_b.GetComponent<PullLever> ().Reset ();
+		l_g.GetComponent<PullLever> ().Reset ();
+
+		SetCoinsOnStart (tempNoHuns, tempNoTens, tempNoOnes);
+	}
+
+	void ClearArrays()
+	{
+		for (int i = tempNoOnes; i < droppedOneCoins.Count; i++) {
+			Destroy (droppedOneCoins[i]);
+		}
+		for (int j = tempNoTens; j < droppedTenCoins.Count; j++) {
+			Destroy (droppedTenCoins[j]);
+		}
+		for (int k = tempNoHuns; k < droppedHunCoins.Count; k++) {
+			Destroy (droppedHunCoins[k]);
+		}
+		for (int x = 0; x < addedCoins.Count; x++) {
+			Destroy (addedCoins[x]);
+		}
+
+		addedCoins.Clear ();
+
+		droppedOneCoins.Clear ();
+		droppedHunCoins.Clear ();
+		droppedTenCoins.Clear ();
+
+		spawnedOneCoins = oldSpawnOnes;
+		spawnedTenCoins = oldSpawnTens;
+		spawnedHunCoins = oldSpawnHuns;
+
+	}
+
+	void ClearObjects()
+	{
+		if (coinOneAnimImage != null) {
+			coinOneAnimImage.SetActive (false);
+		}
+		if (coinTenAnimImage != null) {
+			coinTenAnimImage.SetActive (false);
+		}
+		if (outlineOne != null) {
+			outlineOne.SetActive (false);
+		}
+		if (outlineTen != null) {
+			outlineTen.SetActive (false);
+		}
+		if (coinOneParent != null) {
+			coinOneParent.gameObject.SetActive (true);
+		}
+		if (coinTenParent != null) {
+			coinTenParent.gameObject.SetActive (true);
+		}
+	}
+
+	void ResetPositionsAndVars()
+	{
+		coinOneParent.position = parentOnePos;
+		coinTenParent.position = parentTenPos;
+
+		shiftOnes = shiftTens = shiftHuns = false;
+		hasOnesShifted = hasTensShifted = false;
+		exchangeOnesForTen = true;
+		exchangeTensForHun = false;
+
+	}
+
 
 }

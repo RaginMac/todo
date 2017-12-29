@@ -7,10 +7,15 @@ public class ObjectPosition : MonoBehaviour {
 	public Vector3 originalPos;
 	public Animator anim;
 
+    public float jumpDelay;
+    public float[] delays;
+
 	// Use this for initialization
 	void Start () {
 		originalPos = this.transform.position;
 		anim = this.GetComponent<Animator> ();
+        jumpDelay = delays[Random.Range(0, delays.Length)];
+
 	}
 	
 	// Update is called once per frame
@@ -31,7 +36,7 @@ public class ObjectPosition : MonoBehaviour {
 
 	public void Init()
 	{
-		Invoke ("PlayJump", Random.Range (0.01f, 0.5f));
+		Invoke ("PlayJump", jumpDelay);
 	}
 
 	public void PlayJump()
