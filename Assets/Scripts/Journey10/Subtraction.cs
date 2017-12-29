@@ -394,22 +394,26 @@ public class Subtraction : MonoBehaviour {
 			hitObject.GetComponent<EnableScript> ().counter++;
 			hitObject.GetComponentInChildren<TextMesh> ().text = hitObject.GetComponent<EnableScript> ().counter.ToString ();
 			Coin1Array [draggedObject.GetComponent<OriginalPos> ().indexValue] = null; 
+			Manager.Instance.PlayDragDropAudio ();
 			Destroy (draggedObject); 
 
 		} else if (hitObject.tag == "CounterPanel10" && draggedObject.tag == "Coin10") {
 			hitObject.GetComponent<EnableScript> ().counter++;
 			hitObject.GetComponentInChildren<TextMesh> ().text = hitObject.GetComponent<EnableScript> ().counter.ToString ();
 			Coin10Array [draggedObject.GetComponent<OriginalPos> ().indexValue] = null; 
+			Manager.Instance.PlayDragDropAudio ();
 			Destroy (draggedObject);
 
 		} else if (hitObject.tag == "CounterPanel100" && draggedObject.tag == "Coin100") {
 			hitObject.GetComponent<EnableScript>().counter++;
 			hitObject.GetComponentInChildren<TextMesh> ().text = hitObject.GetComponent<EnableScript>().counter.ToString ();
 			Coin100Array [draggedObject.GetComponent<OriginalPos> ().indexValue] = null; 
+			Manager.Instance.PlayDragDropAudio ();
 			Destroy (draggedObject);
 		} else {
 			draggedObject.transform.position = draggedObject.GetComponent<OriginalPos> ().originalPos;
 		}
+
 
 		CheckFirstCoin ();
 	}
@@ -426,6 +430,7 @@ public class Subtraction : MonoBehaviour {
 				Coin1Array [i] = Instantiate (coin1, coin1Fall.position, Quaternion.identity, coin1Parent);
 				Coin1Array [i].GetComponent <OriginalPos> ().indexValue = i;
 				Coin1Array [i].GetComponent <CoinFallScript> ().target = coin1Spawn[i];
+				Manager.Instance.PlayDragDropAudio ();
 
 				yield return new WaitForSeconds (0.8f);
 			}
@@ -439,6 +444,7 @@ public class Subtraction : MonoBehaviour {
 				Coin10Array [i] = Instantiate (coin10, coin10Fall.position, Quaternion.identity, coin10Parent);
 				Coin10Array [i].GetComponent <OriginalPos> ().indexValue = i;
 				Coin10Array [i].GetComponent <CoinFallScript> ().target = coin10Spawn[i];
+				Manager.Instance.PlayDragDropAudio ();
 
 				yield return new WaitForSeconds (0.8f);
 			}
