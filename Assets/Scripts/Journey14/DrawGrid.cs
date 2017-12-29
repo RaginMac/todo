@@ -62,7 +62,7 @@ public class DrawGrid : MonoBehaviour {
 
 	public void CreateQuestion(){
 		rows = Random.Range(12, 16);
-		columns = Random.Range(10, 16);
+		columns = Random.Range(11, 16);
 		no1 = rows;
 		no2 = columns;
 		ansNumber = no1 * no2;
@@ -124,11 +124,11 @@ public class DrawGrid : MonoBehaviour {
 		else if (instantiatePlaceValues)
 		{
 			for (int i = 0; i < no2; i++) {
-				Image temp = Instantiate (cell, new Vector3 (startPlaceVal.position.x + (i * 0.45f), startPlaceVal.position.y, 1), Quaternion.identity, placeValParent);
+				Image temp = Instantiate (celPlaceVal, new Vector3 (startPlaceVal.position.x + (i * 0.45f), startPlaceVal.position.y, 1), Quaternion.identity, placeValParent);
 				placeValueGridHor.Add (temp);
 			}
 			for (int j = 0; j < no1; j++) {
-				Image temp = Instantiate (cell, new Vector3 (startPlaceValVert.position.x, startPlaceValVert.position.y - (j * 0.45f), 1), Quaternion.identity, placeValParent);
+				Image temp = Instantiate (celPlaceVal, new Vector3 (startPlaceValVert.position.x, startPlaceValVert.position.y - (j * 0.45f), 1), Quaternion.identity, placeValParent);
 				placeValueGridVert.Add (temp);
 			}
 		}

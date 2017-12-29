@@ -9,18 +9,17 @@ public class DistributedCoins : MonoBehaviour {
 	public QuestionType qType;
 
 
-	public int unitsDigit, tensDigit;
-	public  int numberOne, numberTwo,spawnDropindex = 0, answer, remainder;
-	//public GameObject[] dropTrays; // unitsCoins, tensCoins;
-	public Transform[] spawnArray;
+	public int unitsDigit = 1, tensDigit = 1;
+	public  int numberOne, numberTwo = 2,spawnDropindex = 0, answer, remainder;
+    public List<int> primes;
+    public Transform[] spawnArray;
 	public List<GameObject> newCoins, unitsCoins, tensCoins, dropTrays, draggedCoins;
 	public Text n1, n2, playerAnswer, remainderAnswer;
-	public GameObject draggedObject,keypad, coin, newCoinParent, exchangePanel;
+	public GameObject draggedObject,keypad, coin, newCoinParent, exchangePanel, exchangePanel_grey;
 	public Camera cam;
 	public Vector3 offset;
 	public Transform spawnPos;
-
-	public bool showStartAnimation = false;
+    public bool showStartAnimation = false;
 
 	private int dropIndex = -1;
 
@@ -36,34 +35,47 @@ public class DistributedCoins : MonoBehaviour {
 	int dropcount = 0;
 
 	Transform[] temp;
-	int index, isExchanged = 0, animIndex;
+	int index, isExchanged = 0, animIndex, tempNo;
 	Vector3 animTarget;
 	List<GameObject> animArray;
 
-	void Awake()
+    public List<int> randoms;
+
+    void Awake()
 	{
+        exchangePanel_grey.SetActive(true);
 		cam = Camera.main;
-	}
+		keypad.GetComponent<Keypad>().EraseAllText();
+		//FindNumbers();
+    }
 
 	// Use this for initialization
-	void Start () {
-		keypad.GetComponent<Keypad>().EraseAllText();
+	void Start ()
+    {
+//        FindNumbers();
+		//StartCoroutine("GenerateNumbers");
+        
 		animTarget = dropTrays[0].transform.position;
-		numberOne = GetDividendNumber();
-		numberTwo = GetDivisorNumber();
-		answer = numberOne/numberTwo;
-		remainder = numberOne % numberTwo;
+	
+		numberOne = GetDividend (primes);
+		//numberTwo = GetDivisor (); 
 
-		SetElements(numberTwo, true, dropTrays);
-		SetElements(tensDigit, true, tensCoins);
-		SetElements(unitsDigit, true, unitsCoins);
+       // numberTwo = GetDivisorNumber();
 
-		SetText(n1, numberOne.ToString());
-		SetText(n2, numberTwo.ToString());
-		SetDropLimits();
+       // answer = numberOne/numberTwo;
+		//remainder = numberOne % numberTwo;
+
+		//SetElements(numberTwo, true, dropTrays);
+		//SetElements(tensDigit, true, tensCoins);
+		//SetElements(unitsDigit, true, unitsCoins);
+
+		//SetText(n1, numberOne.ToString());
+		//SetText(n2, numberTwo.ToString());
+
+		//SetDropLimits();
 
 
-		Invoke("CheckStartStatus", 1f);
+		//Invoke("CheckStartStatus", 1f);
 	}
 	
 	// Update is called once per frame
@@ -77,7 +89,147 @@ public class DistributedCoins : MonoBehaviour {
 		}
 	}
 
-	void StartAnim(List<GameObject> arrayName, int indexNumber, Vector3 target)
+  	int FindRandomNumber(int n1, int n2)
+	{
+		int num = Random.Range(n1, n2);
+
+		return num;
+	}
+
+	public int GetDividend(List<int> myList)
+	{
+		int no = 0;
+		//int val = FindRandomNumber(12, 90);
+		unitsDigit = FindRandomNumber (1, 9);
+		tensDigit = FindRandomNumber (1, 9);
+
+
+		if (qType == QuestionType.withoutRemainder)
+		{
+			no = int.Parse (tensDigit.ToString () + unitsDigit.ToString ());
+			while (myList.Contains (no) || no % numberTwo != 0)
+			{
+				//val = FindRandomNumber (12, 90);
+				unitsDigit = FindRandomNumber (1, 9);
+				tensDigit = FindRandomNumber (1, 9);
+				no = int.Parse (tensDigit.ToString () + unitsDigit.ToString ());
+			}
+		} 
+		else if (qType == QuestionType.withRemainder)
+		{
+			no = int.Parse (tensDigit.ToString () + unitsDigit.ToString ());
+			while (no % numberTwo == 0) {
+				//val = FindRandomNumber (12, 90);
+				unitsDigit = FindRandomNumber (1, 9);
+				tensDigit = FindRandomNumber (1, 9);
+				no = int.Parse (tensDigit.ToString () + unitsDigit.ToString ());
+			}
+			print ("n1 : " + no + "         " + numberTwo);
+		}
+
+		int val = no;
+		//Invoke("CalculatePlaceValueDigits", 0.5f);
+		Invoke("SetEverything", 0.5f);
+		return val;
+	}
+
+	public int GetDivisor()
+	{
+		int val  = FindRandomNumber(2, 5);
+		if (qType == QuestionType.withoutRemainder) {
+			while (numberOne % val != 0) {
+				val = FindRandomNumber (2, 5);
+			}
+		} 
+		else {
+			while (numberOne % val == 0) {
+				val = FindRandomNumber (2, 5);
+			}
+		}
+
+		Invoke("SetEverything", 0.5f);
+		return val;
+	}
+
+	void CalculatePlaceValueDigits()
+	{
+		string tempString = numberOne.ToString ();
+		string[] digits = new string[tempString.Length];
+
+		for (int i = 0; i < tempString.Length; i++) {
+			digits [i] = tempString [i].ToString ();
+		}
+
+		unitsDigit = int.Parse(digits [1]);
+		tensDigit = int.Parse (digits [0]);
+	}
+//	public IEnumerator GenerateNumbers()
+//	{
+//		while (primes.Contains (int.Parse (tensDigit.ToString()+unitsDigit.ToString())))
+//		{
+//			unitsDigit = Random.Range (1, 9);
+//			tensDigit = Random.Range (1, 9);
+//		}
+//
+//		numberOne = int.Parse (tensDigit.ToString()+unitsDigit.ToString());
+//
+//		yield return new WaitForSeconds (0.2f);
+//
+//		while (numberOne % numberTwo != 0)
+//		{
+//			numberTwo = Random.Range (2, 5);
+//		}
+//
+//		yield return new WaitForSeconds (0.2f);
+//
+//		SetEverything ();
+//
+//	}
+//
+//	public int GetDividend()
+//	{
+//		while (primes.Contains (int.Parse (tensDigit.ToString()+unitsDigit.ToString())))
+//		{
+//			unitsDigit = Random.Range (1, 9);
+//			tensDigit = Random.Range (1, 9);
+//		}
+//
+//		tempNo = int.Parse (tensDigit.ToString()+unitsDigit.ToString());
+//
+//		Invoke ("GetDivisor", 0.5f);
+//
+//		return tempNo;
+//	}
+//
+//	public void GetDivisor()
+//	{
+//		while (tempNo % numberTwo != 0)
+//		{
+//			numberTwo = Random.Range (2, 5);
+//		}
+//		print ("n2 : " + numberTwo);
+//		Invoke ("SetEverything", 0.2f);
+//	}
+
+	void SetEverything()
+	{
+		answer = numberOne/numberTwo;
+		remainder = numberOne % numberTwo;
+
+		SetElements(numberTwo, true, dropTrays);
+		SetElements(tensDigit, true, tensCoins);
+		SetElements(unitsDigit, true, unitsCoins);
+
+		SetText(n1, numberOne.ToString());
+		SetText(n2, numberTwo.ToString());
+
+		SetDropLimits();
+		Invoke("CheckStartStatus", 1f);
+//		CheckStartStatus ();
+	}
+
+
+    void StartAnim(List<GameObject> arrayName, int indexNumber, Vector3 target)
 	{
 		animArray = arrayName;
 		animIndex = indexNumber;
@@ -89,7 +241,7 @@ public class DistributedCoins : MonoBehaviour {
 	void ShowCoinAnim(List<GameObject> array, int indexVal, Vector3 target)
 	{
 		if(array!=null){
-			array[indexVal].transform.position = Vector3.MoveTowards(array[indexVal].transform.position, target, 0.3f);
+			array[indexVal].transform.position = Vector3.MoveTowards(array[indexVal].transform.position, target, 0.4f);
 		}
 
 		if(Vector3.Distance(array[indexVal].transform.position, dropTrays[0].transform.position)<0.2f)
@@ -110,13 +262,13 @@ public class DistributedCoins : MonoBehaviour {
 
 	void CheckStartStatus()
 	{
-		if(tensDigit>=numberTwo || unitsDigit<numberTwo){
+		if(tensDigit>=numberTwo){
 			SetDragStatus(tensCoins, tensDigit-n, true);
 			SetDragStatus(unitsCoins, unitsDigit-m, false);
 
 			StartAnim(tensCoins, tensDigit-n,animTarget);
 		}
-		else if(tensDigit<numberTwo){
+		else if(tensDigit<numberTwo || unitsDigit<numberTwo){
 			SetDragStatus(unitsCoins, unitsDigit-m, true);
 			SetDragStatus(tensCoins, tensDigit-n, false);
 
@@ -129,29 +281,6 @@ public class DistributedCoins : MonoBehaviour {
 		for (int i = 0; i < dropTrays.Count; i++) {
 			dropTrays[i].GetComponent<CheckCoinDropLimit>().SetDropLimit(tensDigit, numberTwo);
 		}
-	}
-
-	public int GetDividendNumber()
-	{
-		unitsDigit = Random.Range(1, 9);
-		tensDigit = Random.Range(1, 9);
-
-		int temp = int.Parse(tensDigit.ToString() + unitsDigit.ToString());
-
-		return temp;
-	}
-
-	public int GetDivisorNumber()
-	{
-		int val = Random.Range(1, 5);
-		if(qType==QuestionType.withoutRemainder){
-			while(numberOne%val!=0)
-			{
-				val = Random.Range(1, 5);
-			}
-		}
-
-		return val;
 	}
 
 	void SetElements(int count, bool visibility, List<GameObject> array)
@@ -174,6 +303,7 @@ public class DistributedCoins : MonoBehaviour {
 
 	void SetDragStatus(List<GameObject> coinArray, int index, bool isTrue)
 	{
+        //print("array: " + coinArray + "index : " + index);
 		coinArray[index].GetComponent<BoxCollider2D>().enabled = isTrue;
 	}
 
@@ -230,43 +360,51 @@ public class DistributedCoins : MonoBehaviour {
 
 	void DropObjects(Transform hit, GameObject drag)
 	{
-		//drag.transform.SetParent(hit.transform);
-		if(drag.tag=="Coin10")
-		{
-			if(hit.gameObject.tag!="ExchangePanel10"){
-				//hit.GetComponent<CheckCoinDropLimit>().tenCounter++;
-				CheckCoinLimit(hit.GetComponent<CheckCoinDropLimit>().noOfTensCoins);
-				temp = hit.GetComponent<CheckCoinDropLimit>().snapArray;
-				index = hit.GetComponent<CheckCoinDropLimit>().dropindex;
-			}else{
-				isExchanged = 1;
-			}
-			if(n<tensDigit){
-				n++;
-			}
+        Manager.Instance.PlayDragDropAudio();
+        //drag.transform.SetParent(hit.transform);
+        if (drag.tag == "Coin10")
+        {
+            if (hit.gameObject.tag != "ExchangePanel10") {
+                //hit.GetComponent<CheckCoinDropLimit>().tenCounter++;
+                CheckCoinLimit(hit.GetComponent<CheckCoinDropLimit>().noOfTensCoins);
+                temp = hit.GetComponent<CheckCoinDropLimit>().snapArray;
+                index = hit.GetComponent<CheckCoinDropLimit>().dropindex;
+            } else {
+                isExchanged = 1;
+            }
+            if (n < tensDigit) {
+                n++;
+            }
 
-			//tensCoins.Remove(drag);
-			SetDragStatus(tensCoins, tensDigit-n, true);
-			CheckForChange();
+            //tensCoins.Remove(drag);
+            if (tensDigit - tencounter > tensDigit % numberTwo) { 
+                 SetDragStatus(tensCoins, tensDigit - n, true);
+            }
+			//CheckForChange();
 		}
 		else if(drag.tag=="Coin1")
 		{
-			print("1coin");
 			newCoins.Remove(drag.gameObject);
-			if(newCoins.Count==0)
+			if(newCoins.Count==0)               //all yello coins have been deagged
 			{
-				exchangePanel.GetComponent<BoxCollider2D>().enabled = true;
+				//exchangePanel.GetComponent<BoxCollider2D>().enabled = true;
 
-				if(tensDigit%numberTwo!=0){	exchangePanel.SetActive(true);}
+				if(tensDigit%numberTwo!=0){
+                    //exchangePanel.SetActive(true);
+                    CheckForChange();
+                }
 
 				if(tensDigit<numberTwo){ 
 					SetDragStatus(tensCoins, tensDigit-n, true);			//if all units coins have been dragged, allow exchange for tens coins
 				}			
 			}
+
 			hit.GetComponent<CheckCoinDropLimit>().oneCounter++;
+
 			if(m<newCoins.Count){
 				m++;
 			}
+
 			temp = hit.GetComponent<CheckCoinDropLimit>().snapArray2;
 			index = hit.GetComponent<CheckCoinDropLimit>().dropIndex2;
 
@@ -296,7 +434,7 @@ public class DistributedCoins : MonoBehaviour {
 //		}
 	}
 
-	void CheckCoinLimit(int limit)
+	void CheckCoinLimit(int limit)          //check if blue coins have been dragged and set ones coins status accordingly.
 	{
 		//if(dropTrays[tencounter].GetComponent<CheckCoinDropLimit>().tenCounter!=limit)
 		{
@@ -306,22 +444,24 @@ public class DistributedCoins : MonoBehaviour {
 		if(tensDigit%numberTwo==0){
 			if(tensDigit-tencounter==0)
 			{
-				print("drag ones");
 				SetDragStatus(unitsCoins, unitsDigit-m, true);
 				StartAnim(unitsCoins, unitsDigit-m, dropTrays[0].transform.position);
 			}
 		}else{
-			if(tensDigit-tencounter<numberTwo)
+			if(tensDigit-tencounter<= tensDigit%numberTwo)
 			{
-				print("drag ones");
 				SetDragStatus(unitsCoins, unitsDigit-m, true);
-				StartAnim(unitsCoins, unitsDigit-m, dropTrays[0].transform.position);
-			}
+
+                StartAnim(unitsCoins, unitsDigit-m, dropTrays[0].transform.position);
+
+                SetDragStatus(tensCoins, tensDigit - n, false);
+            }
 		}
 	}
 
 	public void SpawnNewCoins()
 	{
+        Manager.Instance.PlayDragDropAudio();
 		GameObject temp = Instantiate(coin, spawnPos.position, Quaternion.identity) as GameObject;	
 		temp.GetComponent<Move>().target = spawnArray[spawnDropindex].transform;
 		temp.GetComponent<OriginalPos>().originalPos = spawnArray[spawnDropindex].transform.position;
@@ -342,11 +482,9 @@ public class DistributedCoins : MonoBehaviour {
 
 	void CheckForChange()
 	{
-		if(tencounter>=numberTwo && numberTwo!=1 && tensDigit%numberTwo!=0)
-		{
-			//exchangePanel.SetActive(true);
-			exchangePanel.GetComponent<BoxCollider2D>().enabled = false;
-		}
+        exchangePanel.GetComponent<BoxCollider2D>().enabled = true;
+        exchangePanel_grey.SetActive(false);
+        SetDragStatus(tensCoins, tensDigit-n, true);
 	}
 
 	public void ResetEverything()
@@ -355,7 +493,7 @@ public class DistributedCoins : MonoBehaviour {
 		n = 1;
 		spawnDropindex = 0;
 		temp = null;
-		exchangePanel.SetActive(false);
+		exchangePanel_grey.SetActive(true);
 		tencounter = 0;
 
 
@@ -399,6 +537,7 @@ public class DistributedCoins : MonoBehaviour {
 
 	public void ResetKeypad()
 	{
-		keypad.GetComponent<Animator>().SetBool("KeypadShow", false);
+        //keypad.GetComponent<Animator>().SetBool("KeypadShow", false);
+        keypad.GetComponent<Keypad>().HideBG(false);
 	}
 }

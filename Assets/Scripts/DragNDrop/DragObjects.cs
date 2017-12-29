@@ -131,7 +131,7 @@ public class DragObjects : MonoBehaviour {
 		//Animator[] mangoAnims = basket.GetComponentsInChildren<Animator>();
 
 		for (int i = 0; i < placedMangoes.Count; i++) {
-			placedMangoes[i].GetComponent<Animator>().SetTrigger("JumpMango");
+			placedMangoes[i].GetComponent<ObjectPosition>().Init();
 		}
 	}
 

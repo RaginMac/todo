@@ -12,18 +12,16 @@ public class DivideCarrots : MonoBehaviour {
 	public int number1, number2, answer, remainder; 
 	public string clickedAnswer, clickedRemainder;
 	public List<int> randomNumbers;
-
 	public Text n1, n2;
 	public GameObject[] q_carrots, rabbits, dragCarrots;
-
 	public Transform target, activeRabbit;
-
-
 	public GameObject draggedObject,keypad;
 	public Camera cam;
 	public Vector3 offset;
-	public AudioSource source;
+	public AudioSource source, questionSource;
 	public AudioClip carrotBite;
+	public Keypad keys;
+	public string[] audios;
 
 	[SerializeField]
 	int dropIndex = -1;
@@ -31,7 +29,7 @@ public class DivideCarrots : MonoBehaviour {
 	int noOfRabbits = 0;
 
 	bool readyToMove = false;
-	public Keypad keys;
+
 
 
 
@@ -57,9 +55,25 @@ public class DivideCarrots : MonoBehaviour {
 		n1.text = number1.ToString();
 		n2.text = number2.ToString();
 		SetQuestionCarrots(true, number1, q_carrots);
+
+		Invoke ("PlayQuestionAudio", 1f);
 		//SetQuestionCarrots(true, number2, dragCarrots);
 	}
-	
+
+	void PlayQuestionAudio()
+	{
+//		if (qType == QuestionType.withoutRemainder) {
+//			
+//		}
+		string path = PlayerPrefs.GetString("Language") + audios[number2-1];
+		questionSource.clip = Resources.Load(path) as AudioClip;
+		if (Manager.Instance.noOfQuestionsAnswered <= Manager.Instance.totalNoOfQuestions) {
+			questionSource.Play ();
+		} else if(Manager.Instance.noOfQuestionsAnswered > Manager.Instance.totalNoOfQuestions){
+			questionSource.Stop ();
+		}
+	}
+
 	// Update is called once per frame
 	void Update () {
 		if(readyToMove)
@@ -94,10 +108,13 @@ public class DivideCarrots : MonoBehaviour {
 	public int GetDivisor()
 	{
 		int val  = FindRandomNumber(2, 10);
-		if(qType == QuestionType.withoutRemainder){
-			while(number1%val!=0)
-			{
-				val  = FindRandomNumber(2, 10);
+		if (qType == QuestionType.withoutRemainder) {
+			while (number1 % val != 0) {
+				val = FindRandomNumber (2, 10);
+			}
+		} else {
+			while (number1 % val == 0) {
+				val = FindRandomNumber (2, 10);
 			}
 		}
 		return val;
@@ -234,8 +251,10 @@ public class DivideCarrots : MonoBehaviour {
 
 	public void ResetKeypad()
 	{
-		keypad.GetComponent<Animator>().SetBool("KeypadShow", false);
-		keypad.GetComponent<Keypad> ().keypadBG.SetActive (false);
+//		keypad.GetComponent<Animator>().SetBool("KeypadShow", false);
+//		keypad.GetComponent<Keypad> ().keypadBG.SetActive (false);
+		keypad.GetComponent<Keypad> ().HideBG(false);
+
 	}
 }
 

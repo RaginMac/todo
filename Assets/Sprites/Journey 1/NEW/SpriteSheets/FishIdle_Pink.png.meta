@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: f2cdd8b86679c2749af417b8b9771eab
-timeCreated: 1507471797
+timeCreated: 1514282099
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -104,9 +104,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 705
+        y: 624
         width: 286
-        height: 141
+        height: 156
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,9 +118,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 286
-        y: 705
+        y: 624
         width: 286
-        height: 141
+        height: 156
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,9 +132,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 572
-        y: 705
+        y: 624
         width: 286
-        height: 141
+        height: 156
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,10 +145,10 @@ TextureImporter:
       name: FishIdle_Pink_3
       rect:
         serializedVersion: 2
-        x: 0
-        y: 564
+        x: 858
+        y: 624
         width: 286
-        height: 141
+        height: 156
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -159,10 +159,10 @@ TextureImporter:
       name: FishIdle_Pink_4
       rect:
         serializedVersion: 2
-        x: 286
-        y: 564
+        x: 0
+        y: 468
         width: 286
-        height: 141
+        height: 156
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -173,10 +173,10 @@ TextureImporter:
       name: FishIdle_Pink_5
       rect:
         serializedVersion: 2
-        x: 572
-        y: 564
+        x: 286
+        y: 468
         width: 286
-        height: 141
+        height: 156
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,10 +187,10 @@ TextureImporter:
       name: FishIdle_Pink_6
       rect:
         serializedVersion: 2
-        x: 0
-        y: 423
+        x: 572
+        y: 468
         width: 286
-        height: 141
+        height: 156
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -201,10 +201,10 @@ TextureImporter:
       name: FishIdle_Pink_7
       rect:
         serializedVersion: 2
-        x: 286
-        y: 423
+        x: 858
+        y: 468
         width: 286
-        height: 141
+        height: 156
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -215,10 +215,10 @@ TextureImporter:
       name: FishIdle_Pink_8
       rect:
         serializedVersion: 2
-        x: 572
-        y: 423
+        x: 0
+        y: 312
         width: 286
-        height: 141
+        height: 156
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -229,10 +229,10 @@ TextureImporter:
       name: FishIdle_Pink_9
       rect:
         serializedVersion: 2
-        x: 0
-        y: 282
+        x: 286
+        y: 312
         width: 286
-        height: 141
+        height: 156
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -243,10 +243,10 @@ TextureImporter:
       name: FishIdle_Pink_10
       rect:
         serializedVersion: 2
-        x: 286
-        y: 282
+        x: 572
+        y: 312
         width: 286
-        height: 141
+        height: 156
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -257,10 +257,10 @@ TextureImporter:
       name: FishIdle_Pink_11
       rect:
         serializedVersion: 2
-        x: 572
-        y: 282
+        x: 0
+        y: 156
         width: 286
-        height: 141
+        height: 156
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -271,10 +271,10 @@ TextureImporter:
       name: FishIdle_Pink_12
       rect:
         serializedVersion: 2
-        x: 0
-        y: 141
+        x: 286
+        y: 156
         width: 286
-        height: 141
+        height: 156
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -285,10 +285,10 @@ TextureImporter:
       name: FishIdle_Pink_13
       rect:
         serializedVersion: 2
-        x: 286
-        y: 141
+        x: 572
+        y: 156
         width: 286
-        height: 141
+        height: 156
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -299,10 +299,10 @@ TextureImporter:
       name: FishIdle_Pink_14
       rect:
         serializedVersion: 2
-        x: 572
-        y: 141
+        x: 0
+        y: 0
         width: 286
-        height: 141
+        height: 156
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -313,10 +313,10 @@ TextureImporter:
       name: FishIdle_Pink_15
       rect:
         serializedVersion: 2
-        x: 0
+        x: 286
         y: 0
         width: 286
-        height: 141
+        height: 156
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -327,10 +327,10 @@ TextureImporter:
       name: FishIdle_Pink_16
       rect:
         serializedVersion: 2
-        x: 286
+        x: 572
         y: 0
         width: 286
-        height: 141
+        height: 156
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
