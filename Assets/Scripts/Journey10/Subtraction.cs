@@ -22,6 +22,9 @@ public class Subtraction : MonoBehaviour {
 	public TextMesh n1FirstDigit;
 	public TextMesh n1SecondDigit;
 	public TextMesh n1ThirdDigit;
+	public int firstN1;
+	public int secondN1;
+	public int thirdN1;
 
 	[Header("N2 Texts:")]
 	// display second number
@@ -79,6 +82,7 @@ public class Subtraction : MonoBehaviour {
 	public bool exchange100;
 	public bool exchangeDrop = false;
 	public bool answered;
+	public bool resetFlag;
 
 	void Start () {
 		 
@@ -110,26 +114,33 @@ public class Subtraction : MonoBehaviour {
 			n1 = tempN1.ToString () + tempN2.ToString ();
 			n2 = tempN3.ToString () + tempN4.ToString ();
 
+			secondN1 = tempN1;
+			thirdN1 = tempN2;
+
 			secondDigit = tempN3;
 			thirdDigit = tempN4;
 
-			InstantiateCoins (tempN1, tempN2, 0);
+			InstantiateCoins (0, tempN1, tempN2);
 			StartCoroutine(DisplayQuestion("0", tempN1.ToString (), tempN2.ToString (), "0", tempN3.ToString (), tempN4.ToString ()));
 			FindAnswer (n1, n2);
 		
 		} else if (diff == Difficulty.Grade2) {
 			int tempN1 = Random.Range (1, 10);
 			int tempN2 = Random.Range (1, 10);
+
 			int tempN3 = Random.Range (1, tempN1);
 			int tempN4 = Random.Range (1, tempN2);
 
 			n1 = tempN1.ToString () + tempN2.ToString ();
 			n2 = tempN3.ToString () + tempN4.ToString ();
 
+			secondN1 = tempN1;
+			thirdN1 = tempN2;
+
 			secondDigit = tempN3;
 			thirdDigit = tempN4;
 
-			InstantiateCoins (tempN1, tempN2, 0);
+			InstantiateCoins (0, tempN1, tempN2);
 			StartCoroutine(DisplayQuestion("0", tempN1.ToString (), tempN2.ToString (), "0", tempN3.ToString (), tempN4.ToString ()));
 			FindAnswer (n1, n2);
 
@@ -144,6 +155,10 @@ public class Subtraction : MonoBehaviour {
 
 			n1 = tempN1.ToString () + tempN2.ToString () + tempN3.ToString();
 			n2 = tempN4.ToString () + tempN5.ToString () + tempN6.ToString();
+
+			firstN1 = tempN1;
+			secondN1 = tempN2;
+			thirdN1 = tempN3;
 
 			firstDigit = tempN4;
 			secondDigit = tempN5;
@@ -172,10 +187,13 @@ public class Subtraction : MonoBehaviour {
 			n1 = tempN1.ToString () + tempN2.ToString ();
 			n2 = tempN3.ToString () + tempN4.ToString ();
 
+			secondN1 = tempN1;
+			thirdN1 = tempN2;
+
 			secondDigit = tempN3;
 			thirdDigit = tempN4;
 
-			InstantiateCoins (tempN1, tempN2, 0);
+			InstantiateCoins (0, tempN1, tempN2);
 			StartCoroutine(DisplayQuestion("0", tempN1.ToString (), tempN2.ToString (), "0", tempN3.ToString (), tempN4.ToString ()));
 			FindAnswer (n1, n2);
 
@@ -184,15 +202,18 @@ public class Subtraction : MonoBehaviour {
 			int tempN2 = Random.Range (1, 10);
 
 			int tempN3 = Random.Range (0, tempN1 - 1);
-			int tempN4 = Random.Range (1, 10);
+			int tempN4 = Random.Range (tempN2 + 1, 10);
 
 			n1 = tempN1.ToString () + tempN2.ToString ();
 			n2 = tempN3.ToString () + tempN4.ToString ();
 
+			secondN1 = tempN1;
+			thirdN1 = tempN2;
+
 			secondDigit = tempN3;
 			thirdDigit = tempN4;
 
-			InstantiateCoins (tempN1, tempN2, 0);
+			InstantiateCoins (0, tempN1, tempN2);
 
 			StartCoroutine(DisplayQuestion("0", tempN1.ToString (), tempN2.ToString (), "0", tempN3.ToString (), tempN4.ToString ())); 
 			FindAnswer (n1, n2);
@@ -203,11 +224,15 @@ public class Subtraction : MonoBehaviour {
 			int tempN3 = Random.Range (1, 10);
 
 			int tempN4 = Random.Range (0, tempN1 - 1);
-			int tempN5 = Random.Range (1, 10);
-			int tempN6 = Random.Range (1, 10);
+			int tempN5 = Random.Range (tempN2 + 1, 10);
+			int tempN6 = Random.Range (tempN3 + 1, 10);
 
 			n1 = tempN1.ToString () + tempN2.ToString () + tempN3.ToString();
 			n2 = tempN4.ToString () + tempN5.ToString () + tempN6.ToString();
+
+			firstN1 = tempN1;
+			secondN1 = tempN2;
+			thirdN1 = tempN3;
 
 			firstDigit = tempN4;
 			secondDigit = tempN5;
@@ -256,7 +281,7 @@ public class Subtraction : MonoBehaviour {
 		ans100.text = "";
 	}
 
-	void CheckFirstCoin()
+	public void CheckFirstCoin()
 	{
 		for (int i = Coin1Array.Count - 1; i >= 0; i--) 
 		{
@@ -313,13 +338,13 @@ public class Subtraction : MonoBehaviour {
 	void InstantiateCoins(int firstDigit, int secondDigit, int thirdDigit)
 	{
 		if (diff == Difficulty.Grade1 || diff == Difficulty.Grade2) {
-			for (int i = 0; i < secondDigit; i++) {
+			for (int i = 0; i < thirdDigit; i++) {
 				//				Coin1Array [i].SetActive (true);
 				Coin1Array [i] = Instantiate (coin1, coin1Spawn[i].position, Quaternion.identity, coin1Parent);
 				Coin1Array [i].GetComponent <OriginalPos> ().indexValue = i;
 			}
 
-			for (int i = 0; i < firstDigit; i++) {
+			for (int i = 0; i < secondDigit; i++) {
 				Coin10Array [i] = Instantiate (coin10, coin10Spawn[i].position, Quaternion.identity, coin10Parent);
 				Coin10Array [i].GetComponent <OriginalPos> ().indexValue = i;
 			}
@@ -342,13 +367,32 @@ public class Subtraction : MonoBehaviour {
 		}
 	}
 
+	public void DestroyCoins() {
+		for (int i = 0; i < Coin1Array.Count; i++) 
+		{
+			if (Coin1Array [i] != null) {
+				Destroy (Coin1Array [i]);
+				Coin1Array [i] = null;
+			}
+			
 
+			if(Coin10Array[i] != null){
+				Destroy (Coin10Array [i]);
+				Coin10Array [i] = null;
+			}
+
+			if(Coin100Array[i] != null) {
+				Destroy (Coin100Array [i]);
+				Coin100Array [i] = null;
+			}
+		}
+	}
 
 	void DropInCounter(GameObject hitObject)
 	{
 		if (hitObject.tag == "CounterPanel1" && draggedObject.tag == "Coin1") {
 			hitObject.GetComponent<EnableScript> ().counter++;
-			hitObject.GetComponentInChildren<TextMesh> ().text = hitObject .GetComponent<EnableScript> ().counter.ToString ();
+			hitObject.GetComponentInChildren<TextMesh> ().text = hitObject.GetComponent<EnableScript> ().counter.ToString ();
 			Coin1Array [draggedObject.GetComponent<OriginalPos> ().indexValue] = null; 
 			Destroy (draggedObject); 
 
@@ -404,20 +448,33 @@ public class Subtraction : MonoBehaviour {
 	}
 
 
-	void CheckCounter()
+	public void CheckCounter()
 	{
 		if (diff == Difficulty.Grade2 || diff == Difficulty.Grade1) {
 			if (thirdDigit == counterPanel1.GetComponent<EnableScript> ().counter) {
 				counterPanel10.GetComponent<BoxCollider2D> ().enabled = true;
+				counterPanel1.GetComponent<BoxCollider2D> ().enabled = false;
+			} else {
+				counterPanel10.GetComponent<BoxCollider2D> ().enabled = false;
+				counterPanel1.GetComponent<BoxCollider2D> ().enabled = true;
 			}
 
 		} else if (diff == Difficulty.Grade3) {
 			if (thirdDigit == counterPanel1.GetComponent<EnableScript> ().counter) {
 				counterPanel10.GetComponent<BoxCollider2D> ().enabled = true;
+				counterPanel1.GetComponent<BoxCollider2D> ().enabled = false;
+			} else {
+				counterPanel10.GetComponent<BoxCollider2D> ().enabled = false;
+				counterPanel1.GetComponent<BoxCollider2D> ().enabled = true;
 			}
 
 			if (secondDigit == counterPanel10.GetComponent<EnableScript> ().counter) {
 				counterPanel100.GetComponent<BoxCollider2D> ().enabled = true;
+				counterPanel10.GetComponent<BoxCollider2D> ().enabled = false;
+
+			} else if(secondDigit != counterPanel10.GetComponent<EnableScript> ().counter && thirdDigit == counterPanel1.GetComponent<EnableScript> ().counter){
+				counterPanel100.GetComponent<BoxCollider2D> ().enabled = false;
+				counterPanel10.GetComponent<BoxCollider2D> ().enabled = true;
 			}
 		}
 	}
@@ -478,13 +535,19 @@ public class Subtraction : MonoBehaviour {
 		}
 
 		if(draggedObject) {
-			if (hit.transform.name == "SlotMachine" || hit.transform.tag == "ExchangePanel10" || hit.transform.tag == "ExchangePanel100" 
-				|| hit.transform.tag == "CounterPanel100" || hit.transform.tag == "CounterPanel10" || hit.transform.tag == "CounterPanel1" 
-				|| hit.transform.name == "Coin10(Clone)" || hit.transform.name == "Coin100(Clone)" || hit.transform.name == "Coin1(Clone)") {
+//			if (hit.transform.name == "SlotMachine" || hit.transform.tag == "ExchangePanel10" || hit.transform.tag == "ExchangePanel100" 
+//				|| hit.transform.tag == "CounterPanel100" || hit.transform.tag == "CounterPanel10" || hit.transform.tag == "CounterPanel1" 
+//				|| hit.transform.name == "Coin10(Clone)" || hit.transform.name == "Coin100(Clone)" || hit.transform.name == "Coin1(Clone)") {
+//
+//				draggedObject.transform.position = new Vector3 (ray.origin.x + offset.x, ray.origin.y + offset.y, draggedObject.transform.position.z);
+//			} else {
+//				draggedObject.transform.position = draggedObject.GetComponent<OriginalPos> ().originalPos;
+//			}
 
-				draggedObject.transform.position = new Vector3 (ray.origin.x + offset.x, ray.origin.y + offset.y, draggedObject.transform.position.z);
+			if (hit.transform.name == "BG") {
+				draggedObject.transform.position = draggedObject.GetComponent<OriginalPos> ().originalPos;draggedObject.transform.position = draggedObject.GetComponent<OriginalPos> ().originalPos;
 			} else {
-				draggedObject.transform.position = draggedObject.GetComponent<OriginalPos> ().originalPos;
+				draggedObject.transform.position = new Vector3 (ray.origin.x + offset.x, ray.origin.y + offset.y, draggedObject.transform.position.z);
 			}
 		}
 
@@ -503,5 +566,27 @@ public class Subtraction : MonoBehaviour {
 				draggedObject = null;
 			}
 		}
+	}
+
+
+	public void ResetAnswers()
+	{
+		ans1.text = "";
+		ans10.text = "";
+		ans100.text = "";
+
+		DestroyCoins ();
+		InstantiateCoins (firstN1, secondN1, thirdN1);
+
+		counterPanel1.GetComponent<EnableScript> ().ResetCounters();
+		counterPanel10.GetComponent<EnableScript> ().ResetCounters();
+		counterPanel100.GetComponent<EnableScript> ().ResetCounters();
+
+		counterPanel1.GetComponentInChildren<TextMesh>().text = "0";
+		counterPanel10.GetComponentInChildren<TextMesh>().text = "0";
+		counterPanel100.GetComponentInChildren<TextMesh>().text = "0";
+
+		CheckFirstCoin ();
+		CheckCounter ();
 	}
 }

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class BlockGame : MonoBehaviour {
 
 	public Camera cam;
+	public Transform startPos;
 
 	public GameObject[] numberBoxes;
 	public List<GameObject> BlockSet1 =  new List<GameObject>();
@@ -23,11 +24,6 @@ public class BlockGame : MonoBehaviour {
 	int tempIndex ;
 	int tempNeighTile;
 
-//	public int topTile;
-//	public int bottomTile;
-//	public int leftTile;
-//	public int rightTile;
-
 	//dragObjects
 	public GameObject draggedObject;
 	private Vector3 originalObjPos;
@@ -40,6 +36,8 @@ public class BlockGame : MonoBehaviour {
 	public Vector3 reducedSize;
 	public Vector3 originalSize;
 	public Transform mainParent;
+	public int numBoxesLength = 3;
+	public int firstNum;
 
 	void Awake()
 	{
@@ -54,7 +52,7 @@ public class BlockGame : MonoBehaviour {
 		cam = Camera.main;
 
 		StartCoroutine (RemoveBlockSet1 ());
-		//StartCoroutine (RemoveBlockSet2 ());
+		StartCoroutine (RemoveBlockSet2 ());
 	}
 
 	void Update () {
@@ -63,28 +61,28 @@ public class BlockGame : MonoBehaviour {
 
 	public void CreateGrid()
 	{
-		Vector3 xOffset = numberBoxes [0].transform.position;
+		Vector3 xOffset = startPos.transform.position;
 		xOffset.z -= 3f;
 		for (int i = 1; i < noOfNumberBoxes; i++) {
 			numberBoxes [i].gameObject.SetActive (true);
 			numberBoxes [i].GetComponentInChildren<TextMesh> ().fontSize = 28;
-			numberBoxes [i].GetComponentInChildren<TextMesh> ().text = i.ToString();
-			//numberBoxes [i].GetComponentInChildren<TextMesh> ().text = "";
+			numberBoxes [i].GetComponentInChildren<TextMesh> ().text = firstNum.ToString();
 			numberBoxes [i].GetComponent<IndexValue> ().indexValue = i;
 			numberBoxes [i].transform.position = xOffset;
+			firstNum++;
 
 			xOffset.x += 1.31f;
 
 			if (i % columns == 0) {
 				xOffset.y -= 1.45f;
-				xOffset.x = numberBoxes [0].transform.position.x;
+				xOffset.x = startPos.transform.position.x;
 			}
 		}
 	}
 
 	public void CreateSnapPointsGrid()
 	{
-		Vector3 xOffset = snapPoints [0].transform.position;
+		Vector3 xOffset = startPos.transform.position;
 		xOffset.z -= 1.5f;
 		for (int i = 1; i < noOfNumberBoxes; i++) {
 			snapPoints [i].gameObject.SetActive (true);
@@ -95,7 +93,7 @@ public class BlockGame : MonoBehaviour {
 
 			if (i % columns == 0) {
 				xOffset.y -= 1.45f;
-				xOffset.x = snapPoints [0].transform.position.x;
+				xOffset.x = startPos.transform.position.x;
 			}
 		}
 	}
@@ -120,7 +118,6 @@ public class BlockGame : MonoBehaviour {
 					parent = draggedObject.transform;
 					CheckBlockSet ();
 					parent.transform.localScale = originalSize;
-
 				}
 			}
 		}
@@ -161,11 +158,12 @@ public class BlockGame : MonoBehaviour {
 		return val;
 	}
 
-	int numBoxesLength = 3;
+
 	IEnumerator RemoveBlockSet1()
 	{
 		yield return new WaitForSeconds(0.01f);
-		tempIndex = UniqueRandomInt(randomNumBoxes, 1, 35);
+
+		tempIndex = UniqueRandomInt (randomNumBoxes, 1, 7);
 		int k = 0;
 
 		for (int i = 0; i < numBoxesLength; i++)
@@ -184,7 +182,10 @@ public class BlockGame : MonoBehaviour {
 					k++;
 				}
 
-				patternValues.Add (val);
+				if (i < numBoxesLength - 1) {
+					patternValues.Add (val);
+				}
+
 				randomNumBoxes.Add (tempIndex);
 				BlockSet1.Add (numberBoxes [tempIndex]);
 				numberBoxes [tempIndex].GetComponent<BoxCollider2D> ().enabled = true;
@@ -210,64 +211,45 @@ public class BlockGame : MonoBehaviour {
 		parent = null;
 	}
 
+	public List<int> tempIndexes = new List<int>();
 	IEnumerator RemoveBlockSet2()
 	{
-		yield return new WaitForSeconds(0.15f);
+		yield return new WaitForSeconds(0.02f);
+		int k = 0;
+		int val = 0;
 
-		tempIndex = UniqueRandomInt(randomNumBoxes, 1, 35);
+		tempIndex = UniqueRandomInt (randomNumBoxes, 16, 20);
 
+		tempIndexes.Add (tempIndex);
+		BlockSet2.Add (numberBoxes [tempIndex]);
 
-//		int val = 0;
-//		int patternIndex = 0;
-//		int counter = 0;
-//
-//		do
-//		{
-//			BlockSet2.Clear();
-//			patternIndex = 0;
-//			counter = 0;
-//
-//			tempIndex = UniqueRandomInt(randomNumBoxes, 22, 28);
-//
-//			for (int i = 0; i < numBoxesLength; i++)
-//			{
-//				if(numberBoxes [tempIndex] != null) 
-//				{
-//					val = patternValues[patternIndex];
-//					tempNeighTile = (numberBoxes [tempIndex].GetComponent<IndexValue> ().neighbouringTiles [val]);
-//
-//					if(randomNumBoxes.Contains(tempNeighTile) || tempNeighTile <= 0 || tempNeighTile == null || tempNeighTile == 0)
-//					{
-//						break;
-//					} else {
-//
-//						BlockSet2.Add (numberBoxes [tempIndex]);
-//						randomNumBoxes.Add (tempIndex);
-//						snapPoints [tempIndex].GetComponent<BoxCollider2D> ().enabled = true;
-//
-//						tempIndex = tempNeighTile;
-//
-//						patternIndex++;
-//						counter++;
-//					}
-//				}
-//			}
-//		} 
-//		while(counter <= 2);
-//
-//		for (int i = 0; i < BlockSet1.Count; i++) {
-//			numberBoxes [BlockSet2 [i].GetComponent<IndexValue>().indexValue] = null;
-//			BlockSet2 [i].GetComponent<BoxCollider2D> ().enabled = true;
-//			BlockSet2 [i].GetComponent<IndexValue> ().BlocksetNo = 2;	
-//		}
-//
-//		Vector3 tempPosition = spawnPoints [2].transform.position;
-//
-//		parent = BlockSet2 [0].transform;
-//		CheckBlockSet ();
-//		parent.transform.localScale = reducedSize;
-//		parent.transform.position = tempPosition;
-//		parent = null;
+		for (int i = 0; i < numBoxesLength - 1; i++) {
+			val = patternValues[i];
+			tempNeighTile = (numberBoxes [tempIndex].GetComponent<IndexValue> ().neighbouringTiles [val]);
+
+			if (tempNeighTile != 0) {
+				numberBoxes [tempIndex] = null;
+				tempIndex = tempNeighTile;
+			}
+			tempIndexes.Add (tempIndex);
+			BlockSet2.Add (numberBoxes [tempIndex]);
+
+		}
+
+		for (int i = 0; i < tempIndexes.Count; i++) {
+			numberBoxes [BlockSet2 [i].GetComponent<IndexValue>().indexValue] = null;
+			BlockSet2 [i].GetComponent<BoxCollider2D> ().enabled = true;
+			snapPoints [tempIndexes[i]].GetComponent<BoxCollider2D> ().enabled = true;
+			BlockSet2 [i].GetComponent<IndexValue> ().BlocksetNo = 2;	
+		}
+
+		Vector3 tempPosition = spawnPoints [1].transform.position;
+
+		parent = BlockSet2 [0].transform;
+		CheckBlockSet ();
+		parent.transform.localScale = reducedSize;
+		parent.transform.position = tempPosition;
+		parent = null;
 	}
 
 	public void DropAnswer(GameObject other)

@@ -15,6 +15,12 @@ public class Lever : MonoBehaviour {
 	public int counterValOne, counterValTen, counterValHun;
 	public GameObject leverOne, leverTen, leverHun;
 
+	public void Update()
+	{
+		//ResetCounters ();
+		StartCoroutine(ResetCounters());
+	}
+
 	public void OnMouseDown(){
 
 		if(this.gameObject.tag=="Drop1"){
@@ -79,6 +85,25 @@ public class Lever : MonoBehaviour {
 
 		if(counterValTen==pva.N1D2 && (pva.diff == TestJ3.Difficulty.Grade3)){
 			leverHun.GetComponent<BoxCollider>().enabled = true;
+		}
+	}
+
+	public IEnumerator ResetCounters()
+	{
+		if(pva.resetFlag)
+		{
+			counterValOne = 0;
+			counterValTen = 0;
+			counterValHun = 0;
+
+
+			leverOne.GetComponentInChildren<TextMesh>().text = "0";
+			leverTen.GetComponentInChildren<TextMesh>().text = "0";
+			leverHun.GetComponentInChildren<TextMesh>().text = "0";
+
+			yield return new WaitForSeconds (0.01f);
+
+			pva.resetFlag = false;
 		}
 	}
 }

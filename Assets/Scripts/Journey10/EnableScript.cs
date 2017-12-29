@@ -6,10 +6,11 @@ public class EnableScript : MonoBehaviour {
 
 	public Subtraction subScript;
 	public bool exchangePanel;
-	public bool counterPanel;
+	public bool counterPanel100, counterPanel10, counterPanel1;
 	public Animator exchangePanelAnimation;
 
 	public int counter;
+
 	// Use this for initialization
 	void Start () {
 		if (exchangePanel) 
@@ -20,8 +21,8 @@ public class EnableScript : MonoBehaviour {
 	void Update () {
 		if (exchangePanel && subScript.subWithBorrow) {
 			Exchange ();
-		} else if (counterPanel) {
-			Counter ();
+		} else if (counterPanel100 || counterPanel10 || counterPanel1) {
+			//Counter ();
 		}
 	}
 
@@ -42,9 +43,21 @@ public class EnableScript : MonoBehaviour {
 
 	void Counter()
 	{
-		if (counter >= 9) {
+		if (counterPanel1 && counter >= subScript.thirdDigit) {
+			this.GetComponent<BoxCollider2D> ().enabled = false;
+
+		} else if (counterPanel10 && counter >= subScript.secondDigit) {
+			this.GetComponent<BoxCollider2D> ().enabled = false;
+
+		} else if (counterPanel100 && counter >= subScript.firstDigit) {
 			this.GetComponent<BoxCollider2D> ().enabled = false;
 		}
+	}
+
+	public void ResetCounters()
+	{
+		counter = 0;
+		//subScript.CheckCounter ();
 	}
 
 }

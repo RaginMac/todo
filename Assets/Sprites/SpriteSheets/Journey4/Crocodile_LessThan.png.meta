@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 0a2ca42cf236fa041b758f6ff835002f
-timeCreated: 1513145631
+timeCreated: 1514461842
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -22,6 +22,24 @@ TextureImporter:
     21300030: Crocodile_LessThan1_15
     21300032: Crocodile_LessThan1_16
     21300034: Crocodile_LessThan1_17
+    21300036: Crocodile_LessThan_0
+    21300038: Crocodile_LessThan_1
+    21300040: Crocodile_LessThan_2
+    21300042: Crocodile_LessThan_3
+    21300044: Crocodile_LessThan_4
+    21300046: Crocodile_LessThan_5
+    21300048: Crocodile_LessThan_6
+    21300050: Crocodile_LessThan_7
+    21300052: Crocodile_LessThan_8
+    21300054: Crocodile_LessThan_9
+    21300056: Crocodile_LessThan_10
+    21300058: Crocodile_LessThan_11
+    21300060: Crocodile_LessThan_12
+    21300062: Crocodile_LessThan_13
+    21300064: Crocodile_LessThan_14
+    21300066: Crocodile_LessThan_15
+    21300068: Crocodile_LessThan_16
+    21300070: Crocodile_LessThan_17
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -96,234 +114,234 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Crocodile_LessThan1_0
+      name: Crocodile_LessThan_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 1304
-        width: 435
-        height: 326
+        y: 1392
+        width: 483
+        height: 348
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Crocodile_LessThan1_1
+      name: Crocodile_LessThan_1
       rect:
         serializedVersion: 2
-        x: 435
-        y: 1304
-        width: 435
-        height: 326
+        x: 483
+        y: 1392
+        width: 483
+        height: 348
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Crocodile_LessThan1_2
+      name: Crocodile_LessThan_2
       rect:
         serializedVersion: 2
-        x: 870
-        y: 1304
-        width: 435
-        height: 326
+        x: 966
+        y: 1392
+        width: 483
+        height: 348
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Crocodile_LessThan1_3
+      name: Crocodile_LessThan_3
       rect:
         serializedVersion: 2
-        x: 1305
-        y: 1304
-        width: 435
-        height: 326
+        x: 1449
+        y: 1392
+        width: 483
+        height: 348
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Crocodile_LessThan1_4
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 978
-        width: 435
-        height: 326
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Crocodile_LessThan1_5
-      rect:
-        serializedVersion: 2
-        x: 437
-        y: 980
-        width: 435
-        height: 326
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Crocodile_LessThan1_6
-      rect:
-        serializedVersion: 2
-        x: 870
-        y: 978
-        width: 435
-        height: 326
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Crocodile_LessThan1_7
-      rect:
-        serializedVersion: 2
-        x: 1305
-        y: 978
-        width: 435
-        height: 326
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Crocodile_LessThan1_8
+      name: Crocodile_LessThan_4
       rect:
         serializedVersion: 2
         x: 0
-        y: 652
-        width: 435
-        height: 326
+        y: 1044
+        width: 483
+        height: 348
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Crocodile_LessThan1_9
+      name: Crocodile_LessThan_5
       rect:
         serializedVersion: 2
-        x: 435
-        y: 652
-        width: 435
-        height: 326
+        x: 483
+        y: 1044
+        width: 483
+        height: 348
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Crocodile_LessThan1_10
+      name: Crocodile_LessThan_6
       rect:
         serializedVersion: 2
-        x: 870
-        y: 652
-        width: 435
-        height: 326
+        x: 966
+        y: 1044
+        width: 483
+        height: 348
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Crocodile_LessThan1_11
+      name: Crocodile_LessThan_7
       rect:
         serializedVersion: 2
-        x: 1305
-        y: 652
-        width: 435
-        height: 326
+        x: 1449
+        y: 1044
+        width: 483
+        height: 348
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Crocodile_LessThan1_12
+      name: Crocodile_LessThan_8
       rect:
         serializedVersion: 2
         x: 0
-        y: 326
-        width: 435
-        height: 326
+        y: 696
+        width: 483
+        height: 348
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Crocodile_LessThan1_13
+      name: Crocodile_LessThan_9
       rect:
         serializedVersion: 2
-        x: 435
-        y: 326
-        width: 435
-        height: 326
+        x: 483
+        y: 696
+        width: 483
+        height: 348
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Crocodile_LessThan1_14
+      name: Crocodile_LessThan_10
       rect:
         serializedVersion: 2
-        x: 870
-        y: 326
-        width: 435
-        height: 326
+        x: 966
+        y: 696
+        width: 483
+        height: 348
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Crocodile_LessThan1_15
+      name: Crocodile_LessThan_11
       rect:
         serializedVersion: 2
-        x: 1305
-        y: 326
-        width: 435
-        height: 326
+        x: 1449
+        y: 696
+        width: 483
+        height: 348
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Crocodile_LessThan1_16
+      name: Crocodile_LessThan_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 348
+        width: 483
+        height: 348
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Crocodile_LessThan_13
+      rect:
+        serializedVersion: 2
+        x: 483
+        y: 348
+        width: 483
+        height: 348
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Crocodile_LessThan_14
+      rect:
+        serializedVersion: 2
+        x: 966
+        y: 348
+        width: 483
+        height: 348
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Crocodile_LessThan_15
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 435
-        height: 326
+        width: 483
+        height: 348
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Crocodile_LessThan1_17
+      name: Crocodile_LessThan_16
       rect:
         serializedVersion: 2
-        x: 435
+        x: 483
         y: 0
-        width: 435
-        height: 326
+        width: 483
+        height: 348
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Crocodile_LessThan_17
+      rect:
+        serializedVersion: 2
+        x: 966
+        y: 0
+        width: 483
+        height: 348
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
