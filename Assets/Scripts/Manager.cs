@@ -571,6 +571,7 @@ public class Manager : MonoBehaviour {
 		{
 			CountQuestionsAnswered (true);
 			questionArray [questionNumber].GetComponent<ArrangementScript> ().ansClicked = true;
+			questionArray [questionNumber].GetComponent<ArrangementScript> ().boyAnime.SetTrigger ("Happy");
 			Invoke ("NextQuestion", 2f); //NextQuestion ();
 		} else {
 			if (countWrongAnswer) {
@@ -908,6 +909,7 @@ public class Manager : MonoBehaviour {
 			questionArray [questionNumber].GetComponent<PlaceValue> ().cam.SetBool ("moveCamera", false);
 
 		} else {
+			questionArray [questionNumber].GetComponent<PlaceValue> ().ResetAnswer ();
 			CountQuestionsAnswered(false);
 		}
 	}
@@ -930,13 +932,18 @@ public class Manager : MonoBehaviour {
 		temp10 = int.Parse(questionArray [questionNumber].GetComponent<TestJ3> ().playerAnswer10);
 		temp1 = int.Parse(questionArray [questionNumber].GetComponent<TestJ3> ().playerAnswer1);
 
-		if (tempA100 == temp100 && tempA10 == temp10 && tempA1 == temp1 && !questionArray [questionNumber].GetComponent<TestJ3> ().answered) { 
-			CountQuestionsAnswered (true);
-			questionArray [questionNumber].GetComponent<TestJ3> ().answered = true;
-			Invoke ("NextQuestion", 2f);
-			questionArray[questionNumber].GetComponent<TestJ3>().ResetAnim();
-		} else {
-			CountQuestionsAnswered(false);
+		//if (questionArray [questionNumber].GetComponent<TestJ3> ().diff == TestJ3.Difficulty.Grade2) 
+		{
+			if (tempA100 == temp100 && tempA10 == temp10 && tempA1 == temp1 && !questionArray [questionNumber].GetComponent<TestJ3> ().answered) { 
+				CountQuestionsAnswered (true);
+				questionArray [questionNumber].GetComponent<TestJ3> ().answered = true;
+				Invoke ("NextQuestion", 2f);
+				questionArray [questionNumber].GetComponent<TestJ3> ().ResetAnim ();
+			} else {
+				questionArray [questionNumber].GetComponent<TestJ3> ().ResetAnswerTexts ();
+				questionArray [questionNumber].GetComponent<TestJ3> ().ResetCoins ();
+				CountQuestionsAnswered (false);
+			}
 		}
 	}
 
@@ -981,6 +988,7 @@ public class Manager : MonoBehaviour {
 			Invoke("NextQuestion", 2f);
 			//questionArray [questionNumber].GetComponent<Subtraction> ().camAnimation.SetBool ("moveCamera", false); 
 		} else {
+			questionArray [questionNumber].GetComponent<Subtraction> ().ResetAnswers ();
 			CountQuestionsAnswered(false);
 		}
 	}

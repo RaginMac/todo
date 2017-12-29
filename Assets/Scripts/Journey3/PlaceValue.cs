@@ -125,4 +125,11 @@ public class PlaceValue : MonoBehaviour {
 		yield return new WaitForSeconds (1);
 		cam.SetBool ("moveCamera", true);
 	}
+
+	public void ResetAnswer()
+	{
+		ans100.text = "";
+		ans10.text = "";
+		ans1.text = "";
+	}
 }

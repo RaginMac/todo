@@ -59,14 +59,15 @@ public class MulByRepeatedAdd : MonoBehaviour {
 
 
 		count = 0;
-		if (g11_2) {
-			CheckAnswer [0].SetActive (false);
-			CheckAnswer [1].SetActive (true);
-		} 
-//		else {
-//			CheckAnswer [0].SetActive (true);
-//			CheckAnswer [1].SetActive (false);
-//		}
+
+//		if (g11_2) {
+//			CheckAnswer [0].SetActive (false);
+//			CheckAnswer [1].SetActive (true);
+//		} 
+////		else {
+////			CheckAnswer [0].SetActive (true);
+////			CheckAnswer [1].SetActive (false);
+////		}
 
 		Invoke("ScrollAnimation",0.5f);
 		CreateQuestion ();
@@ -79,8 +80,11 @@ public class MulByRepeatedAdd : MonoBehaviour {
 			DragObject ();
 
 			if (count >= n2) {
-				CheckAnswer [0].SetActive (true);
-				CheckAnswer [1].SetActive (false);
+				//CheckAnswer [0].SetActive (true);
+				//CheckAnswer [1].SetActive (false);
+
+				if(keypad != null)
+					keypad.GetComponent<SetAnswerArea> ().OnMouseDown ();
 			}
 		}
 

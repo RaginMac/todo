@@ -9,6 +9,7 @@ public class Keypad : MonoBehaviour {
 	public Manager manager;
 	public GameObject keypadBG;
 	public Text[] allInputAreas;
+	public TextMesh[] allAnswerAreas;
 
 	public bool show = false;
 
@@ -47,8 +48,14 @@ public class Keypad : MonoBehaviour {
 
 	public void EraseAllText()
 	{
-		for (int i = 0; i < allInputAreas.Length; i++) {
-			allInputAreas[i].text = "";
+		if (allInputAreas.Length > 0) {
+			for (int i = 0; i < allInputAreas.Length; i++) {
+				allInputAreas [i].text = "";
+			}
+		} else if (allAnswerAreas.Length > 0) {
+			for (int i = 0; i < allAnswerAreas.Length; i++) {
+				allAnswerAreas [i].text = "";
+			}
 		}
 	}
 

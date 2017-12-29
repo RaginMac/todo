@@ -79,6 +79,7 @@ public class TestJ3 : MonoBehaviour {
 	public TextMesh[] answerText3;
 
 	public bool answered;
+	public bool resetFlag;
 
 	void Awake(){
 		//	ResetAnim();
@@ -126,7 +127,7 @@ public class TestJ3 : MonoBehaviour {
 		//	N2D2 = (tempN3);
 
 
-			StartCoroutine(DisplayQuestion("0", tempN1.ToString (), tempN2.ToString ()));
+			StartCoroutine(DisplayQuestion("0" ,tempN1.ToString (), tempN2.ToString ()));
 
 			answer100 = "0";
 			answer10 = tempN1.ToString () + "0";
@@ -323,10 +324,31 @@ public class TestJ3 : MonoBehaviour {
 	}
 
 	public void SetPlayerAnswer(){
-		playerAnswer100 = answerText1[0].text + answerText1[1].text + answerText1[2].text;
-		playerAnswer10 = answerText2[0].text + answerText2[1].text + answerText2[2].text;
-		playerAnswer1 = answerText3[0].text + answerText3[1].text + answerText3[2].text;
+//		playerAnswer100 = answerText1[0].text + answerText1[1].text + answerText1[2].text;
+//		playerAnswer10 = answerText2[0].text + answerText2[1].text + answerText2[2].text;
+//		playerAnswer1 = answerText3[0].text + answerText3[1].text + answerText3[2].text;
 
+		if (diff == Difficulty.Grade2) {
+			playerAnswer100 = "0";
+			playerAnswer10 = answerText2 [0].text + answerText2 [1].text + answerText2 [2].text;
+			playerAnswer1 = answerText3 [0].text + answerText3 [1].text + answerText3 [2].text;
+		} else if (diff == Difficulty.Grade3){
+			playerAnswer100 = answerText1[0].text + answerText1[1].text + answerText1[2].text;
+			playerAnswer10 = answerText2[0].text + answerText2[1].text + answerText2[2].text;
+			playerAnswer1 = answerText3[0].text + answerText3[1].text + answerText3[2].text;
+		}
+
+		if (playerAnswer100 == "" ) {
+			playerAnswer100 = "0";
+		}
+
+		if (playerAnswer10 == "" ) {
+			playerAnswer10 = "0";
+		}
+
+		if (playerAnswer1 == "" ) {
+			playerAnswer1 = "0";
+		}
 	}
 
 	public void ResetAnim(){
@@ -340,4 +362,62 @@ public class TestJ3 : MonoBehaviour {
 		droppedCoinsList.Add(spawnedCoin);
 	}
 
+	public void ResetAnswerTexts() {
+		if (diff == Difficulty.Grade2) {
+			answerText2 [0].text = "";
+			answerText2 [1].text = "";
+			answerText2 [2].text = "";
+
+			answerText3 [0].text = ""; 
+			answerText3 [1].text = "";
+			answerText3 [2].text = "";
+
+		} else if (diff == Difficulty.Grade3){
+			answerText1[0].text = "";
+			answerText1[1].text = "";
+			answerText1[2].text = "";
+
+			answerText2[0].text = "";
+			answerText2[1].text = "";
+			answerText2[2].text = "";
+
+			answerText3[0].text = "";
+			answerText3[1].text = "";
+			answerText3[2].text = "";
+		}
+	}
+
+	public void ResetCoins()
+	{
+		resetFlag = true;
+		dropIndexHun = 0;
+		dropIndexTen = 0;
+		dropIndexOne = 0;
+
+		if(droppedOneCoins.Count > 0)
+		{
+			for (int i = 0; i < droppedOneCoins.Count; i++) {
+				Destroy (droppedOneCoins [i]);
+			}
+			droppedOneCoins.Clear ();
+		}
+
+
+		if(droppedTenCoins.Count > 0)
+		{
+			for (int i = 0; i < droppedTenCoins.Count; i++) {
+				Destroy (droppedTenCoins [i]);
+			}
+			droppedTenCoins.Clear ();
+		}
+
+
+		if(droppedHunCoins.Count > 0)
+		{
+			for (int i = 0; i < droppedHunCoins.Count; i++) {
+				Destroy (droppedHunCoins [i]);
+			}
+			droppedHunCoins.Clear ();
+		}
+	}
 }

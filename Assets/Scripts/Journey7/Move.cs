@@ -20,7 +20,7 @@ public class Move : MonoBehaviour {
 			if(Vector3.Distance(transform.position, target.transform.position)<0.1)
 			{
 				//target = null;
-				print("reached");
+				//print("reached");
 				if(this.GetComponent<OriginalPos>()!=null){
 					this.GetComponent<OriginalPos>().originalPos = target.transform.position;
 				}

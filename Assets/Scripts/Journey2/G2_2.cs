@@ -75,7 +75,7 @@ public class G2_2 : MonoBehaviour {
 
 	void ShuffleBodies(GameObject[] bodyArray) 
 	{
-		for (int i = 0; i < bodyArray.Length; i++)
+		for (int i = 0; i < bodyArray.Length - 2; i++)
 		{
 			GameObject temp = bodyArray [i];
 			Vector3 tempPos = bodyArray [i].transform.position;
