@@ -321,6 +321,8 @@ public class TestJ3 : MonoBehaviour {
 			//temp.transform.SetParent(coinHunParent);
 			AddToDropList(droppedHunCoins, temp);
 		}
+
+		Manager.Instance.PlayDragDropAudio ();
 	}
 
 	public void SetPlayerAnswer(){
