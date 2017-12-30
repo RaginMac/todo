@@ -125,8 +125,8 @@ public class Subtraction : MonoBehaviour {
 			FindAnswer (n1, n2);
 		
 		} else if (diff == Difficulty.Grade2) {
-			int tempN1 = Random.Range (1, 10);
-			int tempN2 = Random.Range (1, 10);
+			int tempN1 = Random.Range (1, 9);
+			int tempN2 = Random.Range (1, 9);
 
 			int tempN3 = Random.Range (1, tempN1);
 			int tempN4 = Random.Range (1, tempN2);
@@ -145,9 +145,9 @@ public class Subtraction : MonoBehaviour {
 			FindAnswer (n1, n2);
 
 		} else if (diff == Difficulty.Grade3) {
-			int tempN1 = Random.Range (1, 10);
-			int tempN2 = Random.Range (1, 10);
-			int tempN3 = Random.Range (1, 10);
+			int tempN1 = Random.Range (1, 9);
+			int tempN2 = Random.Range (1, 9);
+			int tempN3 = Random.Range (1, 9);
 
 			int tempN4 = Random.Range (1, tempN1);
 			int tempN5 = Random.Range (1, tempN2);
@@ -182,7 +182,7 @@ public class Subtraction : MonoBehaviour {
 			int tempN2 = 0;
 
 			int tempN3 = Random.Range (0, tempN1);
-			int tempN4 = Random.Range (1, 10);
+			int tempN4 = Random.Range (1, 9);
 
 			n1 = tempN1.ToString () + tempN2.ToString ();
 			n2 = tempN3.ToString () + tempN4.ToString ();
@@ -198,11 +198,11 @@ public class Subtraction : MonoBehaviour {
 			FindAnswer (n1, n2);
 
 		} else if (diff == Difficulty.Grade2) {
-			int tempN1 = Random.Range (1, 10);
-			int tempN2 = Random.Range (1, 10);
+			int tempN1 = Random.Range (1, 9);
+			int tempN2 = Random.Range (1, 8);
 
 			int tempN3 = Random.Range (0, tempN1 - 1);
-			int tempN4 = Random.Range (tempN2 + 1, 10);
+			int tempN4 = Random.Range (tempN2 + 1, 9);
 
 			n1 = tempN1.ToString () + tempN2.ToString ();
 			n2 = tempN3.ToString () + tempN4.ToString ();
@@ -219,13 +219,13 @@ public class Subtraction : MonoBehaviour {
 			FindAnswer (n1, n2);
 
 		} else if (diff == Difficulty.Grade3) {
-			int tempN1 = Random.Range (1, 10);
-			int tempN2 = Random.Range (1, 10);
-			int tempN3 = Random.Range (1, 10);
+			int tempN1 = Random.Range (1, 9);
+			int tempN2 = Random.Range (1, 8);
+			int tempN3 = Random.Range (1, 8);
 
 			int tempN4 = Random.Range (0, tempN1 - 1);
-			int tempN5 = Random.Range (tempN2 + 1, 10);
-			int tempN6 = Random.Range (tempN3 + 1, 10);
+			int tempN5 = Random.Range (tempN2 + 1, 9);
+			int tempN6 = Random.Range (tempN3 + 1, 9);
 
 			n1 = tempN1.ToString () + tempN2.ToString () + tempN3.ToString();
 			n2 = tempN4.ToString () + tempN5.ToString () + tempN6.ToString();
@@ -394,22 +394,26 @@ public class Subtraction : MonoBehaviour {
 			hitObject.GetComponent<EnableScript> ().counter++;
 			hitObject.GetComponentInChildren<TextMesh> ().text = hitObject.GetComponent<EnableScript> ().counter.ToString ();
 			Coin1Array [draggedObject.GetComponent<OriginalPos> ().indexValue] = null; 
+			Manager.Instance.PlayDragDropAudio ();
 			Destroy (draggedObject); 
 
 		} else if (hitObject.tag == "CounterPanel10" && draggedObject.tag == "Coin10") {
 			hitObject.GetComponent<EnableScript> ().counter++;
 			hitObject.GetComponentInChildren<TextMesh> ().text = hitObject.GetComponent<EnableScript> ().counter.ToString ();
 			Coin10Array [draggedObject.GetComponent<OriginalPos> ().indexValue] = null; 
+			Manager.Instance.PlayDragDropAudio ();
 			Destroy (draggedObject);
 
 		} else if (hitObject.tag == "CounterPanel100" && draggedObject.tag == "Coin100") {
 			hitObject.GetComponent<EnableScript>().counter++;
 			hitObject.GetComponentInChildren<TextMesh> ().text = hitObject.GetComponent<EnableScript>().counter.ToString ();
 			Coin100Array [draggedObject.GetComponent<OriginalPos> ().indexValue] = null; 
+			Manager.Instance.PlayDragDropAudio ();
 			Destroy (draggedObject);
 		} else {
 			draggedObject.transform.position = draggedObject.GetComponent<OriginalPos> ().originalPos;
 		}
+
 
 		CheckFirstCoin ();
 	}
@@ -426,6 +430,7 @@ public class Subtraction : MonoBehaviour {
 				Coin1Array [i] = Instantiate (coin1, coin1Fall.position, Quaternion.identity, coin1Parent);
 				Coin1Array [i].GetComponent <OriginalPos> ().indexValue = i;
 				Coin1Array [i].GetComponent <CoinFallScript> ().target = coin1Spawn[i];
+				Manager.Instance.PlayDragDropAudio ();
 
 				yield return new WaitForSeconds (0.8f);
 			}
@@ -439,6 +444,7 @@ public class Subtraction : MonoBehaviour {
 				Coin10Array [i] = Instantiate (coin10, coin10Fall.position, Quaternion.identity, coin10Parent);
 				Coin10Array [i].GetComponent <OriginalPos> ().indexValue = i;
 				Coin10Array [i].GetComponent <CoinFallScript> ().target = coin10Spawn[i];
+				Manager.Instance.PlayDragDropAudio ();
 
 				yield return new WaitForSeconds (0.8f);
 			}
@@ -555,12 +561,12 @@ public class Subtraction : MonoBehaviour {
 		{
 			if (draggedObject != null)
 			{
+				
 				DropInCounter (hit.transform.gameObject);
+				CheckCounter ();
 
 				if(subWithBorrow)
 					StartCoroutine(DropInExchange (hit.transform.gameObject));
-				
-				CheckCounter ();
 
 				draggedObject.gameObject.GetComponent<BoxCollider2D> ().enabled = true;
 				draggedObject = null;

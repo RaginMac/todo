@@ -22,7 +22,7 @@ public class EnableScript : MonoBehaviour {
 		if (exchangePanel && subScript.subWithBorrow) {
 			Exchange ();
 		} else if (counterPanel100 || counterPanel10 || counterPanel1) {
-			//Counter ();
+			Counter ();
 		}
 	}
 
