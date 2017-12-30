@@ -1072,7 +1072,7 @@ public class Manager : MonoBehaviour {
 		{
 			questionArray [questionNumber].GetComponent<multiply> ().CreateEggTrayGrid ();
 			questionArray [questionNumber].GetComponent<multiply> ().moveCalci.SetTrigger ("Move");
-			questionArray [questionNumber].GetComponent<multiply> ().hintbutton.SetTrigger ("StopGlow");
+			questionArray [questionNumber].GetComponent<multiply> ().hintbutton.SetBool ("StopGlow", true);
 			questionArray [questionNumber].GetComponent<multiply> ().eggTrayObj.SetActive (true);
 			questionArray [questionNumber].GetComponent<multiply> ().hintPressed = true;
 		}

@@ -47,6 +47,9 @@ public class multiply : MonoBehaviour {
 	void Start () {
 		cam = Camera.main;
 
+		if(hintbutton != null)
+			hintbutton.SetBool ("StopGlow", false);
+		
 		for (int i = 0; i <= eggs.Length - 1; i++) { 
 			eggs [i].SetActive (false);
 		}

@@ -17,7 +17,9 @@ public class Keypad : MonoBehaviour {
 	{
 		manager.PlayClickAudio ();
 		if(answerArea!=null) {
-			answerArea.text += input;
+			if (answerArea.text.Length < 2) {
+				answerArea.text += input;
+			}
 		}else if(inputArea!=null){
 			if(inputArea.text.Length<2){
 				inputArea.text += input;
